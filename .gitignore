@@ -1,0 +1,14 @@
+# Ignore toàn bộ thư mục
+/.vs
+
+# Ignore file cụ thể
+secret-config.json
+
+# Ignore tất cả các file có phần mở rộng cụ thể
+*.log
+*.tmp
+
+# Ignore một thư mục con trong thư mục gốc
+/dist/
+/.vs
+/eCom/.vs/eCom/config/applicationhost.config

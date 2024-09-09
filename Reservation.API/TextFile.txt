@@ -1,0 +1,2 @@
+﻿1.Lệnh này add  migration: Add-Migration InitialCreate -OutputDir D:\Coderkechuyen\TDSolution\Reservation\DataContext\Migrations
+2.Lệnh này áp dụng thay đổi vào DB: update-database

@@ -1,0 +1,13 @@
+D:\Coderkechuyen\TDSolution\Base.Lib\bin\Debug\net8.0\TD.Lib.deps.json
+D:\Coderkechuyen\TDSolution\Base.Lib\bin\Debug\net8.0\TD.Lib.dll
+D:\Coderkechuyen\TDSolution\Base.Lib\bin\Debug\net8.0\TD.Lib.pdb
+D:\Coderkechuyen\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.csproj.AssemblyReference.cache
+D:\Coderkechuyen\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.GeneratedMSBuildEditorConfig.editorconfig
+D:\Coderkechuyen\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.AssemblyInfoInputs.cache
+D:\Coderkechuyen\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.AssemblyInfo.cs
+D:\Coderkechuyen\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.csproj.CoreCompileInputs.cache
+D:\Coderkechuyen\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.sourcelink.json
+D:\Coderkechuyen\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.dll
+D:\Coderkechuyen\TDSolution\Base.Lib\obj\Debug\net8.0\refint\TD.Lib.dll
+D:\Coderkechuyen\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.pdb
+D:\Coderkechuyen\TDSolution\Base.Lib\obj\Debug\net8.0\ref\TD.Lib.dll
