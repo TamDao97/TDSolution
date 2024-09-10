@@ -4448,11 +4448,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Coderkechuyen\\TDSolution\\Reservation.API\\Reservation.API.csproj",
+      "projectUniqueName": "D:\\TDSolution\\Reservation.API\\Reservation.API.csproj",
       "projectName": "Reservation.API",
-      "projectPath": "D:\\Coderkechuyen\\TDSolution\\Reservation.API\\Reservation.API.csproj",
+      "projectPath": "D:\\TDSolution\\Reservation.API\\Reservation.API.csproj",
       "packagesPath": "C:\\Users\\tamdc\\.nuget\\packages\\",
-      "outputPath": "D:\\Coderkechuyen\\TDSolution\\Reservation.API\\obj\\",
+      "outputPath": "D:\\TDSolution\\Reservation.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\tamdc\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4470,8 +4470,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Coderkechuyen\\TDSolution\\Base.Lib\\TD.Lib.csproj": {
-              "projectPath": "D:\\Coderkechuyen\\TDSolution\\Base.Lib\\TD.Lib.csproj"
+            "D:\\TDSolution\\Base.Lib\\TD.Lib.csproj": {
+              "projectPath": "D:\\TDSolution\\Base.Lib\\TD.Lib.csproj"
             }
           }
         }

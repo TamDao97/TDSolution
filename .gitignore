@@ -1,5 +1,9 @@
 # Ignore toàn bộ thư mục
 /.vs
+/Reservation.API\obj
+/Reservation.API\bin
+/Base.Lib\obj
+/Base.Lib\bin
 
 # Ignore file cụ thể
 secret-config.json

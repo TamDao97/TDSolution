@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mHBtODFRbY0=",
+  "dgSpecHash": "q7/W5R0ugrM=",
   "success": true,
-  "projectFilePath": "D:\\Coderkechuyen\\TDSolution\\Base.Lib\\TD.Lib.csproj",
+  "projectFilePath": "D:\\TDSolution\\Base.Lib\\TD.Lib.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tamdc\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\tamdc\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",

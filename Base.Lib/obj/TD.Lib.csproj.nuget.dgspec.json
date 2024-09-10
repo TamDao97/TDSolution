@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Coderkechuyen\\TDSolution\\Base.Lib\\TD.Lib.csproj": {}
+    "D:\\TDSolution\\Base.Lib\\TD.Lib.csproj": {}
   },
   "projects": {
-    "D:\\Coderkechuyen\\TDSolution\\Base.Lib\\TD.Lib.csproj": {
+    "D:\\TDSolution\\Base.Lib\\TD.Lib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Coderkechuyen\\TDSolution\\Base.Lib\\TD.Lib.csproj",
+        "projectUniqueName": "D:\\TDSolution\\Base.Lib\\TD.Lib.csproj",
         "projectName": "TD.Lib",
-        "projectPath": "D:\\Coderkechuyen\\TDSolution\\Base.Lib\\TD.Lib.csproj",
+        "projectPath": "D:\\TDSolution\\Base.Lib\\TD.Lib.csproj",
         "packagesPath": "C:\\Users\\tamdc\\.nuget\\packages\\",
-        "outputPath": "D:\\Coderkechuyen\\TDSolution\\Base.Lib\\obj\\",
+        "outputPath": "D:\\TDSolution\\Base.Lib\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tamdc\\AppData\\Roaming\\NuGet\\NuGet.Config",

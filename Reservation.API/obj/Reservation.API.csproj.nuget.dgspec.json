@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Coderkechuyen\\TDSolution\\Reservation.API\\Reservation.API.csproj": {}
+    "D:\\TDSolution\\Reservation.API\\Reservation.API.csproj": {}
   },
   "projects": {
-    "D:\\Coderkechuyen\\TDSolution\\Base.Lib\\TD.Lib.csproj": {
+    "D:\\TDSolution\\Base.Lib\\TD.Lib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Coderkechuyen\\TDSolution\\Base.Lib\\TD.Lib.csproj",
+        "projectUniqueName": "D:\\TDSolution\\Base.Lib\\TD.Lib.csproj",
         "projectName": "TD.Lib",
-        "projectPath": "D:\\Coderkechuyen\\TDSolution\\Base.Lib\\TD.Lib.csproj",
+        "projectPath": "D:\\TDSolution\\Base.Lib\\TD.Lib.csproj",
         "packagesPath": "C:\\Users\\tamdc\\.nuget\\packages\\",
-        "outputPath": "D:\\Coderkechuyen\\TDSolution\\Base.Lib\\obj\\",
+        "outputPath": "D:\\TDSolution\\Base.Lib\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tamdc\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -87,14 +87,14 @@
         }
       }
     },
-    "D:\\Coderkechuyen\\TDSolution\\Reservation.API\\Reservation.API.csproj": {
+    "D:\\TDSolution\\Reservation.API\\Reservation.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Coderkechuyen\\TDSolution\\Reservation.API\\Reservation.API.csproj",
+        "projectUniqueName": "D:\\TDSolution\\Reservation.API\\Reservation.API.csproj",
         "projectName": "Reservation.API",
-        "projectPath": "D:\\Coderkechuyen\\TDSolution\\Reservation.API\\Reservation.API.csproj",
+        "projectPath": "D:\\TDSolution\\Reservation.API\\Reservation.API.csproj",
         "packagesPath": "C:\\Users\\tamdc\\.nuget\\packages\\",
-        "outputPath": "D:\\Coderkechuyen\\TDSolution\\Reservation.API\\obj\\",
+        "outputPath": "D:\\TDSolution\\Reservation.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tamdc\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -112,8 +112,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Coderkechuyen\\TDSolution\\Base.Lib\\TD.Lib.csproj": {
-                "projectPath": "D:\\Coderkechuyen\\TDSolution\\Base.Lib\\TD.Lib.csproj"
+              "D:\\TDSolution\\Base.Lib\\TD.Lib.csproj": {
+                "projectPath": "D:\\TDSolution\\Base.Lib\\TD.Lib.csproj"
               }
             }
           }
