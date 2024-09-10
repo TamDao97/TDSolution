@@ -1,23 +1,27 @@
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { createStore, select, setProps, withProps } from '@ngneat/elf';
-import { AuthProps } from '~modules/auth/store/interfaces/auth-props.interface';
 import { localStorageStrategy, persistState } from '@ngneat/elf-persist-state';
 import { Observable } from 'rxjs';
-import { User } from '~modules/user/shared/user.model';
 import { AuthService } from '~modules/auth/shared/auth.service';
+import { ICurrentUser } from './interfaces/current-user.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthRepository {
-  $user: Observable<User | null>;
+  $user: Observable<ICurrentUser | null>;
   private readonly authStore;
 
   constructor(@Inject(LOCALE_ID) public locale: string) {
     this.authStore = createStore(
       { name: 'auth' },
-      withProps<AuthProps>({
-        user: null,
+      withProps<ICurrentUser>({
+        id: null,
+        userName: null,
+        displayName: null,
         accessToken: null,
         refreshToken: null,
+        isAdmin: false,
+        permission: null,
+        language: null,
       }),
     );
 
@@ -26,7 +30,7 @@ export class AuthRepository {
       storage: localStorageStrategy,
     });
 
-    this.$user = this.authStore.pipe(select(state => state.user));
+    this.$user = this.authStore.pipe(select(state => state));
   }
 
   getAccessTokenValue() {
@@ -37,14 +41,14 @@ export class AuthRepository {
     return this.authStore.getValue().refreshToken;
   }
 
-  updateTokens(accessToken: string, refreshToken: string) {
+  updateTokens(accessToken: string | null, refreshToken: string | null) {
     this.authStore.update(setProps({ accessToken, refreshToken }));
   }
 
-  setUser(user: User) {
+  setUser(user: ICurrentUser) {
     this.authStore.update(state => ({
       ...state,
-      user,
+      ...user,
     }));
   }
 
@@ -65,6 +69,16 @@ export class AuthRepository {
   }
 
   clear() {
-    this.authStore.update(setProps({ user: null, accessToken: null, refreshToken: null }));
+    this.authStore.update(
+      setProps({
+        id: null,
+        userName: null,
+        displayName: null,
+        accessToken: null,
+        refreshToken: null,
+        isAdmin: false,
+        permission: [],
+      }),
+    );
   }
 }

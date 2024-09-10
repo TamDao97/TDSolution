@@ -67,7 +67,7 @@ namespace Reservation.API.Services
         #region Asp core identity
         public async Task<Response<CurrentUser>> LoginAsync(LoginReq req)
         {
-            var user = await _userRepos.Table.FirstOrDefaultAsync(r => r.UserName == req.UserName);
+            var user = await _userRepos.Table.FirstOrDefaultAsync(r => r.UserName == req.Email);
 
             if (user is null)
                 return Response<CurrentUser>.Error(StatusCode.InternalServerError, "Tài khoản không tồn tại trên hệ thống!");
@@ -92,7 +92,7 @@ namespace Reservation.API.Services
                 IsAdmin = user.IsAdmin,
                 AccessToken = tokens.AccessToken,
                 RefreshToken = tokens.RefreshToken,
-                Permission = permissions
+                Permissions = permissions
             };
             return Response<CurrentUser>.Success(currentUser, StatusCode.Ok.ToDescription());
         }

@@ -9,7 +9,7 @@ namespace Reservation.API.DataContext.Dto
 {
     public class LoginReq
     {
-        public string UserName { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
     }
 
@@ -33,6 +33,6 @@ namespace Reservation.API.DataContext.Dto
         public bool IsAdmin { get; set; }
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
-        public List<string> Permission { get; set; } = new List<string>();
+        public List<string> Permissions { get; set; } = new List<string>();
     }
 }

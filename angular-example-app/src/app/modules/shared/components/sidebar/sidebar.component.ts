@@ -12,6 +12,7 @@ import { NgIf } from '@angular/common';
 import { userRoutes } from '~modules/user/shared/user-routes';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { User } from '~modules/user/shared/user.model';
+import { ICurrentUser } from '~modules/auth/store/interfaces/current-user.interface';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,7 +23,7 @@ import { User } from '~modules/user/shared/user.model';
   imports: [RouterModule, NgIf],
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-  @Input({ required: true }) user: User | undefined;
+  @Input({ required: true }) user: ICurrentUser | undefined;
 
   userRoutes: typeof userRoutes;
   currentUrl: string;

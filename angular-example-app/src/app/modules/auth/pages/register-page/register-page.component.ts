@@ -23,7 +23,6 @@ import { ApiError } from '~modules/shared/interfaces/api-error.interface';
 import { Router, RouterLink } from '@angular/router';
 import { AlertId, AlertService } from '~modules/shared/services/alert.service';
 import { CustomError } from '~modules/auth/shared/interfaces/custom-errors.enum';
-import { AuthUserData } from '~modules/auth/shared/interfaces/register-data.interface';
 import { authRoutes } from '~modules/auth/shared/auth-routes';
 import { userRoutes } from '~modules/user/shared/user-routes';
 import { EventBCType, EventBusService } from '~modules/shared/services/event-bus.service';
@@ -35,6 +34,7 @@ import { TrimDirective } from '~modules/shared/directives/trim.directive';
 import { LowercaseDirective } from '~modules/shared/directives/lowercase.directive';
 import { IAppConfig } from '../../../../configs/app-config.interface';
 import { EmailValidators } from '~modules/shared/validators/email.validators';
+import { ICurrentUser } from '~modules/auth/store/interfaces/current-user.interface';
 
 @Component({
   selector: 'app-register-page',
@@ -112,30 +112,29 @@ export class RegisterPageComponent implements OnDestroy {
   }
 
   sendForm() {
-    if (this.registerForm.valid) {
-      this.isButtonRegisterLoading = true;
-
-      const formValue = this.registerForm.getRawValue();
-      this.authService
-        .signup({
-          firstname: formValue.firstname,
-          email: formValue.email,
-          password: formValue.password,
-        })
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: (response: unknown) => {
-            this.handleRegisterResponse(response);
-          },
-          error: (error: ApolloError) => {
-            this.handleRegisterError(error);
-          },
-        });
-    }
+    // if (this.registerForm.valid) {
+    //   this.isButtonRegisterLoading = true;
+    //   const formValue = this.registerForm.getRawValue();
+    //   this.authService
+    //     .signup({
+    //       firstname: formValue.firstname,
+    //       email: formValue.email,
+    //       password: formValue.password,
+    //     })
+    //     .pipe(takeUntil(this.destroy$))
+    //     .subscribe({
+    //       next: (response: unknown) => {
+    //         this.handleRegisterResponse(response);
+    //       },
+    //       error: (error: ApolloError) => {
+    //         this.handleRegisterError(error);
+    //       },
+    //     });
+    // }
   }
 
   handleRegisterResponse(response: unknown) {
-    const user = (response as AuthUserData).user;
+    const user = (response as ICurrentUser);
     if (user) {
       return this.router.navigate([userRoutes.dashboard]).then(() => {
         this.alertService.clearAll();

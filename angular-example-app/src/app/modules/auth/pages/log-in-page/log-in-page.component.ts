@@ -16,7 +16,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '~modules/auth/shared/auth.service';
 import { ApolloError } from '@apollo/client/errors';
-import { Subject, takeUntil } from 'rxjs';
+import { map, Subject, takeUntil } from 'rxjs';
 import { APP_CONFIG, AppConfig } from '../../../../configs/app.config';
 import { NetworkHelperService } from '~modules/shared/services/network-helper.service';
 import { ApiError } from '~modules/shared/interfaces/api-error.interface';
@@ -24,7 +24,6 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { userRoutes } from '~modules/user/shared/user-routes';
 import { AlertId, AlertService } from '~modules/shared/services/alert.service';
 import { CustomError } from '~modules/auth/shared/interfaces/custom-errors.enum';
-import { AuthUserData } from '~modules/auth/shared/interfaces/register-data.interface';
 import { authRoutes } from '~modules/auth/shared/auth-routes';
 import { EventBCType, EventBusService } from '~modules/shared/services/event-bus.service';
 import { AuthRepository } from '~modules/auth/store/auth.repository';
@@ -36,6 +35,7 @@ import { TrimDirective } from '~modules/shared/directives/trim.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { IAppConfig } from '../../../../configs/app-config.interface';
 import { EmailValidators } from '~modules/shared/validators/email.validators';
+import { ICurrentUser } from '~modules/auth/store/interfaces/current-user.interface';
 
 @Component({
   selector: 'app-log-in-page',
@@ -99,11 +99,16 @@ export class LogInPageComponent implements OnDestroy, AfterViewInit {
   sendForm() {
     if (this.logInForm.valid) {
       this.isButtonLogInLoading = true;
-
       const payload = this.logInForm.getRawValue();
       this.authService
         .logIn(payload)
-        .pipe(takeUntil(this.destroy$))
+        .pipe(
+          map(res => {
+            console.log(res);
+            this.saveUserData(res?.data);
+          }),
+          takeUntil(this.destroy$),
+        )
         .subscribe({
           next: (response: unknown) => {
             this.handleLogInResponse(response);
@@ -115,10 +120,15 @@ export class LogInPageComponent implements OnDestroy, AfterViewInit {
     }
   }
 
+  public saveUserData(userData: ICurrentUser) {
+    this.authRepository.updateTokens(userData.accessToken, userData.refreshToken);
+    this.authRepository.setUser(userData);
+  }
+
   handleLogInResponse(response: unknown) {
     const origin = this.activatedRoute.snapshot.queryParams[AppConfig.customQueryParams.origin];
 
-    const user = (response as AuthUserData).user;
+    const user = response as ICurrentUser;
     if (user) {
       if (origin) {
         this.window.location.href = decodeURIComponent(origin);

@@ -17,6 +17,7 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { authRoutes } from '~modules/auth/shared/auth-routes';
 import { environment } from '~environments/environment';
 import { appRoutes } from '../../../../app-routes';
+import { ICurrentUser } from '~modules/auth/store/interfaces/current-user.interface';
 
 @Component({
   selector: 'app-header',
@@ -32,7 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   currentUrl: string;
   userRoutes: typeof userRoutes;
   appRoutes: typeof appRoutes;
-  user: User | undefined;
+  user: ICurrentUser | undefined;
   window: Window;
 
   // eslint-disable-next-line max-params

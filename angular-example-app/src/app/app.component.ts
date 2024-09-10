@@ -29,6 +29,7 @@ import { HeaderComponent } from '~modules/shared/components/header/header.compon
 import { SidebarComponent } from '~modules/shared/components/sidebar/sidebar.component';
 import { FooterComponent } from '~modules/shared/components/footer/footer.component';
 import { AlertComponent } from '~modules/shared/components/alert/alert.component';
+import { ICurrentUser } from '~modules/auth/store/interfaces/current-user.interface';
 
 @Component({
   selector: 'app-root',
@@ -41,7 +42,7 @@ import { AlertComponent } from '~modules/shared/components/alert/alert.component
 export class AppComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  user: User | undefined;
+  user: ICurrentUser | undefined;
   isLoggedIn: boolean | undefined;
   isArrivalRoute: boolean;
   isLoggingOut: boolean;

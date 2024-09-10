@@ -14,10 +14,6 @@ import { TokenInterceptor } from '~modules/shared/interceptors/token.interceptor
 import { AuthService } from '~modules/auth/shared/auth.service';
 import { AuthRepository } from '~modules/auth/store/auth.repository';
 import { DOCUMENT } from '@angular/common';
-import { Apollo, APOLLO_OPTIONS } from 'apollo-angular';
-import { HttpLink } from 'apollo-angular/http';
-import { ApolloClientOptions, ApolloLink, InMemoryCache } from '@apollo/client/core';
-import { setContext } from '@apollo/client/link/context';
 
 if (environment.production) {
   enableProdMode();

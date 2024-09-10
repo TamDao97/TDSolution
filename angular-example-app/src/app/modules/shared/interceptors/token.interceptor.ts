@@ -39,7 +39,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
       if (isAccessTokenExpired) {
         if (!isRefreshTokenExpired) {
-          return this.updateExpiredToken(request, next, headers);
+          // return this.updateExpiredToken(request, next, headers);
         } else {
           this.navigateToLogout();
           return observableThrowError(() => new Error());
@@ -93,30 +93,30 @@ export class TokenInterceptor implements HttpInterceptor {
     );
   }
 
-  updateExpiredToken(
-    request: HttpRequest<unknown>,
-    next: HttpHandler,
-    headers: { req_uuid: string; Authorization: string },
-  ) {
-    return this.authService.refreshToken().pipe(
-      switchMap(() => {
-        const token = this.authRepository.getAccessTokenValue();
-        headers['Authorization'] = `Bearer ${token}`;
-        const updateTokenRequest = request.clone({
-          setHeaders: headers,
-        });
-        return next.handle(updateTokenRequest).pipe(
-          catchError(error => {
-            throw new Error(error);
-          }),
-        );
-      }),
-      catchError((error): ObservableInput<HttpEvent<unknown>> => {
-        this.navigateToLogout();
-        throw new Error(error);
-      }),
-    );
-  }
+  // updateExpiredToken(
+  //   request: HttpRequest<unknown>,
+  //   next: HttpHandler,
+  //   headers: { req_uuid: string; Authorization: string },
+  // ) {
+  //   return this.authService.refreshToken().pipe(
+  //     switchMap(() => {
+  //       const token = this.authRepository.getAccessTokenValue();
+  //       headers['Authorization'] = `Bearer ${token}`;
+  //       const updateTokenRequest = request.clone({
+  //         setHeaders: headers,
+  //       });
+  //       return next.handle(updateTokenRequest).pipe(
+  //         catchError(error => {
+  //           throw new Error(error);
+  //         }),
+  //       );
+  //     }),
+  //     catchError((error): ObservableInput<HttpEvent<unknown>> => {
+  //       this.navigateToLogout();
+  //       throw new Error(error);
+  //     }),
+  //   );
+  // }
 
   navigateToLogout() {
     this.router.navigate([authRoutes.logout], {

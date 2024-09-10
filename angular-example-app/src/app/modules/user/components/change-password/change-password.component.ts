@@ -76,24 +76,24 @@ export class ChangePasswordComponent implements OnDestroy {
   checkPasswords: ValidatorFn = (): ValidationErrors | null =>
     this.oldPassword.value === this.newPassword.value ? { samePasswords: true } : null;
 
-  sendForm() {
-    if (this.changePasswordForm?.valid) {
-      this.isButtonChangePasswordLoading = true;
+  // sendForm() {
+  //   if (this.changePasswordForm?.valid) {
+  //     this.isButtonChangePasswordLoading = true;
 
-      const formValue = this.changePasswordForm.getRawValue();
-      this.authService
-        .changePassword(formValue.oldPassword, formValue.newPassword)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: () => {
-            this.handleChangePasswordResponse();
-          },
-          error: (error: ApolloError) => {
-            this.handleChangePasswordError(error);
-          },
-        });
-    }
-  }
+  //     const formValue = this.changePasswordForm.getRawValue();
+  //     this.authService
+  //       .changePassword(formValue.oldPassword, formValue.newPassword)
+  //       .pipe(takeUntil(this.destroy$))
+  //       .subscribe({
+  //         next: () => {
+  //           this.handleChangePasswordResponse();
+  //         },
+  //         error: (error: ApolloError) => {
+  //           this.handleChangePasswordError(error);
+  //         },
+  //       });
+  //   }
+  // }
 
   handleChangePasswordResponse() {
     this.alertService.create(AlertId.PASSWORD_CHANGED);
