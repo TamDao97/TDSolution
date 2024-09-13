@@ -2,7 +2,6 @@
 
 # Compiled output
 /dist
-/test-results
 /tmp
 /out-tsc
 /bazel-out
@@ -37,7 +36,6 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
-/playwright-report
 
 # System files
 .DS_Store
