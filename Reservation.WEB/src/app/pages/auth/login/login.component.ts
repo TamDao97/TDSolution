@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SharedModule } from '../../../shared/modules/shared/shared.module';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { SharedModule } from '../../../shared/modules/shared.module';
+import { UiFormModule } from '../../../shared/modules/ui-form.module';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, UiFormModule],
 })
 export class LoginComponent implements OnInit {
   frmGroup!: FormGroup;
@@ -15,13 +21,27 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    this.frmGroup = this.fb.group({
-      email: ['', Validators.required],
-      password: [null, [Validators.required]],
+    this.frmGroup = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
     });
   }
 
   onSubmit() {
-    console.log(this.frmGroup.value);
+    // Đánh dấu tất cả các điều khiển là đã được chạm (touched)
+    this.frmGroup.markAllAsTouched();
+
+    // Cập nhật giá trị và trạng thái của tất cả các điều khiển
+    this.frmGroup.updateValueAndValidity();
+
+    // Kiểm tra xem form có hợp lệ không
+    if (this.frmGroup.valid) {
+      console.log(this.frmGroup.value);
+    } else {
+      console.log('Form is invalid');
+    }
   }
 }

@@ -27,26 +27,19 @@
                     Đăng nhập vào tài khoản của bạn
                   </h5>
 
-                  <div data-mdb-input-init class="form-outline mb-4">
-                    <input
-                      class="form-control"
-                      appRequired
-                      type="email"
-                      class="form-control form-control-lg"
-                      formControlName="email"
-                      id="email"
-                    />
-                    <label class="form-label">Email</label>
-                  </div>
+                  <app-td-input
+                    wrapClass="mb-3"
+                    [type]="'email'"
+                    [placeholder]="'Email'"
+                    formControlName="email"
+                  ></app-td-input>
 
-                  <div data-mdb-input-init class="form-outline mb-4">
-                    <input
-                      type="password"
-                      class="form-control form-control-lg"
-                      formControlName="password"
-                    />
-                    <label class="form-label">Password</label>
-                  </div>
+                  <app-td-input
+                    wrapClass="mb-3"
+                    [type]="'password'"
+                    [placeholder]="'Mật khẩu'"
+                    formControlName="password"
+                  ></app-td-input>
 
                   <div class="pt-1 mb-4">
                     <button

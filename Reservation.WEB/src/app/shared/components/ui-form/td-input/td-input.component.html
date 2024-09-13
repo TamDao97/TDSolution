@@ -1,3 +1,18 @@
-<p>
-  td-input works!
-</p>
+<div class="input-control {{ wrapClass }}" [ngClass]="layout">
+  <label *ngIf="label" class="form-label">{{ label }}</label>
+  <input
+    [type]="type"
+    [class]="inputClass"
+    [placeholder]="placeholder"
+    [value]="value"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+    [disabled]="isDisabled"
+  />
+  <div class="error-message" *ngIf="errors">
+    <div *ngIf="errors['required']">Vui lòng nhập thông tin.</div>
+    <div *ngIf="errors['minlength']">Ít nhất là {{ minLength }} ký tự.</div>
+    <div *ngIf="errors['maxlength']">Tối đa là {{ maxLength }} ký tự.</div>
+    <div *ngIf="errors['email']">Email không hợp lệ.</div>
+  </div>
+</div>

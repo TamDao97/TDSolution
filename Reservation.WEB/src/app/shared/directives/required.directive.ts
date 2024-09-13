@@ -30,10 +30,12 @@ export class RequiredDirective implements Validator {
     return null;
   }
 
-  @HostListener('blur', ['$event.target'])
-  onBlur(target: HTMLInputElement) {
+  // Sử dụng sự kiện 'input' để lắng nghe mỗi khi giá trị input thay đổi
+  @HostListener('input', ['$event.target'])
+  onInput(target: HTMLInputElement) {
+    // Kiểm tra nếu trường yêu cầu và không có giá trị thì hiển thị lỗi
     if (this.required && !target.value) {
-      this.showError('This field is required');
+      this.showError('Vui lòng nhập thông tin');
     } else {
       this.hideError();
     }
@@ -51,6 +53,7 @@ export class RequiredDirective implements Validator {
 
   private hideError() {
     const error = this.el.nativeElement.nextElementSibling;
+    console.log('Error element:', error); // Kiểm tra phần tử lỗi có đúng không
     if (error && error.classList.contains('error-message')) {
       this.renderer.removeChild(this.el.nativeElement.parentNode, error);
     }
