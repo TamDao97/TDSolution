@@ -1,0 +1,18 @@
+<div class="input-control {{ wrapClass }}" [ngClass]="layout">
+  <label *ngIf="label" class="form-label">{{ label }}</label>
+  <select
+    [class]="selectClass"
+    [value]="value"
+    (change)="onSelectChange($event)"
+    (blur)="onBlur()"
+    [disabled]="isDisabled"
+  >
+    <option *ngFor="let option of options" [value]="option.value">
+      {{ option.label }}
+    </option>
+  </select>
+
+  <div class="error-message" *ngIf="isShowError && errors">
+    <div *ngIf="errors['required']">Vui lòng nhập thông tin.</div>
+  </div>
+</div>

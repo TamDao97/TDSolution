@@ -11,7 +11,7 @@ import {
 import { validateEmail } from '../../../utils/helpers';
 
 @Component({
-  selector: 'app-td-input',
+  selector: 'td-input',
   templateUrl: './td-input.component.html',
   styleUrls: ['./td-input.component.css'],
   providers: [
@@ -43,16 +43,16 @@ export class TdInputComponent implements ControlValueAccessor, Validator {
   value: any = '';
   isDisabled: boolean = false;
   errors: ValidationErrors | null = null;
+  isShowError: boolean = false;
 
   onChange = (value: any) => {};
 
-  onTouched = () => {
-    console.log(10000);
-  };
+  onTouched = () => {};
 
   onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.value = input.value;
+    this.isShowError = true;
     this.onChange(this.value);
     this.onTouched();
   }

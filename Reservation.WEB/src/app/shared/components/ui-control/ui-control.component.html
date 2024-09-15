@@ -1,0 +1,30 @@
+<div class="container">
+  <p>ui-control works!</p>
+
+  <form [formGroup]="form">
+    <td-input
+      wrapClass="mb-3"
+      [type]="'text'"
+      [placeholder]="'Tên'"
+      formControlName="inputVal"
+      [label]="'Tên'"
+    ></td-input>
+
+    <td-text-area
+      wrapClass="mb-3"
+      [placeholder]="'Ghi chú'"
+      formControlName="noteVal"
+      [label]="'Ghi chú'"
+    >
+    </td-text-area>
+    <td-select
+      wrapClass="mb-3"
+      formControlName="selectVal"
+      [label]="'Tình/thành'"
+    ></td-select>
+
+    <button type="button" class="btn btn-success" (click)="submit()">
+      Success
+    </button>
+  </form>
+</div>

@@ -1,15 +1,16 @@
 <div class="input-control {{ wrapClass }}" [ngClass]="layout">
   <label *ngIf="label" class="form-label">{{ label }}</label>
-  <input
-    [type]="type"
+
+  <textarea
     [class]="inputClass"
     [placeholder]="placeholder"
     [value]="value"
     (input)="onInput($event)"
     (blur)="onBlur()"
     [disabled]="isDisabled"
-  />
-  <div class="error-message" *ngIf="errors">
+    rows="3"
+  ></textarea>
+  <div class="error-message" *ngIf="isShowError && errors">
     <div *ngIf="errors['required']">Vui lòng nhập thông tin.</div>
     <div *ngIf="errors['minlength']">Ít nhất là {{ minLength }} ký tự.</div>
     <div *ngIf="errors['maxlength']">Tối đa là {{ maxLength }} ký tự.</div>

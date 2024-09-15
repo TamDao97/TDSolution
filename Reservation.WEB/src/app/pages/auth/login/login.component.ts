@@ -6,14 +6,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { SharedModule } from '../../../shared/modules/shared.module';
-import { UiFormModule } from '../../../shared/modules/ui-form.module';
+import { UiControlModule } from '../../../shared/modules/ui-control.module';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   standalone: true,
-  imports: [SharedModule, UiFormModule],
+  imports: [SharedModule, UiControlModule],
 })
 export class LoginComponent implements OnInit {
   frmGroup!: FormGroup;
