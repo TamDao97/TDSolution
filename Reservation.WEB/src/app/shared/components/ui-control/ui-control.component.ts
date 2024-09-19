@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { UiControlModule } from '../../modules/ui-control.module';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SharedModule } from '../../modules/shared.module';
+import { UiControlModule } from '../../modules/ui-control.module';
 
 @Component({
   selector: 'app-ui-control',
   templateUrl: './ui-control.component.html',
   styleUrls: ['./ui-control.component.css'],
-  imports: [SharedModule, UiControlModule],
   standalone: true,
+  imports: [SharedModule, UiControlModule],
 })
 export class UiControlComponent implements OnInit {
   form = new FormGroup({
@@ -24,4 +24,9 @@ export class UiControlComponent implements OnInit {
   submit(): void {
     console.log(this.form.value);
   }
+
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
 }

@@ -21,7 +21,7 @@ import {
 export class TdSelectComponent implements ControlValueAccessor {
   @Input() type!: string;
   @Input() label!: string;
-  // @Input() placeholder!: string;
+  @Input() placeholder!: string;
   @Input() wrapClass!: string;
   @Input() selectClass: string = 'form-select';
   @Input() layout: 'vertical' | 'horizontal' = 'vertical';

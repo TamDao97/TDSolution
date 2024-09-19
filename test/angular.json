@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Reservation.WEB": {
+    "test": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/reservation.web",
+            "outputPath": "dist/test",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -53,10 +53,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Reservation.WEB:build:production"
+              "buildTarget": "test:build:production"
             },
             "development": {
-              "buildTarget": "Reservation.WEB:build:development"
+              "buildTarget": "test:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "Reservation.WEB:build"
+            "buildTarget": "test:build"
           }
         },
         "test": {
@@ -81,6 +81,6 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": "b9058029-3a37-4f3b-91e0-3bccf79eb178"
   }
 }

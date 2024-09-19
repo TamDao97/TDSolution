@@ -1,6 +1,8 @@
 <div class="input-control {{ wrapClass }}" [ngClass]="layout">
-  <!-- <label *ngIf="label" class="form-label">{{ label }}</label>
+  <label *ngIf="label" class="form-label">{{ label }}</label>
   <input
+    nbInput
+    fullWidth
     [type]="type"
     [class]="inputClass"
     [placeholder]="placeholder"
@@ -9,34 +11,11 @@
     (blur)="onBlur()"
     [disabled]="isDisabled"
   />
+
   <div class="error-message" *ngIf="isShowError && errors">
     <div *ngIf="errors['required']">Vui lòng nhập thông tin.</div>
     <div *ngIf="errors['minlength']">Ít nhất là {{ minLength }} ký tự.</div>
     <div *ngIf="errors['maxlength']">Tối đa là {{ maxLength }} ký tự.</div>
     <div *ngIf="errors['email']">Email không hợp lệ.</div>
-  </div> -->
-
-  <mat-form-field>
-    <mat-label *ngIf="label">{{ label }}</mat-label>
-    <input
-      matInput
-      [class]="inputClass"
-      [placeholder]="placeholder"
-      [value]="value"
-      (input)="onInput($event)"
-      (blur)="onBlur()"
-      [disabled]="isDisabled"
-    />
-    <div class="error-message" *ngIf="isShowError && errors">
-      <mat-error *ngIf="errors['required']">Vui lòng nhập thông tin.</mat-error>
-      <mat-error *ngIf="errors['minlength']"
-        >Ít nhất là {{ minLength }} ký tự.</mat-error
-      >
-      <mat-error *ngIf="errors['maxlength']"
-        >Tối đa là {{ maxLength }} ký tự.</mat-error
-      >
-      <mat-error *ngIf="errors['email']">Email không hợp lệ.</mat-error>
-    </div>
-    -->
-  </mat-form-field>
+  </div>
 </div>

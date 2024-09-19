@@ -1,18 +1,30 @@
-<div class="input-control {{ wrapClass }}" [ngClass]="layout">
+<!-- <div class="input-control {{ wrapClass }}" [ngClass]="layout">
   <label *ngIf="label" class="form-label">{{ label }}</label>
-  <select
+  <nb-select
+    [placeholder]="placeholder"
     [class]="selectClass"
-    [value]="value"
     (change)="onSelectChange($event)"
     (blur)="onBlur()"
     [disabled]="isDisabled"
   >
-    <option *ngFor="let option of options" [value]="option.value">
-      {{ option.label }}
-    </option>
-  </select>
+    <nb-option *ngFor="let option of options" [value]="option.value">{{
+      option.label
+    }}</nb-option>
+  </nb-select>
 
   <div class="error-message" *ngIf="isShowError && errors">
     <div *ngIf="errors['required']">Vui lòng nhập thông tin.</div>
   </div>
-</div>
+</div> -->
+
+<nb-select
+  [placeholder]="placeholder"
+  [class]="selectClass"
+  (change)="onSelectChange($event)"
+  (blur)="onBlur()"
+  [disabled]="isDisabled"
+>
+  <nb-option *ngFor="let option of options" [value]="option.value">{{
+    option.label
+  }}</nb-option>
+</nb-select>
