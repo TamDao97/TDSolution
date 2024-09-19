@@ -1,24 +1,24 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import {
-  ControlValueAccessor,
   NG_VALUE_ACCESSOR,
-  ValidationErrors,
+  ControlValueAccessor,
   Validators,
+  ValidationErrors,
 } from '@angular/forms';
 
 @Component({
-  selector: 'td-select',
-  templateUrl: './td-select.component.html',
-  styleUrls: ['./td-select.component.css'],
+  selector: 'td-select-group',
+  templateUrl: './td-select-group.component.html',
+  styleUrls: ['./td-select-group.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TdSelectComponent),
+      useExisting: forwardRef(() => TdSelectGroupComponent),
       multi: true,
     },
   ],
 })
-export class TdSelectComponent implements ControlValueAccessor {
+export class TdSelectGroupComponent implements ControlValueAccessor {
   @Input() label!: string;
   @Input() placeholder: string = '--Chọn--';
   @Input() wrapClass!: string;

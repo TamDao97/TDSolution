@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 import { SharedModule } from '../../modules/shared.module';
 import { UiControlModule } from '../../modules/ui-control.module';
 
@@ -11,13 +16,15 @@ import { UiControlModule } from '../../modules/ui-control.module';
   imports: [SharedModule, UiControlModule],
 })
 export class UiControlComponent implements OnInit {
-  form = new FormGroup({
-    inputVal: new FormControl(''),
-    selectVal: new FormControl(''),
-    noteVal: new FormControl(''),
+  form = this.fb.group({
+    inputVal: [null],
+    selectVal: [null],
+    selectMultiVal: [null],
+    selectGroupVal: [null],
+    noteVal: [null],
   });
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {}
 

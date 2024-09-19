@@ -1,96 +1,53 @@
 <nb-layout>
   <nb-layout-column>
-    <div class="container">
-      <p>ui-control works!</p>
+    <nb-card>
+      <nb-card-body class="example-items-col">
+        <div class="container">
+          <p>ui-control works!</p>
+          <form [formGroup]="form">
+            <!-- text input -->
+            <td-input
+              wrapClass="mb-3"
+              [type]="'text'"
+              [placeholder]="'Tên'"
+              formControlName="inputVal"
+              [label]="'Tên'"
+            ></td-input>
 
-      <form [formGroup]="form">
-        <td-input
-          wrapClass="mb-3"
-          [type]="'text'"
-          [placeholder]="'Tên'"
-          formControlName="inputVal"
-          [label]="'Tên'"
-        ></td-input>
+            <!-- text area -->
+            <td-text-area
+              wrapClass="mb-3"
+              [placeholder]="'Ghi chú'"
+              formControlName="noteVal"
+              [label]="'Ghi chú'"
+            >
+            </td-text-area>
 
-        <td-text-area
-          wrapClass="mb-3"
-          [placeholder]="'Ghi chú'"
-          formControlName="noteVal"
-          [label]="'Ghi chú'"
-        >
-        </td-text-area>
-        <td-select
-          wrapClass="mb-3"
-          formControlName="selectVal"
-          [label]="'Tình/thành'"
-        ></td-select>
+            <!-- single select -->
+            <td-select
+              wrapClass="mb-3"
+              formControlName="selectVal"
+              [label]="'Tình/thành'"
+            ></td-select>
 
-        <button type="button" class="btn btn-success" (click)="submit()">
-          Success
-        </button>
-      </form>
+            <!-- multi select -->
+            <td-select-mutil
+              wrapClass="mb-3"
+              formControlName="selectMultiVal"
+              [label]="'Quận/Huyện'"
+            ></td-select-mutil>
 
-      <button nbButton>Hello Nebular</button>
+            <!-- group select -->
+            <td-select-group
+              wrapClass="mb-3"
+              formControlName="selectGroupVal"
+              [label]="'Sản phẩm'"
+            ></td-select-group>
 
-      <nb-card>
-        <nb-card-body class="example-items-col">
-          <td-select
-          wrapClass="mb-3"
-          [label]="'Tình/thành'"
-        ></td-select>
-          <input
-            type="text"
-            nbInput
-            fullWidth
-            status="basic"
-            placeholder="Default"
-          />
-          <input
-            type="text"
-            nbInput
-            fullWidth
-            status="primary"
-            placeholder="Primary"
-          />
-          <input
-            type="text"
-            nbInput
-            fullWidth
-            status="info"
-            placeholder="Info"
-          />
-          <input
-            type="text"
-            nbInput
-            fullWidth
-            status="success"
-            placeholder="Success"
-          />
-          <input
-            type="text"
-            nbInput
-            fullWidth
-            status="warning"
-            placeholder="Warning"
-          />
-          <input
-            type="text"
-            nbInput
-            fullWidth
-            status="danger"
-            placeholder="Danger"
-          />
-          <div class="control-status-example">
-            <input
-              type="text"
-              nbInput
-              fullWidth
-              status="control"
-              placeholder="Control"
-            />
-          </div>
-        </nb-card-body>
-      </nb-card>
-    </div>
+            <button nbButton (click)="submit()">Success</button>
+          </form>
+        </div>
+      </nb-card-body>
+    </nb-card>
   </nb-layout-column>
 </nb-layout>
