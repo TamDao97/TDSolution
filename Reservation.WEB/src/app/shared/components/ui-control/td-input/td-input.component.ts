@@ -1,12 +1,12 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
+  FormControl,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
   Validator,
-  Validators,
 } from '@angular/forms';
 import { validateEmail } from '../../../utils/helpers';
 
@@ -28,41 +28,43 @@ import { validateEmail } from '../../../utils/helpers';
   ],
 })
 export class TdInputComponent implements ControlValueAccessor, Validator {
-  @Input() type!: string;
+  @Input() type: string = 'text';
   @Input() label!: string;
-  @Input() placeholder!: string;
-  @Input() wrapClass!: string;
+  @Input() placeholder: string = '';
+  @Input() wrapClass: string = '';
   @Input() inputClass: string = 'form-control';
   @Input() layout: 'vertical' | 'horizontal' = 'vertical';
-  @Input() validators: Validators[] = []; // Nhận các validator từ ngoài
+  // @Input() validators: any[] = []; // Nhận các validator từ ngoài
 
-  //validator
   @Input() minLength: number = 3;
   @Input() maxLength: number = 255;
 
-  value: any = '';
+  control: FormControl = new FormControl(null);
   isDisabled: boolean = false;
-  errors: ValidationErrors | null = null;
-  isShowError: boolean = false;
+
+  constructor() {}
 
   onChange = (value: any) => {};
-
   onTouched = () => {};
 
-  onInput(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.value = input.value;
-    this.isShowError = true;
-    this.onChange(this.value);
-    this.onTouched();
-  }
+  // onInput(event: Event): void {
+  //   const input = (event.target as HTMLInputElement).value;
+  //   this.control.setValue(input); // Cập nhật giá trị vào form control
+  //   this.onChange(input);
+  //   this.onTouched();
+  // }
 
   onBlur(): void {
     this.onTouched();
   }
 
   writeValue(value: any): void {
-    this.value = value;
+    if (!this.control) {
+      // Chỉ gán formControl khi nó chưa được gán
+      this.control = new FormControl(value);
+    } else {
+      this.control.setValue(value);
+    }
   }
 
   registerOnChange(fn: (value: any) => void): void {
@@ -75,35 +77,40 @@ export class TdInputComponent implements ControlValueAccessor, Validator {
 
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
+    isDisabled ? this.control.disable() : this.control.enable();
   }
 
-  // Validator method
   validate(control: AbstractControl): ValidationErrors | null {
+    this.control = control as FormControl;
     const errors: ValidationErrors = {};
+    const value = this.control.value;
 
-    if (!this.value) {
+    // Kiểm tra validator required
+    if (!value) {
       errors['required'] = true;
     }
 
-    if (this.value && this.value.length < this.minLength) {
+    // Kiểm tra độ dài tối thiểu
+    if (value && value.length < this.minLength) {
       errors['minlength'] = {
         requiredLength: this.minLength,
-        actualLength: this.value.length,
+        actualLength: value.length,
       };
     }
 
-    if (this.value && this.value.length > this.maxLength) {
+    // Kiểm tra độ dài tối đa
+    if (value && value.length > this.maxLength) {
       errors['maxlength'] = {
         requiredLength: this.maxLength,
-        actualLength: this.value.length,
+        actualLength: value.length,
       };
     }
 
-    if (this.type === 'email' && this.value && !validateEmail(this.value)) {
+    // Kiểm tra email nếu input là dạng email
+    if (this.type === 'email' && value && !validateEmail(value)) {
       errors['email'] = true;
     }
 
-    this.errors = Object.keys(errors).length ? errors : null;
-    return this.errors;
+    return Object.keys(errors).length ? errors : null;
   }
 }

@@ -1,3 +1,8 @@
-<p>
-  td-radio works!
-</p>
+<div class="input-control {{ wrapClass }}" [ngClass]="layout">
+  <label *ngIf="label" class="form-label">{{ label }}</label>
+  <nb-radio-group (valueChange)="bind($event)">
+    <nb-radio *ngFor="let option of options" [value]="option.value">
+      {{ option.label }}
+    </nb-radio>
+  </nb-radio-group>
+</div>

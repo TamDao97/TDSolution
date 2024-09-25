@@ -1,6 +1,6 @@
 .input-control {
   display: flex;
-  align-items: center;
+  /* align-items: left; */
 }
 
 .input-control.vertical {

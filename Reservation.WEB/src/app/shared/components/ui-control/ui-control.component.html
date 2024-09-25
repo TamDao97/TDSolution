@@ -44,6 +44,24 @@
               [label]="'Sản phẩm'"
             ></td-select-group>
 
+            <!-- checkbox -->
+            <td-checkbox
+              [label]="'Nam'"
+              [status]="'success'"
+              formControlName="checkVal"
+            ></td-checkbox>
+
+            <!-- radio -->
+            <br />
+            <td-radio
+              [label]="'Chọn đáp án'"
+              formControlName="radioVal"
+            ></td-radio>
+            <br />
+
+            <!-- auto complete -->
+            <td-auto-complete formControlName="autoVal"></td-auto-complete>
+
             <button nbButton (click)="submit()">Success</button>
           </form>
         </div>

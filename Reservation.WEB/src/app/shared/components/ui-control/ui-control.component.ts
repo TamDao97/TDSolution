@@ -21,7 +21,10 @@ export class UiControlComponent implements OnInit {
     selectVal: [null],
     selectMultiVal: [null],
     selectGroupVal: [null],
+    checkVal: [null],
+    radioVal: [null],
     noteVal: [null],
+    autoVal: [null],
   });
 
   constructor(private fb: FormBuilder) {}
@@ -31,9 +34,4 @@ export class UiControlComponent implements OnInit {
   submit(): void {
     console.log(this.form.value);
   }
-
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
 }

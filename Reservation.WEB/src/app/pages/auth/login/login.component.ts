@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedModule } from '../../../shared/modules/shared.module';
 import { UiControlModule } from '../../../shared/modules/ui-control.module';
+import { TdBaseComponent } from '../../../shared/utils/td-base.component';
+import { LoginService } from '../../../services/auth/login.service';
+import { StatusCode } from '../../../shared/utils/enums';
+import { NbToastrService } from '@nebular/theme/public_api';
 
 @Component({
   selector: 'app-login',
@@ -15,33 +14,37 @@ import { UiControlModule } from '../../../shared/modules/ui-control.module';
   standalone: true,
   imports: [SharedModule, UiControlModule],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends TdBaseComponent implements OnInit {
   frmGroup!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private _fb: FormBuilder,
+    private _loginService: LoginService,
+    private _nbToastrService: NbToastrService
+  ) {
+    super(_nbToastrService);
+  }
 
   ngOnInit() {
-    this.frmGroup = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(6),
-      ]),
+    this.frmGroup = this._fb.group({
+      email: [null, [Validators.required]],
+      password: [null, [Validators.required, Validators.minLength(6)]],
     });
   }
 
   onSubmit() {
-    // Đánh dấu tất cả các điều khiển là đã được chạm (touched)
-    this.frmGroup.markAllAsTouched();
-
-    // Cập nhật giá trị và trạng thái của tất cả các điều khiển
-    this.frmGroup.updateValueAndValidity();
-
     // Kiểm tra xem form có hợp lệ không
-    if (this.frmGroup.valid) {
-      console.log(this.frmGroup.value);
-    } else {
-      console.log('Form is invalid');
-    }
+    if (!this.validateForm(this.frmGroup)) return;
+
+    let payload = this.frmGroup.value;
+    this._loginService.login(payload).subscribe((rs) => {
+      if (rs.status == StatusCode.Ok) {
+        this.toastr('Đăng nhập thành công!', 'Thành công');
+        console.log(rs.data);
+      } else {
+        this.toastr('Đăng nhập thất bại!', 'Lỗi');
+        console.log(rs.message);
+      }
+    });
   }
 }

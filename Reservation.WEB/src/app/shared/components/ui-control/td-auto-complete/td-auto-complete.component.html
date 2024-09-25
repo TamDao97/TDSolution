@@ -1,3 +1,21 @@
-<p>
-  td-auto-complete works!
-</p>
+<div (scroll)="onScroll($event)">
+  <input
+    nbInput
+    placeholder="Type to search"
+    [(ngModel)]="inputValue"
+    (ngModelChange)="onInputChange($event)"
+    [nbAutocomplete]="auto"
+  />
+
+  <nb-autocomplete #auto>
+    <nb-option
+      *ngFor="let option of filteredOptions"
+      (click)="selectOption(option)"
+    >
+      {{ option }}
+    </nb-option>
+
+    <!-- Hiển thị khi đang tải thêm dữ liệu -->
+    <div *ngIf="isLoading" class="loading">Loading more options...</div>
+  </nb-autocomplete>
+</div>

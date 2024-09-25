@@ -6,8 +6,10 @@ import {
   NbInputModule,
   NbLayoutModule,
   NbButtonModule,
-  NbStatusService,
   NbSelectModule,
+  NbCheckboxModule,
+  NbRadioModule,
+  NbAutocompleteModule,
 } from '@nebular/theme';
 
 export const libModule = [
@@ -16,6 +18,9 @@ export const libModule = [
   NbCardModule,
   NbLayoutModule,
   NbButtonModule,
+  NbCheckboxModule,
+  NbRadioModule,
+  NbAutocompleteModule,
 ];
 export const customDirective = [];
 
