@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, forwardRef, Input } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -5,6 +6,7 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { map, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'td-select',
@@ -70,5 +72,24 @@ export class TdSelectComponent implements ControlValueAccessor {
 
   setDisabledState?(isDisabled: boolean): void {
     // Có thể thêm xử lý khi cần disabled select
+  }
+
+  githubUsers$: Observable<any[]>;
+  selectedUsers = ['anjmao', 'anjmittu', 'anjmendoza'];
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.githubUsers$ = this.getGithubAccounts('anjm');
+  }
+
+  getGithubAccounts(term = '') {
+    if (term) {
+      return this.http
+        .get<any>(`https://api.github.com/search/users?q=${term}`)
+        .pipe(map((rsp) => rsp.items));
+    } else {
+      return of([]);
+    }
   }
 }

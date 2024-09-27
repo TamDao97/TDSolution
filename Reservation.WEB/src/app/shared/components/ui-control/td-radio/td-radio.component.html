@@ -1,8 +1,15 @@
 <div class="input-control {{ wrapClass }}" [ngClass]="layout">
   <label *ngIf="label" class="form-label">{{ label }}</label>
-  <nb-radio-group (valueChange)="bind($event)">
-    <nb-radio *ngFor="let option of options" [value]="option.value">
+  <div class="radio-group">
+    <label *ngFor="let option of options" class="radio-option">
+      <input
+        type="radio"
+        [name]="name"
+        [value]="option.value"
+        [checked]="option.value === value"
+        [disabled]="isDisabled"
+      />
       {{ option.label }}
-    </nb-radio>
-  </nb-radio-group>
+    </label>
+  </div>
 </div>

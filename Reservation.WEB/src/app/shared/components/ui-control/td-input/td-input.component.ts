@@ -1,12 +1,12 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import {
-  AbstractControl,
-  ControlValueAccessor,
-  FormControl,
-  NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
-  ValidationErrors,
+  NG_VALIDATORS,
+  ControlValueAccessor,
   Validator,
+  FormControl,
+  AbstractControl,
+  ValidationErrors,
 } from '@angular/forms';
 import { validateEmail } from '../../../utils/helpers';
 

@@ -14,34 +14,36 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
   ],
 })
 export class TdCheckboxComponent implements ControlValueAccessor {
-  @Input() status!: string;
-  @Input() label!: string;
+  @Input() label: string = '';
+  @Input() disabled: boolean = false;
 
-  value: any = '';
-  isDisabled: boolean = false;
+  checked: boolean = false;
 
-  onChange = (value: any) => {};
-  onTouched = () => {};
+  private onChange: any = () => {};
+  private onTouched: any = () => {};
 
   writeValue(value: any): void {
-    this.value = value;
+    this.checked = !!value;
   }
 
-  registerOnChange(fn: (value: any) => void): void {
+  registerOnChange(fn: any): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
+  registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
+    this.disabled = isDisabled;
   }
 
-  bind(e: any): void {
-    this.value = e;
-    this.onChange(this.value);
+  toggleCheckbox(): void {
+    if (this.disabled) {
+      return;
+    }
+    this.checked = !this.checked;
+    this.onChange(this.checked);
     this.onTouched();
   }
 }

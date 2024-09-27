@@ -1,19 +1,35 @@
 <div class="input-control {{ wrapClass }}" [ngClass]="layout">
   <label *ngIf="label" class="form-label">{{ label }}</label>
 
-  <nb-select
-    [placeholder]="placeholder"
-    [class]="selectClass"
-    [(selected)]="value"
-    (selectedChange)="onSelectChange($event)"
-    (blur)="onBlur()"
-    [placeholder]="placeholder"
-    [disabled]="isDisabled"
+  <ng-select
+    [items]="githubUsers$ | async"
+    [multiple]="true"
+    bindLabel="login"
+    bindValue="login"
+    placeholder="Select items"
+    [(ngModel)]="selectedUsers"
   >
-    <nb-option *ngFor="let option of options" [value]="option.value">
-      {{ option.label }}
-    </nb-option>
-  </nb-select>
+    <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+      @for (item of items | slice: 0 : 2; track item) {
+      <div class="ng-value">
+        <span class="ng-value-label"
+          ><img [src]="item.avatar_url" width="20px" height="20px" />
+          {{ item.login }}</span
+        >
+        <span
+          class="ng-value-icon right"
+          (click)="clear(item)"
+          aria-hidden="true"
+          >×</span
+        >
+      </div>
+      } @if (items.length > 2) {
+      <div class="ng-value">
+        <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+      </div>
+      }
+    </ng-template>
+  </ng-select>
 
   <div class="error-message" *ngIf="isShowError && errors">
     <div *ngIf="errors['required']">Vui lòng nhập thông tin.</div>

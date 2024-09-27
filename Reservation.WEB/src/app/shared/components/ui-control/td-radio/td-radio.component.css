@@ -1,0 +1,9 @@
+.radio-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-option {
+  margin-bottom: 8px;
+  cursor: pointer;
+}
