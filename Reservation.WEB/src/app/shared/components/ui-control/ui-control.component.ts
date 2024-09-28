@@ -14,12 +14,9 @@ export class UiControlComponent implements OnInit {
   form = this.fb.group({
     inputVal: [null],
     selectVal: [null],
-    selectMultiVal: [null],
-    selectGroupVal: [null],
     checkVal: [null],
     radioVal: [null],
     noteVal: [null],
-    autoVal: [null],
   });
 
   constructor(private fb: FormBuilder) {}

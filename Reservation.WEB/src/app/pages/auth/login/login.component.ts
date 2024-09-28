@@ -5,7 +5,6 @@ import { UiControlModule } from '../../../shared/modules/ui-control.module';
 import { TdBaseComponent } from '../../../shared/utils/td-base.component';
 import { LoginService } from '../../../services/auth/login.service';
 import { StatusCode } from '../../../shared/utils/enums';
-import { NbToastrService } from '@nebular/theme/public_api';
 
 @Component({
   selector: 'app-login',
@@ -17,12 +16,8 @@ import { NbToastrService } from '@nebular/theme/public_api';
 export class LoginComponent extends TdBaseComponent implements OnInit {
   frmGroup!: FormGroup;
 
-  constructor(
-    private _fb: FormBuilder,
-    private _loginService: LoginService,
-    private _nbToastrService: NbToastrService
-  ) {
-    super(_nbToastrService);
+  constructor(private _fb: FormBuilder, private _loginService: LoginService) {
+    super();
   }
 
   ngOnInit() {
@@ -39,10 +34,8 @@ export class LoginComponent extends TdBaseComponent implements OnInit {
     let payload = this.frmGroup.value;
     this._loginService.login(payload).subscribe((rs) => {
       if (rs.status == StatusCode.Ok) {
-        this.toastr('Đăng nhập thành công!', 'Thành công');
         console.log(rs.data);
       } else {
-        this.toastr('Đăng nhập thất bại!', 'Lỗi');
         console.log(rs.message);
       }
     });

@@ -1,12 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, forwardRef, Input } from '@angular/core';
 import {
+  AbstractControl,
   ControlValueAccessor,
+  FormControl,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { map, Observable, of } from 'rxjs';
+import { IDropdown } from '../../../../interfaces/IDropdown';
 
 @Component({
   selector: 'td-select',
@@ -24,13 +27,11 @@ export class TdSelectComponent implements ControlValueAccessor {
   @Input() label!: string;
   @Input() placeholder: string = '--Chọn--';
   @Input() wrapClass!: string;
-  // @Input() selectClass: string = 'form-select';
-  @Input() selectClass: string = '';
   @Input() layout: 'vertical' | 'horizontal' = 'vertical';
   @Input() validators: Validators[] = []; // Nhận các validator từ ngoài
 
   //validator
-  value: any = '';
+  control: FormControl = new FormControl(null);
   isDisabled: boolean = false;
   errors: ValidationErrors | null = null;
   isShowError: boolean = false;
@@ -41,40 +42,7 @@ export class TdSelectComponent implements ControlValueAccessor {
     { value: '3', label: 'Option 3' },
   ];
 
-  onChange: any = () => {};
-  onTouched: any = () => {};
-
-  // Xử lý khi người dùng chọn một giá trị
-  onSelectChange(e: any) {
-    const newValue = e;
-    console.log('onChange được gọi với giá trị:', newValue);
-    // Gọi hàm callback đã đăng ký
-    this.onChange(newValue);
-  }
-
-  // Xử lý sự kiện touch (blur)
-  onBlur() {
-    this.onTouched();
-  }
-
-  // Ghi lại giá trị vào form control
-  writeValue(value: any): void {
-    this.value = value;
-  }
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    // Có thể thêm xử lý khi cần disabled select
-  }
-
-  githubUsers$: Observable<any[]>;
+  githubUsers$: Observable<IDropdown[]>;
   selectedUsers = ['anjmao', 'anjmittu', 'anjmendoza'];
 
   constructor(private http: HttpClient) {}
@@ -91,5 +59,52 @@ export class TdSelectComponent implements ControlValueAccessor {
     } else {
       return of([]);
     }
+  }
+
+  trackByLogin(index: number, item: any): string {
+    return item.login;
+  }
+
+  onChange: any = () => {};
+  onTouched: any = () => {};
+
+  // Xử lý khi người dùng chọn một giá trị
+  onSelectChange(e: any) {
+    this.onChange(e);
+  }
+
+  // Xử lý sự kiện touch (blur)
+  onBlur() {
+    this.onTouched();
+  }
+
+  writeValue(value: any): void {
+    this.control.setValue(value);
+  }
+
+  registerOnChange(fn: (value: any) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.isDisabled = isDisabled;
+    isDisabled ? this.control.disable() : this.control.enable();
+  }
+
+  validate(control: AbstractControl): ValidationErrors | null {
+    this.control = control as FormControl;
+    const errors: ValidationErrors = {};
+    const value = this.control.value;
+
+    // Kiểm tra validator required
+    if (!value) {
+      errors['required'] = true;
+    }
+
+    return Object.keys(errors).length ? errors : null;
   }
 }

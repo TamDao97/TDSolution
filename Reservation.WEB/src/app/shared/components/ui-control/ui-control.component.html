@@ -1,78 +1,49 @@
-<nb-layout>
-  <nb-layout-column>
-    <nb-card>
-      <nb-card-body class="example-items-col">
-        <div class="container">
-          <p>ui-control works!</p>
-          <form [formGroup]="form">
-            <!-- text input -->
-            <td-input
-              wrapClass="mb-3"
-              [type]="'text'"
-              [placeholder]="'Tên'"
-              formControlName="inputVal"
-              [label]="'Tên'"
-            ></td-input>
+<div class="container">
+  <p>ui-control works!</p>
+  <form [formGroup]="form">
+    <!-- text input -->
+    <td-input
+      wrapClass="mb-3"
+      [type]="'text'"
+      [placeholder]="'Tên'"
+      formControlName="inputVal"
+      [label]="'Tên'"
+    ></td-input>
 
-            <!-- text area -->
-            <td-text-area
-              wrapClass="mb-3"
-              [placeholder]="'Ghi chú'"
-              formControlName="noteVal"
-              [label]="'Ghi chú'"
-            >
-            </td-text-area>
+    <!-- text area -->
+    <td-text-area
+      wrapClass="mb-3"
+      [placeholder]="'Ghi chú'"
+      formControlName="noteVal"
+      [label]="'Ghi chú'"
+    >
+    </td-text-area>
 
-            <!-- single select -->
-            <td-select
-              wrapClass="mb-3"
-              formControlName="selectVal"
-              [label]="'Tình/thành'"
-            ></td-select>
+    <!-- single select -->
+    <td-select
+      wrapClass="mb-3"
+      formControlName="selectVal"
+      [label]="'Tình/thành'"
+    ></td-select>
 
-            <!-- multi select -->
-            <td-select-mutil
-              wrapClass="mb-3"
-              formControlName="selectMultiVal"
-              [label]="'Quận/Huyện'"
-            ></td-select-mutil>
+    <!-- checkbox -->
+    <td-checkbox [label]="'Nam'" formControlName="checkVal"></td-checkbox>
 
-            <!-- group select -->
-            <td-select-group
-              wrapClass="mb-3"
-              formControlName="selectGroupVal"
-              [label]="'Sản phẩm'"
-            ></td-select-group>
+    <!-- radio -->
+    <br />
+    <td-radio
+      [label]="'Chọn đáp án'"
+      formControlName="radioVal"
+      [options]="[
+        { label: 'Option 1', value: '1' },
+        { label: 'Option 2', value: '2' },
+        { label: 'Option 3', value: '3' }
+      ]"
+      name="example-radio-group"
+    ></td-radio>
+    <br />
 
-            <!-- checkbox -->
-            <td-checkbox
-              [label]="'Nam'"
-              [status]="'success'"
-              formControlName="checkVal"
-            ></td-checkbox>
 
-            <!-- radio -->
-            <br />
-            <td-radio
-              [label]="'Chọn đáp án'"
-              formControlName="radioVal"
-              formControlName="choice"
-              [options]="[
-                { label: 'Option 1', value: '1' },
-                { label: 'Option 2', value: '2' },
-                { label: 'Option 3', value: '3' }
-              ]"
-              name="example-radio-group"
-            ></td-radio>
-            <br />
-
-            <!-- auto complete -->
-            <td-auto-complete formControlName="autoVal"></td-auto-complete>
-
-            <button nbButton (click)="submit()">Success</button>
-          </form>
-        </div>
-      </nb-card-body>
-    </nb-card>
-  </nb-layout-column>
-</nb-layout>
+    <button nbButton (click)="submit()">Success</button>
+  </form>
+</div>
