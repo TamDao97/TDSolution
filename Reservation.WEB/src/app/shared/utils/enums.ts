@@ -7,3 +7,9 @@ export enum StatusCode {
   MethodNotAllowed = 405,
   InternalServerError = 500,
 }
+
+export enum ToastStatus {
+  Success,
+  Warning,
+  Error,
+}

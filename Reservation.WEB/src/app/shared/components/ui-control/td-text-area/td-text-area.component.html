@@ -4,16 +4,20 @@
   <textarea
     [class]="inputClass"
     [placeholder]="placeholder"
-    [value]="value"
-    (input)="onInput($event)"
     (blur)="onBlur()"
-    [disabled]="isDisabled"
+    [formControl]="control"
     rows="3"
   ></textarea>
-  <div class="error-message" *ngIf="isShowError && errors">
-    <div *ngIf="errors['required']">Vui lòng nhập thông tin.</div>
-    <div *ngIf="errors['minlength']">Ít nhất là {{ minLength }} ký tự.</div>
-    <div *ngIf="errors['maxlength']">Tối đa là {{ maxLength }} ký tự.</div>
-    <div *ngIf="errors['email']">Email không hợp lệ.</div>
+
+  <div class="error-message" *ngIf="control.invalid && control.touched">
+    <!-- Hiển thị lỗi nếu tồn tại các lỗi tương ứng -->
+    <div *ngIf="control.errors?.required">Vui lòng nhập thông tin.</div>
+    <div *ngIf="control.errors?.minlength">
+      Ít nhất là {{ control.errors?.minlength.requiredLength }} ký tự.
+    </div>
+    <div *ngIf="control.errors?.maxlength">
+      Tối đa là {{ control.errors?.maxlength.requiredLength }} ký tự.
+    </div>
+    <div *ngIf="control.errors?.email">Email không hợp lệ.</div>
   </div>
 </div>

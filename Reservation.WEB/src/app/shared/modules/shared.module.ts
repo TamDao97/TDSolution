@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   NgLabelTemplateDirective,
   NgOptionTemplateDirective,
   NgSelectModule,
 } from '@ng-select/ng-select';
 
-export const libModule = [NgSelectModule];
+export const libModule = [NgSelectModule, NgbToastModule];
 export const libDirective = [
   NgLabelTemplateDirective,
   NgOptionTemplateDirective,

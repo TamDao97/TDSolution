@@ -7,7 +7,7 @@ using TD.Lib.Common;
 namespace Reservation.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AuthController : ApiController
     {
         private readonly ILogger<AuthController> _logger;

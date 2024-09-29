@@ -54,12 +54,20 @@ namespace Reservation.API.Services
             if (user is null)
                 return Response<CurrentUser>.Error(StatusCode.InternalServerError, "Tài khoản không tồn tại trên hệ thống!");
 
+            //get permission
+            var permissions = (from ur in _userRoleRepos.TableNoTracking
+                               where ur.IdUser == user.Id
+                               join rp in _rolePermissionRepos.TableNoTracking on ur.IdRole equals rp.IdRole
+                               join p in _permissionRepos.TableNoTracking on rp.IdPermission equals p.Id
+                               select p.PermissionCode).ToList();
+
             var currentUser = new CurrentUser
             {
                 Id = user.Id,
                 UserName = user.UserName,
                 DisplayName = user.DisplayName,
                 IsAdmin = user.IsAdmin,
+                Permissions = permissions
             };
             return Response<CurrentUser>.Success(currentUser, StatusCode.Ok.ToDescription());
         }
@@ -94,6 +102,7 @@ namespace Reservation.API.Services
                 RefreshToken = tokens.RefreshToken,
                 Permissions = permissions
             };
+
             return Response<CurrentUser>.Success(currentUser, StatusCode.Ok.ToDescription());
         }
 

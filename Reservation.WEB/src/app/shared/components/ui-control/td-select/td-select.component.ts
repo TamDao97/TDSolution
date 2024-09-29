@@ -28,13 +28,10 @@ export class TdSelectComponent implements ControlValueAccessor {
   @Input() placeholder: string = '--Chọn--';
   @Input() wrapClass!: string;
   @Input() layout: 'vertical' | 'horizontal' = 'vertical';
-  @Input() validators: Validators[] = []; // Nhận các validator từ ngoài
 
   //validator
   control: FormControl = new FormControl(null);
   isDisabled: boolean = false;
-  errors: ValidationErrors | null = null;
-  isShowError: boolean = false;
 
   options = [
     { value: '1', label: 'Option 1' },
@@ -43,7 +40,6 @@ export class TdSelectComponent implements ControlValueAccessor {
   ];
 
   githubUsers$: Observable<IDropdown[]>;
-  selectedUsers = ['anjmao', 'anjmittu', 'anjmendoza'];
 
   constructor(private http: HttpClient) {}
 

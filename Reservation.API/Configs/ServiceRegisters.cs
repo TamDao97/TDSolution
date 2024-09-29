@@ -18,6 +18,10 @@ namespace Reservation.API.Configs
         {
             services.AddDbContext<ReservationDbContext>(opts => opts.UseSqlServer(config["ConnectionStrings:ReservationDbContextConnection"]));
 
+            var test = config["Jwt:Key"];
+            var test1 = config["Jwt:Issuer"];
+            var test2 = config["Jwt:Audience"];
+
             // Configure Authentication
             services.AddAuthentication(x =>
             {
@@ -29,8 +33,8 @@ namespace Reservation.API.Configs
                 o.SaveToken = true;
                 o.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = false, // on production make it true
-                    ValidateAudience = false, // on production make it true
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = config["Jwt:Issuer"],
@@ -38,6 +42,7 @@ namespace Reservation.API.Configs
                     IssuerSigningKey = new SymmetricSecurityKey(Key),
                     ClockSkew = TimeSpan.Zero
                 };
+
                 o.Events = new JwtBearerEvents
                 {
                     OnAuthenticationFailed = context =>

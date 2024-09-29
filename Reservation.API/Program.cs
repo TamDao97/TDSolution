@@ -1,3 +1,4 @@
+﻿using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Reservation.API.Configs;
 using TD.Lib.Config;
 
@@ -8,7 +9,12 @@ builder.Services.LibRegisters(builder.Configuration);
 builder.Services.DataContextRegisters(builder.Configuration);
 builder.Services.DependencyInjection(builder.Configuration);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    // Thiết lập route template mặc định cho tất cả controller
+    options.Conventions.Add(new RouteTokenTransformerConvention(new EndpointTransformerCustom()));
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

@@ -144,11 +144,11 @@ namespace Reservation.API.Services
                     Console.WriteLine($"Method: {method.Name}");
 
                     // Lấy các attributes của method
-                    var methodAttribute = method.GetCustomAttributes(true).FirstOrDefault(r => r.GetType().Name == nameof(TDPermissionAttribute)) as TDPermissionAttribute;
+                    var permissionAttribute = method.GetCustomAttributes(true).FirstOrDefault(r => r.GetType().Name == nameof(TDPermissionAttribute)) as TDPermissionAttribute;
 
-                    if (methodAttribute is null) continue;
+                    if (permissionAttribute is null) continue;
 
-                    Console.WriteLine($"[Method Attribute] {methodAttribute.GetType().Name}");
+                    Console.WriteLine($"[Method Attribute] {permissionAttribute.GetType().Name}");
 
                     permission = new Permission
                     {
@@ -156,12 +156,12 @@ namespace Reservation.API.Services
                         ModuleCode = controller.Name,
                         ModuleDescription = moduleAttribute.Description,
                         ModuleOrder = moduleAttribute.Order,
-                        PermissionCode = $"{controller.Name}_{methodAttribute.PermissionCode}",
-                        Description = methodAttribute.Description
+                        PermissionCode = $"{controller.Name}_{permissionAttribute.PermissionCode}",
+                        Description = permissionAttribute.Description
                     };
                     lstPermissionAdd.Add(permission);
 
-                    var lstRoleCode = methodAttribute.RoleCodes?.Split(",", StringSplitOptions.RemoveEmptyEntries);
+                    var lstRoleCode = permissionAttribute.RoleCodes?.Split(",", StringSplitOptions.RemoveEmptyEntries);
 
                     Role role = null;
                     foreach (var roleCode in lstRoleCode)
