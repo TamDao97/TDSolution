@@ -2,6 +2,7 @@ import { Component, forwardRef, Input } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
+  FormControl,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
@@ -34,35 +35,23 @@ export class TdTextAreaComponent implements ControlValueAccessor, Validator {
   @Input() wrapClass!: string;
   @Input() inputClass: string = 'form-control';
   @Input() layout: 'vertical' | 'horizontal' = 'vertical';
-  @Input() validators: Validators[] = []; // Nhận các validator từ ngoài
 
   //validator
   @Input() minLength: number = 3;
   @Input() maxLength: number = 255;
 
-  value: any = '';
-  isDisabled: boolean = false;
-  errors: ValidationErrors | null = null;
-  isShowError: boolean = false;
+  control: FormControl = new FormControl(null);
 
   onChange = (value: any) => {};
 
   onTouched = () => {};
-
-  onInput(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.value = input.value;
-    this.isShowError = true;
-    this.onChange(this.value);
-    this.onTouched();
-  }
 
   onBlur(): void {
     this.onTouched();
   }
 
   writeValue(value: any): void {
-    this.value = value;
+    this.control.setValue(value);
   }
 
   registerOnChange(fn: (value: any) => void): void {
@@ -74,36 +63,40 @@ export class TdTextAreaComponent implements ControlValueAccessor, Validator {
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
+    isDisabled ? this.control.disable() : this.control.enable();
   }
 
-  // Validator method
   validate(control: AbstractControl): ValidationErrors | null {
+    this.control = control as FormControl;
     const errors: ValidationErrors = {};
+    const value = this.control.value;
 
-    if (!this.value) {
+    // Kiểm tra validator required
+    if (!value) {
       errors['required'] = true;
     }
 
-    if (this.value && this.value.length < this.minLength) {
+    // Kiểm tra độ dài tối thiểu
+    if (value && value.length < this.minLength) {
       errors['minlength'] = {
         requiredLength: this.minLength,
-        actualLength: this.value.length,
+        actualLength: value.length,
       };
     }
 
-    if (this.value && this.value.length > this.maxLength) {
+    // Kiểm tra độ dài tối đa
+    if (value && value.length > this.maxLength) {
       errors['maxlength'] = {
         requiredLength: this.maxLength,
-        actualLength: this.value.length,
+        actualLength: value.length,
       };
     }
 
-    if (this.type === 'email' && this.value && !validateEmail(this.value)) {
+    // Kiểm tra email nếu input là dạng email
+    if (this.type === 'email' && value && !validateEmail(value)) {
       errors['email'] = true;
     }
 
-    this.errors = Object.keys(errors).length ? errors : null;
-    return this.errors;
+    return Object.keys(errors).length ? errors : null;
   }
 }

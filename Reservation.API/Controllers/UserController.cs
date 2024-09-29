@@ -1,12 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Reservation.API.Attributes;
+using Reservation.API.Commons;
 using Reservation.API.Controllers.Base;
 using Reservation.API.DataContext.Dto.Core;
 using Reservation.API.DataContext.Entity.Core;
 using Reservation.API.Services;
 using TD.Lib.Common;
 
+/*
+ * Note*:
+ * - Đặt attr TDModule để đánh dấu tạo ra nhóm module
+ * - Đặt attr TDPermission để đánh dấu sinh ra mã quyền, những role được phép truy cập
+ * - Đặt attr TDAuthorize để thực hiện việc authen & author 
+ */
 namespace Reservation.API.Controllers
 {
+    [TDAuthorize]
+    [TDModule("Quản lý tài khoản", 2)]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ApiController
@@ -61,6 +72,7 @@ namespace Reservation.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [TDPermission("GetByIdAsync", "Xem chi tiết tài khoản", $"{RoleCodes.ThuNgan}, {RoleCodes.LeTan}")]
         [Route("user-getbyid/{id}")]
         [HttpGet]
         public async Task<ActionResult<Response<UserDto>>> GetByIdAsync(Guid id)

@@ -1,9 +1,5 @@
 import { Component, forwardRef, Input } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormControl,
-  NG_VALUE_ACCESSOR,
-} from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'td-radio',
@@ -25,7 +21,6 @@ export class TdRadioComponent implements ControlValueAccessor {
   @Input() options: any[] = [];
 
   value: any = '';
-  isDisabled: boolean = false;
 
   onChange = (value: any) => {};
   onTouched = () => {};
@@ -42,13 +37,12 @@ export class TdRadioComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
-  }
+  setDisabledState?(isDisabled: boolean): void {}
 
-  bind(e: any): void {
-    this.value = e;
-    this.onChange(this.value);
+  // Handle radio change
+  onRadioChange(value: any) {
+    this.value = value;
+    this.onChange(value);
     this.onTouched();
   }
 }

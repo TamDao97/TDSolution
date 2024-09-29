@@ -29,7 +29,9 @@ namespace TD.Lib.Helper
                 {
                     Subject = new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, userName) }),
                     Expires = DateTime.Now.AddMinutes(60),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature),
+                    Issuer = configuration["Jwt:Issuer"],
+                    Audience = configuration["Jwt:Audience"]
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);
                 var refreshToken = GenerateRefreshToken();

@@ -8,10 +8,10 @@ import { IResponse } from '../../interfaces/IResponse';
   providedIn: 'root',
 })
 export class LoginService {
-  private apiUrl = `${environment.apiUrl}/Auth`;
+  private apiUrl = `${environment.apiUrl}/auth`;
   constructor(private httpClient: HttpClient) {}
 
   login(payload: any): Observable<IResponse> {
-    return this.httpClient.post<IResponse>(`${this.apiUrl}/register`, payload);
+    return this.httpClient.post<IResponse>(`${this.apiUrl}/login`, payload);
   }
 }

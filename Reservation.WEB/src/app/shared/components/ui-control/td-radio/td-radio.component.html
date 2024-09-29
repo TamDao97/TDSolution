@@ -7,7 +7,7 @@
         [name]="name"
         [value]="option.value"
         [checked]="option.value === value"
-        [disabled]="isDisabled"
+        (click)="onRadioChange(option.value)"
       />
       {{ option.label }}
     </label>

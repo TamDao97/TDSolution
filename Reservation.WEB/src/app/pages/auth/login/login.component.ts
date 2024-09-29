@@ -4,7 +4,9 @@ import { SharedModule } from '../../../shared/modules/shared.module';
 import { UiControlModule } from '../../../shared/modules/ui-control.module';
 import { TdBaseComponent } from '../../../shared/utils/td-base.component';
 import { LoginService } from '../../../services/auth/login.service';
-import { StatusCode } from '../../../shared/utils/enums';
+import { StatusCode, ToastStatus } from '../../../shared/utils/enums';
+import { AuthService } from '../../../shared/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,11 @@ import { StatusCode } from '../../../shared/utils/enums';
 export class LoginComponent extends TdBaseComponent implements OnInit {
   frmGroup!: FormGroup;
 
-  constructor(private _fb: FormBuilder, private _loginService: LoginService) {
+  constructor(
+    private _router: Router,
+    private _fb: FormBuilder,
+    private _loginService: LoginService
+  ) {
     super();
   }
 
@@ -34,9 +40,11 @@ export class LoginComponent extends TdBaseComponent implements OnInit {
     let payload = this.frmGroup.value;
     this._loginService.login(payload).subscribe((rs) => {
       if (rs.status == StatusCode.Ok) {
-        console.log(rs.data);
+        AuthService.setAuthStorage(rs.data);
+        this._router.navigate(['/dashboard']); // Điều hướng sau khi đăng nhập thành công
+        this.toast(ToastStatus.Success, rs.message);
       } else {
-        console.log(rs.message);
+        this.toast(ToastStatus.Error, rs.message);
       }
     });
   }

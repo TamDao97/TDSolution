@@ -6,6 +6,7 @@ import { TdSelectComponent } from '../components/ui-control/td-select/td-select.
 import { TdTextAreaComponent } from '../components/ui-control/td-text-area/td-text-area.component';
 import { TdCheckboxComponent } from '../components/ui-control/td-checkbox/td-checkbox.component';
 import { TdRadioComponent } from '../components/ui-control/td-radio/td-radio.component';
+import { TdToastComponent } from '../components/ui-control/td-toast/td-toast.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { TdRadioComponent } from '../components/ui-control/td-radio/td-radio.com
     TdTextAreaComponent,
     TdCheckboxComponent,
     TdRadioComponent,
+    TdToastComponent,
   ],
   imports: [SharedModule],
   exports: [
@@ -23,6 +25,7 @@ import { TdRadioComponent } from '../components/ui-control/td-radio/td-radio.com
     TdTextAreaComponent,
     TdCheckboxComponent,
     TdRadioComponent,
+    TdToastComponent,
   ],
 })
 export class UiControlModule {}

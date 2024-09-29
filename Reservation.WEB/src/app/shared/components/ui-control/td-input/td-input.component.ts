@@ -40,7 +40,6 @@ export class TdInputComponent implements ControlValueAccessor, Validator {
   @Input() maxLength: number = 255;
 
   control: FormControl = new FormControl(null);
-  isDisabled: boolean = false;
 
   constructor() {}
 
@@ -59,12 +58,7 @@ export class TdInputComponent implements ControlValueAccessor, Validator {
   }
 
   writeValue(value: any): void {
-    if (!this.control) {
-      // Chỉ gán formControl khi nó chưa được gán
-      this.control = new FormControl(value);
-    } else {
-      this.control.setValue(value);
-    }
+    this.control.setValue(value);
   }
 
   registerOnChange(fn: (value: any) => void): void {
@@ -76,7 +70,6 @@ export class TdInputComponent implements ControlValueAccessor, Validator {
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
     isDisabled ? this.control.disable() : this.control.enable();
   }
 
