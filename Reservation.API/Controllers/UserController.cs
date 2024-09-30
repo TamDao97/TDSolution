@@ -16,12 +16,13 @@ using TD.Lib.Common;
  */
 namespace Reservation.API.Controllers
 {
-    [TDAuthorize]
+    //[TDAuthorize]
     [TDModule("Quản lý tài khoản", 2)]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ApiController
     {
+        private static List<Dropdown> LstItem = new List<Dropdown>();
         private readonly ILogger<UserController> _logger;
         private readonly IUserService _userService;
 
@@ -29,6 +30,11 @@ namespace Reservation.API.Controllers
         {
             _logger = logger;
             _userService = userService;
+
+            for (int i = 0; i < 1000; i++)
+            {
+                LstItem.Add(new Dropdown { Value = i + 1, Text = $"Đào Lê{i + 1}" });
+            }
         }
 
         /// <summary>
@@ -78,6 +84,16 @@ namespace Reservation.API.Controllers
         public async Task<ActionResult<Response<UserDto>>> GetByIdAsync(Guid id)
         {
             return Ok(await _userService.GetByIdAsync(id));
+        }
+
+        [AllowAnonymous]
+        [Route("fake-data")]
+        [HttpPost]
+        public async Task<ActionResult<Response<List<Dropdown>>>> GetTestDatas(GridFilterBase filter)
+        {
+            var totalRecord = LstItem.Count;
+            var datas = LstItem.Skip((filter.PageNumber - 1) * filter.PageSize).Take(filter.PageSize).ToList();
+            return Ok(Response<List<Dropdown>>.Success(datas, "success!"));
         }
     }
 }

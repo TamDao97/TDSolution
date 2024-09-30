@@ -8,8 +8,11 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { map, Observable, of } from 'rxjs';
+import { catchError, delay, finalize, map, Observable, of, tap } from 'rxjs';
 import { IDropdown } from '../../../../interfaces/IDropdown';
+import { environment } from '../../../../../env.development';
+import { IResponse } from '../../../../interfaces/IResponse';
+import { StatusCode } from '../../../utils/enums';
 
 @Component({
   selector: 'td-select',
@@ -29,31 +32,61 @@ export class TdSelectComponent implements ControlValueAccessor {
   @Input() wrapClass!: string;
   @Input() layout: 'vertical' | 'horizontal' = 'vertical';
 
-  //validator
+  items: IDropdown[] = [];
+  loading = false;
+  page = 1;
+  pageSize = 20;
   control: FormControl = new FormControl(null);
-  isDisabled: boolean = false;
-
-  options = [
-    { value: '1', label: 'Option 1' },
-    { value: '2', label: 'Option 2' },
-    { value: '3', label: 'Option 3' },
-  ];
-
   githubUsers$: Observable<IDropdown[]>;
+  apiUrl = environment.apiUrl + '/user/fake-data';
 
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.githubUsers$ = this.getGithubAccounts('anjm');
+    this.loadMoreDatas();
   }
 
-  getGithubAccounts(term = '') {
-    if (term) {
-      return this.http
-        .get<any>(`https://api.github.com/search/users?q=${term}`)
-        .pipe(map((rsp) => rsp.items));
-    } else {
-      return of([]);
+  fetchDatas(page: number, pageSize: number): Observable<IDropdown[]> {
+    const payload = {
+      pageNumber: page,
+      pageSize: pageSize,
+    };
+
+    return this.http.post<IResponse>(this.apiUrl, payload).pipe(
+      map((res: IResponse) =>
+        res.data.map((item: IDropdown) => ({
+          value: item.value,
+          text: item.text,
+        }))
+      ),
+      tap(() => (this.loading = false)),
+      catchError((err) => {
+        console.error('Error loading data', err);
+        // Thông báo lỗi cho người dùng (nếu cần)
+        alert('Đã có lỗi xảy ra khi tải dữ liệu');
+        return of([]); // Trả về mảng trống nếu có lỗi
+      }),
+      finalize(() => {
+        this.loading = false; // Đảm bảo luôn tắt loading
+      })
+    );
+  }
+
+  loadMoreDatas() {
+    this.loading = true;
+    this.fetchDatas(this.page, this.pageSize).subscribe((datas) => {
+      this.items = [...this.items, ...datas];
+      this.githubUsers$ = of(this.items);
+      setTimeout(() => {
+        this.loading = false;
+      }, 100); // Đợi 100ms trước khi set lại loading
+    });
+  }
+
+  onScrollToEnd() {
+    if (!this.loading) {
+      this.page++;
+      this.loadMoreDatas();
     }
   }
 
@@ -87,7 +120,6 @@ export class TdSelectComponent implements ControlValueAccessor {
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
     isDisabled ? this.control.disable() : this.control.enable();
   }
 

@@ -3,18 +3,21 @@
   <ng-select
     [items]="githubUsers$ | async"
     [multiple]="true"
-    bindLabel="login"
-    bindValue="login"
+    bindLabel="text"
+    bindValue="value"
     [placeholder]="placeholder"
     [formControl]="control"
     (change)="onSelectChange($event)"
+    [virtualScroll]="true"
+    (scrollToEnd)="onScrollToEnd()"
+    [loading]="loading"
   >
     <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
       <ng-container *ngFor="let item of items; trackBy: trackByLogin">
         <div class="ng-value">
           <span class="ng-value-label">
-            <img [src]="item.avatar_url" width="20px" height="20px" />
-            {{ item.login }}
+            <!-- <img [src]="item.avatar_url" width="20px" height="20px" /> -->
+            {{ item.text }}
           </span>
           <span
             class="ng-value-icon right"
