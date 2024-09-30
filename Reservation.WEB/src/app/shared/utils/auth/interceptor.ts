@@ -4,10 +4,14 @@ import { ICurrentUser } from '../../interfaces/ICurrentUser';
 import { catchError, throwError } from 'rxjs';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { StatusCode } from '../enums';
+import { ToastService } from '../../services/toast.service';
 
 export const Interceptor: HttpInterceptorFn = (req, next) => {
   const auth = AuthService.getAuthStorage(); // Lấy token từ localStorage
   const router = inject(Router); // Khởi tạo router
+  const toastService = inject(ToastService); // Khởi tạo router
+
   if (auth) {
     const currentUser = JSON.parse(auth) as ICurrentUser;
     // Clone và thêm Authorization header nếu có token
@@ -18,9 +22,12 @@ export const Interceptor: HttpInterceptorFn = (req, next) => {
     });
     return next(cloned).pipe(
       catchError((err) => {
-        if (err.status === 401) {
+        if (err.status === StatusCode.Unauthorized) {
           // Chuyển hướng đến trang đăng nhập khi nhận mã lỗi 401
           router.navigate(['/login']);
+        }
+        if (err.status === StatusCode.Forbidden) {
+          router.navigate(['/error', StatusCode.Forbidden]);
         }
         return throwError(err);
       })

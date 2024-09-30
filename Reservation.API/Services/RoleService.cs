@@ -166,7 +166,7 @@ namespace Reservation.API.Services
                     Role role = null;
                     foreach (var roleCode in lstRoleCode)
                     {
-                        role = lstRolesDb.FirstOrDefault(r => r.Code == roleCode);
+                        role = lstRolesDb.FirstOrDefault(r => r.Code.Trim() == roleCode.Trim());
 
                         if (role is null) continue;
 
@@ -181,7 +181,7 @@ namespace Reservation.API.Services
             }
 
             await _permissionRepos.DeleteMultiAsync(lstPermissionDb);
-            await _rolePermissionRepos.DeleteMultiAsync(lstRolePermissionAdd);
+            await _rolePermissionRepos.DeleteMultiAsync(lstRolePermissionsDb);
 
             await _permissionRepos.CreateMultiAsync(lstPermissionAdd);
             await _rolePermissionRepos.CreateMultiAsync(lstRolePermissionAdd);

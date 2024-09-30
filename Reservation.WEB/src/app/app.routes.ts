@@ -5,6 +5,7 @@ import { LayoutComponent } from './shared/components/layout/layout.component';
 import { UiControlComponent } from './shared/components/ui-control/ui-control.component';
 import { Routes } from '@angular/router';
 import { AuthGuard } from './shared/utils/auth/auth-guard';
+import { PageErrorComponent } from './shared/components/page-error/page-error.component';
 
 export const routes: Routes = [
   {
@@ -31,5 +32,6 @@ export const routes: Routes = [
       },
     ],
   },
+  { path: 'error/:statusCode', component: PageErrorComponent },
   { path: '**', component: Page404Component }, // Wildcard route for 404 page
 ];

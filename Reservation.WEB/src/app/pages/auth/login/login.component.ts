@@ -7,6 +7,7 @@ import { LoginService } from '../../../services/auth/login.service';
 import { StatusCode, ToastStatus } from '../../../shared/utils/enums';
 import { AuthService } from '../../../shared/services/auth.service';
 import { Router } from '@angular/router';
+import { TdToastComponent } from '../../../shared/components/ui-control/td-toast/td-toast.component';
 
 @Component({
   selector: 'app-login',
@@ -41,7 +42,7 @@ export class LoginComponent extends TdBaseComponent implements OnInit {
     this._loginService.login(payload).subscribe((rs) => {
       if (rs.status == StatusCode.Ok) {
         AuthService.setAuthStorage(rs.data);
-        this._router.navigate(['/dashboard']); // Điều hướng sau khi đăng nhập thành công
+        this._router.navigate(['/dashboards']); // Điều hướng sau khi đăng nhập thành công
         this.toast(ToastStatus.Success, rs.message);
       } else {
         this.toast(ToastStatus.Error, rs.message);
