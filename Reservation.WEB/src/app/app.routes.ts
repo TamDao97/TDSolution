@@ -6,6 +6,7 @@ import { UiControlComponent } from './shared/components/ui-control/ui-control.co
 import { Routes } from '@angular/router';
 import { AuthGuard } from './shared/utils/auth/auth-guard';
 import { PageErrorComponent } from './shared/components/page-error/page-error.component';
+import { UserComponent } from './pages/auth/user/user.component';
 
 export const routes: Routes = [
   {
@@ -21,14 +22,14 @@ export const routes: Routes = [
     component: LayoutComponent, // Layout chính của ứng dụng
     children: [
       {
-        path: 'dashboard',
-        component: DashboardComponent,
-        canActivate: [AuthGuard],
-      },
-      {
         path: '',
         redirectTo: 'ui-component',
         pathMatch: 'full',
+      },
+      {
+        path: 'user',
+        component: UserComponent,
+        // canActivate: [AuthGuard],
       },
     ],
   },

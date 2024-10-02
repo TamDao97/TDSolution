@@ -8,7 +8,16 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { catchError, delay, finalize, map, Observable, of, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  delay,
+  finalize,
+  map,
+  Observable,
+  of,
+  tap,
+} from 'rxjs';
 import { IDropdown } from '../../../../interfaces/IDropdown';
 import { environment } from '../../../../../env.development';
 import { IResponse } from '../../../../interfaces/IResponse';
@@ -37,7 +46,9 @@ export class TdSelectComponent implements ControlValueAccessor {
   page = 1;
   pageSize = 20;
   control: FormControl = new FormControl(null);
-  githubUsers$: Observable<IDropdown[]>;
+
+  subject$ = new BehaviorSubject<IDropdown[]>([]);
+  githubUsers$ = this.subject$.asObservable();
   apiUrl = environment.apiUrl + '/user/fake-data';
 
   constructor(private http: HttpClient) {}
@@ -76,7 +87,7 @@ export class TdSelectComponent implements ControlValueAccessor {
     this.loading = true;
     this.fetchDatas(this.page, this.pageSize).subscribe((datas) => {
       this.items = [...this.items, ...datas];
-      this.githubUsers$ = of(this.items);
+      this.subject$.next(this.items);
       setTimeout(() => {
         this.loading = false;
       }, 100); // Đợi 100ms trước khi set lại loading

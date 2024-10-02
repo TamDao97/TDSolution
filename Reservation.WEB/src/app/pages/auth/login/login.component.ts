@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedModule } from '../../../shared/modules/shared.module';
 import { UiControlModule } from '../../../shared/modules/ui-control.module';
-import { TdBaseComponent } from '../../../shared/utils/td-base.component';
+import { TdBaseComponent } from '../../../shared/utils/extends-components/td-base.component';
 import { LoginService } from '../../../services/auth/login.service';
 import { StatusCode, ToastStatus } from '../../../shared/utils/enums';
 import { AuthService } from '../../../shared/services/auth.service';

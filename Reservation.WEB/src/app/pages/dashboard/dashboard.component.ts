@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { StatusCode, ToastStatus } from '../../shared/utils/enums';
-import { TdBaseComponent } from '../../shared/utils/td-base.component';
+import { TdBaseComponent } from '../../shared/utils/extends-components/td-base.component';
 
 @Component({
   selector: 'app-dashboard',

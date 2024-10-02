@@ -1,6 +1,6 @@
 import { FormGroup } from '@angular/forms';
-import { ToastService } from '../services/toast.service';
-import { ToastStatus } from './enums';
+import { ToastService } from '../../services/toast.service';
+import { ToastStatus } from '../enums';
 import { inject } from '@angular/core';
 
 export class TdBaseComponent {
