@@ -7,11 +7,12 @@ import {
   NgOptionTemplateDirective,
   NgSelectModule,
 } from '@ng-select/ng-select';
+import { NgxLoadingModule } from 'ngx-loading';
 
-export const libModule = [NgSelectModule, NgbToastModule];
+export const libModule = [NgSelectModule, NgbToastModule, NgxLoadingModule];
 export const libDirective = [
-  NgLabelTemplateDirective,
-  NgOptionTemplateDirective,
+  // NgLabelTemplateDirective,
+  // NgOptionTemplateDirective,
 ];
 
 @NgModule({
