@@ -7,19 +7,18 @@ import { StatusCode, ToastStatus } from '../enums';
 @Component({
   template: '',
 })
-export abstract class TdBaseGridComponent extends TdBaseComponent {
+export class TdBaseGridComponent extends TdBaseComponent {
+  title: string = '';
+  gridData: any[] = [];
+  totalPage: number = 0;
+  totalRecord: number = 0;
+  pageNumber: number = 1;
+  pageSize: number = 10;
+  isLoading: Boolean = false;
+
   constructor(private _tdBaseService: TdBaseService) {
     super();
   }
-
-  title: string;
-  totalPage: number;
-  totalRecord: number;
-  pageNumber: number;
-  pageSize: number;
-
-  gridData: any[];
-  isLoading: Boolean = false;
 
   ngOnInit() {
     // this.gridLoadData();

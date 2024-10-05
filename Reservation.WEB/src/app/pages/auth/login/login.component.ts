@@ -42,7 +42,7 @@ export class LoginComponent extends TdBaseComponent implements OnInit {
     this._loginService.login(payload).subscribe((rs) => {
       if (rs.status == StatusCode.Ok) {
         AuthService.setAuthStorage(rs.data);
-        this._router.navigate(['/dashboards']); // Điều hướng sau khi đăng nhập thành công
+        this._router.navigate(['/user']); // Điều hướng sau khi đăng nhập thành công
         this.toast(ToastStatus.Success, rs.message);
       } else {
         this.toast(ToastStatus.Error, rs.message);
