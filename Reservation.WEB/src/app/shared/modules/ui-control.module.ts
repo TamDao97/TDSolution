@@ -18,7 +18,7 @@ import { TdInputComponent } from '../components/ui-control/td-input/td-input.com
     TdRadioComponent,
     TdToastComponent,
   ],
-  imports: [SharedModule],
+  imports: [SharedModule], // Đăng ký component cho ag-grid],
   exports: [
     TdInputComponent,
     TdSelectComponent,

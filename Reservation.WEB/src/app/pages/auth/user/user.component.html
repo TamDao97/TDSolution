@@ -1,35 +1,14 @@
 <div class="page-inner">
   <div class="page-header">
-    <h3 class="fw-bold mb-3">{{ title }}</h3>
-    <ul class="breadcrumbs mb-3">
-      <li class="nav-home">
-        <a href="#">
-          <i class="icon-home"></i>
-        </a>
-      </li>
-      <li class="separator">
-        <i class="icon-arrow-right"></i>
-      </li>
-      <li class="nav-item">
-        <a href="#">Tables</a>
-      </li>
-      <li class="separator">
-        <i class="icon-arrow-right"></i>
-      </li>
-      <li class="nav-item">
-        <a href="#">Datatables</a>
-      </li>
-    </ul>
+    <h3 class="fw-bold mb-3">
+      <i class="icon-home"></i> <span class="ms-3">{{ title }}</span>
+    </h3>
   </div>
   <div class="row">
     <div class="col-md-12">
       <!-- The AG Grid component -->
-      <ag-grid-angular
-        class="ag-theme-quartz"
-        style="height: 500px"
-        [rowData]="rowData"
-        [columnDefs]="colDefs"
-      />
+      <td-ag-grid-table [columnDefs]="colDefs" [rowData]="rowData">
+      </td-ag-grid-table>
     </div>
   </div>
 </div>

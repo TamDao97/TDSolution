@@ -1,0 +1,22 @@
+i {
+  cursor: pointer;
+  margin-right: 10px; /* khoảng cách giữa các icon */
+  font-size: 18px; /* Kích thước icon */
+  transition: color 0.3s ease; /* Hiệu ứng chuyển màu */
+}
+
+.action-icon:hover {
+  transform: scale(1.1); /* Tăng kích thước khi hover */
+}
+
+.text-success:hover {
+  color: #28a745; /* Màu xanh lá cây khi hover */
+}
+
+.text-primary:hover {
+  color: #007bff; /* Màu xanh dương khi hover */
+}
+
+.text-danger:hover {
+  color: #dc3545; /* Màu đỏ khi hover */
+}
