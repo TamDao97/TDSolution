@@ -17,6 +17,7 @@ import { UiGridTableModule } from '../../../shared/modules/ui-grid-table.module'
 })
 export class UserComponent extends TdBaseGridComponent implements OnInit {
   override title = 'Quản lý người dùng';
+  isCollapsed = false;
 
   // Row Data: The data to be displayed.
   rowData = [
@@ -27,14 +28,17 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
 
   // Column Definitions: Defines the columns to be displayed.
   colDefs: ColDef[] = [
-    { field: 'make' },
-    { field: 'model' },
-    { field: 'price' },
-    { field: 'electric' },
+    { field: 'make', flex: 1 },
+    { field: 'model', flex: 1 },
+    { field: 'price', flex: 1 },
+    { field: 'electric', flex: 1 },
     {
       headerName: 'Hành động',
       field: 'action',
-      width: 250,
+      width: 200,
+      resizable: false,
+      lockPinned: true,
+      lockPosition: 'right',
       cellRenderer: ActionCellRendererComponent, // Sử dụng component hành động
       cellRendererParams: {
         actions: [

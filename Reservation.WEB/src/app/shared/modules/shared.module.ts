@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbCollapseModule,
+  NgbDropdownModule,
+  NgbToastModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import {
   NgLabelTemplateDirective,
   NgOptionTemplateDirective,
@@ -9,7 +13,13 @@ import {
 } from '@ng-select/ng-select';
 import { NgxLoadingModule } from 'ngx-loading';
 
-export const libModule = [NgSelectModule, NgbToastModule, NgxLoadingModule];
+export const libModule = [
+  NgSelectModule,
+  NgbToastModule,
+  NgxLoadingModule,
+  NgbDropdownModule,
+  NgbCollapseModule,
+];
 export const libDirective = [
   // NgLabelTemplateDirective,
   // NgOptionTemplateDirective,
