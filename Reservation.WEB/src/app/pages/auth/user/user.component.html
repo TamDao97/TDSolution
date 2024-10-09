@@ -1,60 +1,64 @@
 <div class="page-inner">
-  <div class="page-header">
-    <h3 class="fw-bold mb-3">
-      <i class="icon-home"></i> <span class="ms-3">{{ title }}</span>
-    </h3>
-  </div>
-
-  <div class="row mb-1">
-    <div class="col-md-4 offset-6">
-      <td-input
-        wrapClass="mb-3"
-        [type]="'text'"
-        [placeholder]="'Từ khóa tìm kiếm'"
-      ></td-input>
-    </div>
-    <div class="col-md-2 pull-right">
-      <button
-        type="button"
-        class="btn btn-sm btn-outline-primary"
-        (click)="collapse.toggle()"
-        [attr.aria-expanded]="!isCollapsed"
-        aria-controls="collapseExample"
-      >
-        Tìm kiếm
-      </button>
-    </div>
-
-    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-      <div class="card">
-        <div class="card-body">
-          You can collapse this card by clicking one Toggle button
+  <div class="card">
+    <div class="card-body">
+      <div class="row mb-1">
+        <div class="col-md-6">
+          <div class="page-header">
+            <h3 class="fw-bold">
+              <i class="icon-home"></i> <span class="ms-3">{{ title }}</span>
+            </h3>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="row mb-1">
-    <div class="col-md-12">
-      <div class="btn-group" ngbDropdown>
-        <button type="button" class="btn btn-success">Thêm mới</button>
-        <button
-          type="button"
-          class="btn btn-success dropdown-toggle-split"
-          ngbDropdownToggle
-        ></button>
-        <div class="dropdown-menu" ngbDropdownMenu>
-          <button ngbDropdownItem>Xuất Excel</button>
-          <button ngbDropdownItem>Nhập Excel</button>
+        <div class="col-md-4 p-0">
+          <td-input
+            [type]="'text'"
+            [placeholder]="'Từ khóa tìm kiếm'"
+          ></td-input>
+        </div>
+        <div class="col-md-2">
+          <div class="d-flex justify-content-end">
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-primary rounded-0"
+            >
+              Tìm kiếm
+            </button>
+            <button type="button" class="btn btn-sm btn-primary rounded-0">
+              <i class="fa fa-solid fa-filter"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <!-- The AG Grid component -->
-      <td-ag-grid-table [columnDefs]="colDefs" [rowData]="rowData">
-      </td-ag-grid-table>
+  <div class="card">
+    <div class="card-body">
+      <div class="row mb-2">
+        <div class="col-md-12">
+          <div class="btn-group" ngbDropdown>
+            <button type="button" class="btn btn-sm btn-outline-primary">
+              Thêm mới
+            </button>
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-primary dropdown-toggle-split"
+              ngbDropdownToggle
+            ></button>
+            <div class="dropdown-menu" ngbDropdownMenu>
+              <button ngbDropdownItem>Xuất Excel</button>
+              <button ngbDropdownItem>Nhập Excel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- The AG Grid component -->
+          <td-ag-grid-table [columnDefs]="colDefs" [rowData]="rowData">
+          </td-ag-grid-table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
