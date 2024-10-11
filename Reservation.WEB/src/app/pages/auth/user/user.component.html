@@ -1,21 +1,22 @@
 <div class="page-inner">
   <div class="card">
     <div class="card-body">
-      <div class="row mb-1">
-        <div class="col-md-6">
-          <div class="page-header">
-            <h3 class="fw-bold">
-              <i class="icon-home"></i> <span class="ms-3">{{ title }}</span>
-            </h3>
-          </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h3 class="fw-bold">
+            <i class="icon-home"></i> <span class="ms-3">{{ title }}</span>
+          </h3>
         </div>
-        <div class="col-md-4 p-0">
+      </div>
+      <div class="row mb-1">
+        <div class="col-md-6 mb-1"></div>
+        <div class="col-md-4 mb-1">
           <td-input
             [type]="'text'"
             [placeholder]="'Từ khóa tìm kiếm'"
           ></td-input>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 mb-1">
           <div class="d-flex justify-content-end">
             <button
               type="button"
@@ -23,7 +24,11 @@
             >
               Tìm kiếm
             </button>
-            <button type="button" class="btn btn-sm btn-primary rounded-0">
+            <button
+              type="button"
+              class="btn btn-sm btn-primary rounded-0"
+              (click)="openModal()"
+            >
               <i class="fa fa-solid fa-filter"></i>
             </button>
           </div>

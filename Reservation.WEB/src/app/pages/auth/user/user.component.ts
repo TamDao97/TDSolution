@@ -1,3 +1,4 @@
+import { TdFilterAdvanceComponent } from './../../../shared/components/ui-control/td-filter-advance/td-filter-advance.component';
 import { Component, OnInit } from '@angular/core';
 import { TdBaseService } from '../../../shared/services/td-base.service';
 import { TdBaseGridComponent } from '../../../shared/utils/extends-components/td-base-grid.component';
@@ -7,6 +8,7 @@ import { ColDef } from 'ag-grid-community';
 
 import { ActionCellRendererComponent } from '../../../shared/components/ui-control/td-ag-grid-table/action-cell-renderer/action-cell-renderer.component';
 import { UiGridTableModule } from '../../../shared/modules/ui-grid-table.module';
+import { ModalService } from '../../../shared/services/modal.service';
 
 @Component({
   selector: 'app-user',
@@ -62,7 +64,10 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
     },
   ];
 
-  constructor(_tdBaseService: TdBaseService) {
+  constructor(
+    _tdBaseService: TdBaseService,
+    private _modalService: ModalService
+  ) {
     super(_tdBaseService);
   }
 
@@ -79,5 +84,14 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
 
   onDeleteClick(data: any) {
     console.log('Xóa', data);
+  }
+
+  openModal() {
+    this._modalService.openModalWithComponent(
+      'Tìm kiếm nâng cao',
+      TdFilterAdvanceComponent,
+      true,
+      '1200px'
+    );
   }
 }
