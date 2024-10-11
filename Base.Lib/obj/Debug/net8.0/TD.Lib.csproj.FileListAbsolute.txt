@@ -24,3 +24,16 @@ D:\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.dll
 D:\TDSolution\Base.Lib\obj\Debug\net8.0\refint\TD.Lib.dll
 D:\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.pdb
 D:\TDSolution\Base.Lib\obj\Debug\net8.0\ref\TD.Lib.dll
+E:\TDSolution\Base.Lib\bin\Debug\net8.0\TD.Lib.deps.json
+E:\TDSolution\Base.Lib\bin\Debug\net8.0\TD.Lib.dll
+E:\TDSolution\Base.Lib\bin\Debug\net8.0\TD.Lib.pdb
+E:\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.csproj.AssemblyReference.cache
+E:\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.GeneratedMSBuildEditorConfig.editorconfig
+E:\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.AssemblyInfoInputs.cache
+E:\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.AssemblyInfo.cs
+E:\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.csproj.CoreCompileInputs.cache
+E:\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.sourcelink.json
+E:\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.dll
+E:\TDSolution\Base.Lib\obj\Debug\net8.0\refint\TD.Lib.dll
+E:\TDSolution\Base.Lib\obj\Debug\net8.0\TD.Lib.pdb
+E:\TDSolution\Base.Lib\obj\Debug\net8.0\ref\TD.Lib.dll

@@ -7,6 +7,8 @@ import { TdCheckboxComponent } from '../components/ui-control/td-checkbox/td-che
 import { TdRadioComponent } from '../components/ui-control/td-radio/td-radio.component';
 import { TdToastComponent } from '../components/ui-control/td-toast/td-toast.component';
 import { TdInputComponent } from '../components/ui-control/td-input/td-input.component';
+import { TdModalComponent } from '../components/ui-control/td-modal/td-modal.component';
+import { TdFilterAdvanceComponent } from '../components/ui-control/td-filter-advance/td-filter-advance.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { TdInputComponent } from '../components/ui-control/td-input/td-input.com
     TdCheckboxComponent,
     TdRadioComponent,
     TdToastComponent,
+    TdModalComponent,
+    TdFilterAdvanceComponent,
   ],
   imports: [SharedModule], // Đăng ký component cho ag-grid],
   exports: [
@@ -26,6 +30,8 @@ import { TdInputComponent } from '../components/ui-control/td-input/td-input.com
     TdCheckboxComponent,
     TdRadioComponent,
     TdToastComponent,
+    TdModalComponent,
+    TdFilterAdvanceComponent,
   ],
 })
 export class UiControlModule {}

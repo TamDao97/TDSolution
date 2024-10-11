@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   NgbCollapseModule,
   NgbDropdownModule,
+  NgbModule,
   NgbToastModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -19,6 +20,7 @@ export const libModule = [
   NgxLoadingModule,
   NgbDropdownModule,
   NgbCollapseModule,
+  NgbModule,
 ];
 export const libDirective = [
   // NgLabelTemplateDirective,
