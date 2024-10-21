@@ -1,6 +1,5 @@
 import { TdFilterAdvanceComponent } from './../../../shared/components/ui-control/td-filter-advance/td-filter-advance.component';
-import { Component, OnInit } from '@angular/core';
-import { TdBaseService } from '../../../shared/services/td-base.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TdBaseGridComponent } from '../../../shared/utils/extends-components/td-base-grid.component';
 import { SharedModule } from '../../../shared/modules/shared.module';
 import { UiControlModule } from '../../../shared/modules/ui-control.module';
@@ -8,7 +7,10 @@ import { ColDef } from 'ag-grid-community';
 
 import { ActionCellRendererComponent } from '../../../shared/components/ui-control/td-ag-grid-table/action-cell-renderer/action-cell-renderer.component';
 import { UiGridTableModule } from '../../../shared/modules/ui-grid-table.module';
-import { ModalService } from '../../../shared/services/modal.service';
+import { IControl } from '../../../shared/interfaces/IControl';
+import { ControlTypeEnum } from '../../../shared/utils/enums';
+import { FilterGridService } from '../../../shared/utils/services/filter-grid.service';
+import { TdBaseService } from '../../../shared/utils/services/td-base.service';
 
 @Component({
   selector: 'app-user',
@@ -66,12 +68,52 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
 
   constructor(
     _tdBaseService: TdBaseService,
-    private _modalService: ModalService
+    private _filterGridService: FilterGridService
   ) {
     super(_tdBaseService);
   }
 
   override ngOnInit(): void {}
+
+  /************Khai báo form filter**************/
+
+  filterControl: IControl[] = [
+    {
+      label: 'Quyền',
+      type: ControlTypeEnum.Select,
+      colClass: 'col-4',
+      ngModel: 'role',
+      placeHolder: '--Chọn--',
+      order: 1,
+    },
+    {
+      label: 'Trạng thái',
+      type: ControlTypeEnum.Select,
+      colClass: 'col-4',
+      ngModel: 'status',
+      placeHolder: '--Chọn--',
+      order: 1,
+    },
+    {
+      label: 'Giới tính',
+      type: ControlTypeEnum.Radio,
+      colClass: 'col-4',
+      ngModel: 'gender',
+      order: 1,
+    },
+    {
+      label: 'Loại tài khoản',
+      type: ControlTypeEnum.Select,
+      colClass: 'col-4',
+      ngModel: 'accountType',
+      placeHolder: '--Chọn--',
+      order: 1,
+    },
+  ];
+
+  onSearchAdvance(): void {
+    this._filterGridService.open(this.filterControl);
+  }
 
   // Các hàm xử lý action
   onViewClick(data: any) {
@@ -84,14 +126,5 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
 
   onDeleteClick(data: any) {
     console.log('Xóa', data);
-  }
-
-  openModal() {
-    this._modalService.openModalWithComponent(
-      'Tìm kiếm nâng cao',
-      TdFilterAdvanceComponent,
-      true,
-      '1200px'
-    );
   }
 }

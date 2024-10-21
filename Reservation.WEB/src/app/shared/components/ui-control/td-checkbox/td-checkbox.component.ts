@@ -14,7 +14,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
   ],
 })
 export class TdCheckboxComponent implements ControlValueAccessor {
-  @Input() label: string = '';
+  @Input() label?: string = '';
   @Input() disabled: boolean = false;
 
   checked: boolean = false;

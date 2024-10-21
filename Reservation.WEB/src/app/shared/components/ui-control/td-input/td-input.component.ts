@@ -29,8 +29,8 @@ import { validateEmail } from '../../../utils/helpers';
 })
 export class TdInputComponent implements ControlValueAccessor, Validator {
   @Input() type: string = 'text';
-  @Input() label!: string;
-  @Input() placeholder: string = '';
+  @Input() label?: string;
+  @Input() placeholder?: string = '';
   @Input() wrapClass: string = '';
   @Input() inputClass: string = 'form-control';
   @Input() layout: 'vertical' | 'horizontal' = 'vertical';

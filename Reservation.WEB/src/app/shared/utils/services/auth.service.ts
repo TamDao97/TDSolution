@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { LocalStorageKey } from '../utils/constants';
 import { StorageLocalService } from './storage-local.service';
+import { LocalStorageKey } from '../constants';
 
 @Injectable({
   providedIn: 'root',

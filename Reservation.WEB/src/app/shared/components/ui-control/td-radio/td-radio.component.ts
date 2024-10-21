@@ -14,7 +14,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class TdRadioComponent implements ControlValueAccessor {
-  @Input() label!: string;
+  @Input() label?: string;
   @Input() wrapClass!: string;
   @Input() name: string = '';
   @Input() layout: 'vertical' | 'horizontal' = 'vertical';

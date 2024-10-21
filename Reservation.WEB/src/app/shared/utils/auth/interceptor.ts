@@ -1,12 +1,12 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { AuthService } from '../../services/auth.service';
 import { ICurrentUser } from '../../interfaces/ICurrentUser';
 import { catchError, finalize, throwError } from 'rxjs';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { StatusCode } from '../enums';
-import { ToastService } from '../../services/toast.service';
-import { LoadingService } from '../../services/loading.service';
+import { AuthService } from '../services/auth.service';
+import { LoadingService } from '../services/loading.service';
+import { ToastService } from '../services/toast.service';
 
 export const Interceptor: HttpInterceptorFn = (req, next) => {
   const auth = AuthService.getAuthStorage(); // Lấy token từ localStorage

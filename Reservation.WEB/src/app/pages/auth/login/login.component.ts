@@ -5,9 +5,8 @@ import { UiControlModule } from '../../../shared/modules/ui-control.module';
 import { TdBaseComponent } from '../../../shared/utils/extends-components/td-base.component';
 import { LoginService } from '../../../services/auth/login.service';
 import { StatusCode, ToastStatus } from '../../../shared/utils/enums';
-import { AuthService } from '../../../shared/services/auth.service';
 import { Router } from '@angular/router';
-import { TdToastComponent } from '../../../shared/components/ui-control/td-toast/td-toast.component';
+import { AuthService } from '../../../shared/utils/services/auth.service';
 
 @Component({
   selector: 'app-login',
