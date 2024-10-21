@@ -1,12 +1,7 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  inject,
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LoadingService } from './shared/services/loading.service';
 import { SharedModule } from './shared/modules/shared.module';
+import { LoadingService } from './shared/utils/services/loading.service';
 
 @Component({
   selector: 'app-root',
