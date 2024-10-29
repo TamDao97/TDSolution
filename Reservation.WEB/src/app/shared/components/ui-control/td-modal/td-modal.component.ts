@@ -47,6 +47,8 @@ export class TdModalComponent implements AfterViewInit {
     // Truy cập vào element bên ngoài component bằng class
     const outsideElement = this._document.querySelector('.modal-dialog');
     if (outsideElement) {
+
+      debugger;
       // Sử dụng Renderer2 để thay đổi style
       this._renderer.setStyle(outsideElement, 'max-width', this.modalWidth);
       // this._renderer.addClass(outsideElement, 'highlight');

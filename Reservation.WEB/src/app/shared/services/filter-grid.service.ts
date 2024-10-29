@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ModalService } from './modal.service';
-import { TdFilterAdvanceComponent } from '../../components/ui-control/td-filter-advance/td-filter-advance.component';
+import { TdFilterAdvanceComponent } from '../components/ui-control/td-filter-advance/td-filter-advance.component';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ export class FilterGridService {
   open(fields: any[]): void {
     this._modalService.open({
       title: 'Tìm kiếm nâng cao',
-      width: '60%',
+      width: '80%',
       showHeader: true,
       component: TdFilterAdvanceComponent,
       params: {

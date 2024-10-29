@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  ViewChild,
-  TemplateRef,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IControl } from '../../../interfaces/IControl';
 import { ControlTypeEnum } from '../../../utils/enums';
 

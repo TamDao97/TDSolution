@@ -9,8 +9,8 @@ import { ActionCellRendererComponent } from '../../../shared/components/ui-contr
 import { UiGridTableModule } from '../../../shared/modules/ui-grid-table.module';
 import { IControl } from '../../../shared/interfaces/IControl';
 import { ControlTypeEnum } from '../../../shared/utils/enums';
-import { FilterGridService } from '../../../shared/utils/services/filter-grid.service';
-import { TdBaseService } from '../../../shared/utils/services/td-base.service';
+import { FilterGridService } from '../../../shared/services/filter-grid.service';
+import { TdBaseService } from '../../../shared/services/td-base.service';
 
 @Component({
   selector: 'app-user',
@@ -81,7 +81,7 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
     {
       label: 'Quyền',
       type: ControlTypeEnum.Select,
-      colClass: 'col-4',
+      colClass: 'col-12',
       ngModel: 'role',
       placeHolder: '--Chọn--',
       order: 1,
@@ -89,22 +89,24 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
     {
       label: 'Trạng thái',
       type: ControlTypeEnum.Select,
-      colClass: 'col-4',
+      colClass: 'col-12',
       ngModel: 'status',
       placeHolder: '--Chọn--',
       order: 1,
     },
+
     {
-      label: 'Giới tính',
-      type: ControlTypeEnum.Radio,
-      colClass: 'col-4',
-      ngModel: 'gender',
+      label: 'Ngày',
+      type: ControlTypeEnum.Date,
+      colClass: 'col-12',
+      ngModel: 'date',
+      placeHolder: '--Chọn--',
       order: 1,
     },
     {
       label: 'Loại tài khoản',
       type: ControlTypeEnum.Select,
-      colClass: 'col-4',
+      colClass: 'col-12',
       ngModel: 'accountType',
       placeHolder: '--Chọn--',
       order: 1,

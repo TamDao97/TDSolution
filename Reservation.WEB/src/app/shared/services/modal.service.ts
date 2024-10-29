@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TdModalComponent } from '../../components/ui-control/td-modal/td-modal.component';
+import { TdModalComponent } from '../components/ui-control/td-modal/td-modal.component';
 
 export interface IModalOptions {
   title: string;

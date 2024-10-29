@@ -1,5 +1,12 @@
 <div class="row">
-  <div [class]="field.colClass" *ngFor="let field of fields">
+  <div class="col-2">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div>
+  <div class="col-2">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div>
+  <div class="col-2">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div>
+  <div class="col-2">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div>
+  <div class="col-2">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div>
+  <div class="col-2">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div>
+  <div class="col-2">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div>
+  <!-- <div [class]="field.colClass" *ngFor="let field of fields">
     <ng-container [ngSwitch]="field.type">
       <ng-container *ngSwitchCase="controlTypeEnum.Text">
         <td-input
@@ -16,7 +23,13 @@
           [(ngModel)]="field.ngModel"
         ></td-select>
       </ng-container>
-      <ng-container *ngSwitchCase="controlTypeEnum.Date"> </ng-container>
+      <ng-container *ngSwitchCase="controlTypeEnum.Date">
+        <td-date-picker
+          [label]="field.label"
+          [placeholder]="field.placeHolder"
+          [(ngModel)]="field.ngModel"
+        ></td-date-picker>
+      </ng-container>
       <ng-container *ngSwitchCase="controlTypeEnum.TextArea"> </ng-container>
       <ng-container *ngSwitchCase="controlTypeEnum.CheckBox">
         <td-checkbox
@@ -38,5 +51,5 @@
       </ng-container>
       <ng-container *ngSwitchDefault></ng-container>
     </ng-container>
-  </div>
+  </div> -->
 </div>
