@@ -11,7 +11,7 @@ export class FilterGridService {
   open(fields: any[]): void {
     this._modalService.open({
       title: 'Tìm kiếm nâng cao',
-      width: '80%',
+      width: '60%',
       showHeader: true,
       component: TdFilterAdvanceComponent,
       params: {

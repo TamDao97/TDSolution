@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using Reservation.API.Attributes;
 using Reservation.API.Commons;
@@ -7,7 +6,6 @@ using Reservation.API.DataContext.Dto.Core;
 using Reservation.API.DataContext.Entity.Core;
 using Reservation.API.Services.Base;
 using Reservation.API.UnitOfWork;
-using System.Collections.Generic;
 using System.Reflection;
 using TD.Lib.AutoMapper;
 using TD.Lib.Common;

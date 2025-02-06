@@ -1,5 +1,4 @@
-import { TdFilterAdvanceComponent } from './../../../shared/components/ui-control/td-filter-advance/td-filter-advance.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TdBaseGridComponent } from '../../../shared/utils/extends-components/td-base-grid.component';
 import { SharedModule } from '../../../shared/modules/shared.module';
 import { UiControlModule } from '../../../shared/modules/ui-control.module';
@@ -94,20 +93,19 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
       placeHolder: '--Chọn--',
       order: 1,
     },
-
-    {
-      label: 'Ngày',
-      type: ControlTypeEnum.Date,
-      colClass: 'col-12',
-      ngModel: 'date',
-      placeHolder: '--Chọn--',
-      order: 1,
-    },
     {
       label: 'Loại tài khoản',
       type: ControlTypeEnum.Select,
       colClass: 'col-12',
       ngModel: 'accountType',
+      placeHolder: '--Chọn--',
+      order: 1,
+    },
+    {
+      label: 'Ngày',
+      type: ControlTypeEnum.Date,
+      colClass: 'col-12',
+      ngModel: 'date',
       placeHolder: '--Chọn--',
       order: 1,
     },

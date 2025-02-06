@@ -11,6 +11,7 @@ import { UiControlModule } from '../../modules/ui-control.module';
   imports: [SharedModule, UiControlModule],
 })
 export class UiControlComponent implements OnInit {
+  dateVal: any = null;
   form = this.fb.group({
     inputVal: [null],
     selectVal: [null],

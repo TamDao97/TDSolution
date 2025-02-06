@@ -9,7 +9,6 @@ import { TdToastComponent } from '../components/ui-control/td-toast/td-toast.com
 import { TdInputComponent } from '../components/ui-control/td-input/td-input.component';
 import { TdModalComponent } from '../components/ui-control/td-modal/td-modal.component';
 import { TdFilterAdvanceComponent } from '../components/ui-control/td-filter-advance/td-filter-advance.component';
-import { TdDatePickerComponent } from '../components/ui-control/td-date-picker/td-date-picker.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,6 @@ import { TdDatePickerComponent } from '../components/ui-control/td-date-picker/t
     TdToastComponent,
     TdModalComponent,
     TdFilterAdvanceComponent,
-    TdDatePickerComponent
   ],
   imports: [SharedModule], // Đăng ký component cho ag-grid],
   exports: [
@@ -34,7 +32,6 @@ import { TdDatePickerComponent } from '../components/ui-control/td-date-picker/t
     TdToastComponent,
     TdModalComponent,
     TdFilterAdvanceComponent,
-    TdDatePickerComponent
   ],
 })
 export class UiControlModule {}

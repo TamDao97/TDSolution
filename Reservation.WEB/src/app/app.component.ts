@@ -1,4 +1,8 @@
-import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SharedModule } from './shared/modules/shared.module';
 import { LoadingService } from './shared/services/loading.service';
@@ -9,17 +13,13 @@ import { LoadingService } from './shared/services/loading.service';
   imports: [RouterOutlet, SharedModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
   title = 'Reservation.WEB';
 
   constructor(
     private cdr: ChangeDetectorRef,
     public loadingService: LoadingService
   ) {}
-
-  ngAfterViewInit() {
-    // Sử dụng ChangeDetectorRef để yêu cầu Angular chạy lại change detection sau khi view đã render xong
-    this.cdr.detectChanges();
-  }
 }
