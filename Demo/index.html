@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ Tây - Điểm đến văn hóa Hà Nội</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Hồ Tây</h1>
+        <p class="subtitle">Viên ngọc xanh giữa lòng Hà Nội</p>
+    </header>
+
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="https://images.unsplash.com/photo-1625663289497-f2962a45686f" alt="Hồ Tây hoàng hôn">
+            </div>
+            <div class="swiper-slide">
+                <img src="https://images.unsplash.com/photo-1576437157172-6b70e78ca4a9" alt="Đền Quán Thánh">
+            </div>
+            <div class="swiper-slide">
+                <img src="https://images.unsplash.com/photo-1613168610532-b4b5d6b4e1e9" alt="Chùa Trấn Quốc">
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+
+    <main>
+        <section class="info">
+            <h2>Giới thiệu</h2>
+            <p>Hồ Tây là hồ nước ngọt tự nhiên lớn nhất của thành phố Hà Nội với diện tích mặt nước khoảng 500ha. Đây không chỉ là một địa điểm du lịch nổi tiếng mà còn là nơi lưu giữ nhiều giá trị văn hóa, lịch sử của Thủ đô.</p>
+        </section>
+
+        <section class="highlights">
+            <h2>Điểm nhấn nổi bật</h2>
+            <div class="highlight-grid">
+                <div class="highlight-item">
+                    <h3>Chùa Trấn Quốc</h3>
+                    <p>Ngôi chùa cổ nhất Hà Nội, được xây dựng từ thế kỷ VI</p>
+                </div>
+                <div class="highlight-item">
+                    <h3>Đền Quán Thánh</h3>
+                    <p>Một trong Tứ trấn của kinh thành Thăng Long xưa</p>
+                </div>
+                <div class="highlight-item">
+                    <h3>Ẩm thực</h3>
+                    <p>Nhiều nhà hàng, quán café với view đẹp nhìn ra hồ</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Hồ Tây - Di sản văn hóa Hà Nội</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+</body>
+</html> 
