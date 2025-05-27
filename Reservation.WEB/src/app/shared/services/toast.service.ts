@@ -1,20 +1,25 @@
-import { Injectable, TemplateRef } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
-  toasts: any[] = [];
+  constructor(private _notification: NzNotificationService) {}
 
-  show(textOrTpl: string | TemplateRef<any>, options: any = {}) {
-    this.toasts.push({ textOrTpl, ...options });
+  success(title: string, content: string) {
+    this._notification.create('success', title, content, {
+      nzPlacement: 'topRight',
+      nzDuration: 3000,
+    });
   }
 
-  remove(toast: any) {
-    this.toasts = this.toasts.filter((t) => t !== toast);
+  error(title: string, content: string) {
+    this._notification.create('error', title, content, {
+      nzPlacement: 'topRight',
+      nzDuration: 3000,
+    });
   }
 
-  clear() {
-    this.toasts = [];
-  }
+  // thêm các method info, warning, v.v nếu cần
 }

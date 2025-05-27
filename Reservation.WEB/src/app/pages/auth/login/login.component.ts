@@ -6,7 +6,7 @@ import { TdBaseComponent } from '../../../shared/utils/extends-components/td-bas
 import { LoginService } from '../../../services/auth/login.service';
 import { StatusCode, ToastStatus } from '../../../shared/utils/enums';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../shared/services/auth.service';
+import { AuthService } from '../../../shared/utils/services/auth.service';
 
 @Component({
   selector: 'app-login',

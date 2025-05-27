@@ -39,17 +39,17 @@ export class TdModalComponent implements AfterViewInit {
   ) {}
 
   ngAfterViewInit() {
-    this.setWidthModal(this.modalWidth);
-    this.loadComponent(this.componentToLoad, this.params);
-  }
+    // Gọi loadComponent trong ngAfterViewInit để đảm bảo dynamicContent đã được khởi tạo
+    if (this.componentToLoad) {
+      this.loadComponent(this.componentToLoad, this.params);
+    }
 
-  setWidthModal(width: any): void {
     // Truy cập vào element bên ngoài component bằng class
     const outsideElement = this._document.querySelector('.modal-dialog');
     if (outsideElement) {
       // Sử dụng Renderer2 để thay đổi style
       this._renderer.setStyle(outsideElement, 'max-width', this.modalWidth);
-      this._renderer.addClass(outsideElement, 'highlight');
+      // this._renderer.addClass(outsideElement, 'highlight');
     }
   }
 
@@ -62,7 +62,9 @@ export class TdModalComponent implements AfterViewInit {
         this.dynamicContent.createComponent(factory);
 
       // Truyền params vào component động nếu có
-      if (params) Object.assign(componentRef.instance, params);
+      if (params) {
+        Object.assign(componentRef.instance, params);
+      }
 
       // Nếu component động cần xử lý change detection
       componentRef.changeDetectorRef.detectChanges();

@@ -16,13 +16,7 @@
           [(ngModel)]="field.ngModel"
         ></td-select>
       </ng-container>
-      <ng-container *ngSwitchCase="controlTypeEnum.Date">
-        <!-- <td-date-picker
-          [label]="field.label"
-          [placeholder]="field.placeHolder"
-          [(ngModel)]="field.ngModel"
-        ></td-date-picker> -->
-      </ng-container>
+      <ng-container *ngSwitchCase="controlTypeEnum.Date"> </ng-container>
       <ng-container *ngSwitchCase="controlTypeEnum.TextArea"> </ng-container>
       <ng-container *ngSwitchCase="controlTypeEnum.CheckBox">
         <td-checkbox

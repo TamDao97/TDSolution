@@ -19,7 +19,6 @@ import { TdFilterAdvanceComponent } from '../components/ui-control/td-filter-adv
     TdCheckboxComponent,
     TdRadioComponent,
     TdToastComponent,
-    TdModalComponent,
     TdFilterAdvanceComponent,
   ],
   imports: [SharedModule], // Đăng ký component cho ag-grid],
@@ -30,7 +29,6 @@ import { TdFilterAdvanceComponent } from '../components/ui-control/td-filter-adv
     TdCheckboxComponent,
     TdRadioComponent,
     TdToastComponent,
-    TdModalComponent,
     TdFilterAdvanceComponent,
   ],
 })
