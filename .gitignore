@@ -1,18 +1,54 @@
-# Ignore toàn bộ thư mục
-/.vs
-/Reservation.API\obj
-/Reservation.API\bin
-/Base.Lib\obj
-/Base.Lib\bin
-
-# Ignore file cụ thể
-secret-config.json
-
-# Ignore tất cả các file có phần mở rộng cụ thể
+# =========================
+# .NET Core (.NET 6/7/8...)
+# =========================
+**/bin/
+**/obj/
+*.user
+*.suo
+*.cache
 *.log
-*.tmp
+*.vs/
+*.dbmdl
+*.db
 
-# Ignore một thư mục con trong thư mục gốc
-/dist/
-/.vs
-/eCom/.vs/eCom/config/applicationhost.config
+# ASP.NET secrets
+**/appsettings.Development.json
+**/secrets.json
+
+# Rider / VS Code / JetBrains
+.idea/
+.vscode/
+*.sln.docstates
+
+# EntityFramework Migrations History
+_Migrations/
+
+# ==================
+# Angular (Frontend)
+# ==================
+**/node_modules/
+**/dist/
+**/.angular/
+**/coverage/
+**/.env
+**/package-lock.json
+
+# Angular environment files (nếu chứa thông tin nhạy cảm)
+**/src/environments/environment*.ts
+
+# NPM/Yarn logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# MacOS / Windows system files
+.DS_Store
+Thumbs.db
+
+# ========================
+# ZIP or Build Archives
+# ========================
+*.zip
+*.rar
+*.7z
+*.tar.gz
