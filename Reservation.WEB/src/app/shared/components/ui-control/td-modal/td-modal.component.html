@@ -1,33 +1,25 @@
-<div class="modal-dialog" [ngStyle]="{ 'max-width': modalWidth }">
-  <div class="modal-content">
-    <div *ngIf="showHeader" class="modal-header">
-      <h4 class="modal-title">{{ title }}</h4>
-      <button
-        type="button"
-        class="btn-close"
-        aria-label="Close"
-        (click)="activeModal.dismiss()"
-      ></button>
-    </div>
-    <div class="modal-body">
-      <!-- Đảm bảo rằng template được tham chiếu bởi ViewChild -->
-      <ng-template #dynamicContent></ng-template>
-    </div>
-    <div class="modal-footer">
-      <button
-        type="button"
-        class="btn btn-secondary"
-        (click)="activeModal.dismiss()"
-      >
-        Close
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary"
-        (click)="activeModal.close()"
-      >
-        Confirm
-      </button>
-    </div>
-  </div>
+<div *ngIf="showHeader" class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="_activeModal.dismiss()"
+  ></button>
+</div>
+<div class="modal-body">
+  <!-- Đảm bảo rằng template được tham chiếu bởi ViewChild -->
+  <ng-template #dynamicContent></ng-template>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-secondary"
+    (click)="_activeModal.dismiss()"
+  >
+    Close
+  </button>
+  <button type="button" class="btn btn-primary" (click)="_activeModal.close()">
+    Confirm
+  </button>
 </div>

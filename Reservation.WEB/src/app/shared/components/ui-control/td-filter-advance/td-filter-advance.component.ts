@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  TemplateRef,
+} from '@angular/core';
+import { IControl } from '../../../interfaces/IControl';
+import { ControlTypeEnum } from '../../../utils/enums';
 
 @Component({
-  selector: 'app-td-filter-advance',
+  selector: 'td-filter-advance',
   templateUrl: './td-filter-advance.component.html',
-  styleUrls: ['./td-filter-advance.component.css']
+  styleUrls: ['./td-filter-advance.component.css'],
 })
 export class TdFilterAdvanceComponent implements OnInit {
-
-  constructor() { }
+  fields: IControl[];
+  controlTypeEnum = ControlTypeEnum;
+  constructor() {}
 
   ngOnInit() {
+    console.log(this.fields);
   }
-
 }

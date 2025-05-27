@@ -4532,19 +4532,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Administrator\\.nuget\\packages\\": {}
+    "C:\\Users\\tamdc\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\TDSolution\\Reservation.API\\Reservation.API.csproj",
+      "projectUniqueName": "D:\\TDSolution\\Reservation.API\\Reservation.API.csproj",
       "projectName": "Reservation.API",
-      "projectPath": "E:\\TDSolution\\Reservation.API\\Reservation.API.csproj",
-      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "E:\\TDSolution\\Reservation.API\\obj\\",
+      "projectPath": "D:\\TDSolution\\Reservation.API\\Reservation.API.csproj",
+      "packagesPath": "C:\\Users\\tamdc\\.nuget\\packages\\",
+      "outputPath": "D:\\TDSolution\\Reservation.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tamdc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4559,8 +4559,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "E:\\TDSolution\\Base.Lib\\TD.Lib.csproj": {
-              "projectPath": "E:\\TDSolution\\Base.Lib\\TD.Lib.csproj"
+            "D:\\TDSolution\\Base.Lib\\TD.Lib.csproj": {
+              "projectPath": "D:\\TDSolution\\Base.Lib\\TD.Lib.csproj"
             }
           }
         }
@@ -4628,7 +4628,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

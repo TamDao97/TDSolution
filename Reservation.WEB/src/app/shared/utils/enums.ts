@@ -13,3 +13,12 @@ export enum ToastStatus {
   Warning,
   Error,
 }
+
+export enum ControlTypeEnum {
+  Text,
+  Select,
+  Date,
+  CheckBox,
+  Radio,
+  TextArea,
+}

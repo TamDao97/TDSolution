@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
   Component,
   Input,
@@ -5,6 +6,11 @@ import {
   ViewContainerRef,
   ComponentFactoryResolver,
   AfterViewInit,
+  Renderer2,
+  ElementRef,
+  Inject,
+  ComponentRef,
+  Type,
 } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -22,32 +28,54 @@ export class TdModalComponent implements AfterViewInit {
   dynamicContent!: ViewContainerRef;
 
   private componentToLoad: any; // Tham số tạm thời để lưu component sẽ được load
+  private params: Partial<any>;
 
   constructor(
-    public activeModal: NgbActiveModal,
-    private resolver: ComponentFactoryResolver
+    @Inject(DOCUMENT) private _document: Document,
+    private _renderer: Renderer2,
+    private _el: ElementRef,
+    public _activeModal: NgbActiveModal,
+    private _resolver: ComponentFactoryResolver
   ) {}
 
   ngAfterViewInit() {
     // Gọi loadComponent trong ngAfterViewInit để đảm bảo dynamicContent đã được khởi tạo
     if (this.componentToLoad) {
-      this.loadComponent(this.componentToLoad);
+      this.loadComponent(this.componentToLoad, this.params);
+    }
+
+    // Truy cập vào element bên ngoài component bằng class
+    const outsideElement = this._document.querySelector('.modal-dialog');
+    if (outsideElement) {
+      // Sử dụng Renderer2 để thay đổi style
+      this._renderer.setStyle(outsideElement, 'max-width', this.modalWidth);
+      // this._renderer.addClass(outsideElement, 'highlight');
     }
   }
 
-  loadComponent(component: any) {
+  loadComponent<T extends object>(component: Type<T>, params: Partial<T>) {
     // Kiểm tra ViewChild đã được khởi tạo trước khi sử dụng
     if (this.dynamicContent) {
-      const factory = this.resolver.resolveComponentFactory(component);
+      const factory = this._resolver.resolveComponentFactory(component);
       this.dynamicContent.clear(); // Gọi clear để xóa nội dung cũ
-      this.dynamicContent.createComponent(factory);
+      const componentRef: ComponentRef<T> =
+        this.dynamicContent.createComponent(factory);
+
+      // Truyền params vào component động nếu có
+      if (params) {
+        Object.assign(componentRef.instance, params);
+      }
+
+      // Nếu component động cần xử lý change detection
+      componentRef.changeDetectorRef.detectChanges();
     } else {
       console.error('ViewChild dynamicContent chưa sẵn sàng.');
     }
   }
 
   // Thay đổi để lưu component mà bạn muốn load
-  loadComponentOnInit(component: any) {
+  loadComponentOnInit<T extends object>(component: any, params: Partial<T>) {
     this.componentToLoad = component;
+    this.params = params;
   }
 }

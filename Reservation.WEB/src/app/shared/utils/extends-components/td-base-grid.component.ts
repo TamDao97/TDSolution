@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { TdBaseComponent } from './td-base.component';
-import { TdBaseService } from '../../services/td-base.service';
 import { IPagingData } from '../../../interfaces/IPagingData';
 import { StatusCode, ToastStatus } from '../enums';
+import { TdBaseService } from '../services/td-base.service';
 
 @Component({
   template: '',

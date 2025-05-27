@@ -1,3 +1,42 @@
-<p>
-  td-filter-advance works!
-</p>
+<div class="row">
+  <div [class]="field.colClass" *ngFor="let field of fields">
+    <ng-container [ngSwitch]="field.type">
+      <ng-container *ngSwitchCase="controlTypeEnum.Text">
+        <td-input
+          [type]="'text'"
+          [label]="field.label"
+          [placeholder]="field.placeHolder"
+          [(ngModel)]="field.ngModel"
+        ></td-input>
+      </ng-container>
+      <ng-container *ngSwitchCase="controlTypeEnum.Select">
+        <td-select
+          [label]="field.label"
+          [placeholder]="field.placeHolder"
+          [(ngModel)]="field.ngModel"
+        ></td-select>
+      </ng-container>
+      <ng-container *ngSwitchCase="controlTypeEnum.Date"> </ng-container>
+      <ng-container *ngSwitchCase="controlTypeEnum.TextArea"> </ng-container>
+      <ng-container *ngSwitchCase="controlTypeEnum.CheckBox">
+        <td-checkbox
+          [label]="field.label"
+          [(ngModel)]="field.ngModel"
+        ></td-checkbox>
+      </ng-container>
+      <ng-container *ngSwitchCase="controlTypeEnum.Radio">
+        <td-radio
+          [label]="field.label"
+          [(ngModel)]="field.ngModel"
+          [options]="[
+            { label: 'Option 1', value: '1' },
+            { label: 'Option 2', value: '2' },
+            { label: 'Option 3', value: '3' }
+          ]"
+          name="example-radio-group"
+        ></td-radio>
+      </ng-container>
+      <ng-container *ngSwitchDefault></ng-container>
+    </ng-container>
+  </div>
+</div>

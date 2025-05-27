@@ -6,12 +6,10 @@ import {
   FormControl,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
-  Validators,
 } from '@angular/forms';
 import {
   BehaviorSubject,
   catchError,
-  delay,
   finalize,
   map,
   Observable,
@@ -21,7 +19,6 @@ import {
 import { IDropdown } from '../../../../interfaces/IDropdown';
 import { environment } from '../../../../../env.development';
 import { IResponse } from '../../../../interfaces/IResponse';
-import { StatusCode } from '../../../utils/enums';
 
 @Component({
   selector: 'td-select',
@@ -36,8 +33,8 @@ import { StatusCode } from '../../../utils/enums';
   ],
 })
 export class TdSelectComponent implements ControlValueAccessor {
-  @Input() label!: string;
-  @Input() placeholder: string = '--Chọn--';
+  @Input() label?: string;
+  @Input() placeholder?: string = '--Chọn--';
   @Input() wrapClass!: string;
   @Input() layout: 'vertical' | 'horizontal' = 'vertical';
 
