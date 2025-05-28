@@ -1,12 +1,11 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  inject,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SharedModule } from './shared/modules/shared.module';
-import { LoadingService } from './shared/services/loading.service';
 
 @Component({
   selector: 'app-root',
