@@ -14,52 +14,58 @@
             </div>
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">
-                <form [formGroup]="frmGroup">
-                  <div class="d-flex align-items-center mb-3 pb-1">
-                    <i
-                      class="fas fa-cubes fa-2x me-3"
-                      style="color: #ff6219"
-                    ></i>
-                    <span class="h1 fw-bold mb-0">Đăng nhập</span>
+                <form
+                  nz-form
+                  [formGroup]="frmGroup"
+                  class="login-form"
+                  (ngSubmit)="onSubmit()"
+                >
+                  <nz-form-item>
+                    <nz-form-control [nzErrorTip]="emailErrorTpl">
+                      <nz-input-group nzPrefixIcon="user">
+                        <input
+                          type="text"
+                          nz-input
+                          formControlName="email"
+                          placeholder="Tài khoản"
+                        />
+                      </nz-input-group>
+                    </nz-form-control>
+                    <ng-template #emailErrorTpl let-control>
+                      <ng-container *ngIf="control.hasError('required')">
+                        Vui lòng nhập email!
+                      </ng-container>
+                      <ng-container *ngIf="control.hasError('email')">
+                        Email không hợp lệ!
+                      </ng-container>
+                    </ng-template>
+                  </nz-form-item>
+
+                  <nz-form-item>
+                    <nz-form-control [nzErrorTip]="passwordErrorTpl">
+                      <nz-input-group nzPrefixIcon="lock">
+                        <input
+                          type="password"
+                          nz-input
+                          formControlName="password"
+                          placeholder="Mật khẩu"
+                        />
+                      </nz-input-group>
+                    </nz-form-control>
+                    <ng-template #passwordErrorTpl let-control>
+                      <ng-container *ngIf="control.hasError('required')">
+                        Vui lòng nhập mật khẩu!
+                      </ng-container>
+                      <ng-container *ngIf="control.hasError('minlength')">
+                        Mật khẩu phải có ít nhất 6 ký tự!
+                      </ng-container>
+                    </ng-template>
+                  </nz-form-item>
+                  <div class="row">
+                    <div class="col-md-12 col-lg-12 d-flex justify-content-end">
+                      <button nz-button [nzType]="'primary'">Đăng nhập</button>
+                    </div>
                   </div>
-
-                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
-                    Đăng nhập vào tài khoản của bạn
-                  </h5>
-
-                  <td-input
-                    wrapClass="mb-3"
-                    [type]="'email'"
-                    [placeholder]="'Email'"
-                    formControlName="email"
-                  ></td-input>
-
-                  <td-input
-                    wrapClass="mb-3"
-                    [type]="'password'"
-                    [placeholder]="'Mật khẩu'"
-                    formControlName="password"
-                  ></td-input>
-
-                  <div class="pt-1 mb-4">
-                    <button
-                      data-mdb-button-init
-                      data-mdb-ripple-init
-                      class="btn btn-dark btn-lg btn-block"
-                      type="button"
-                      (click)="onSubmit()"
-                    >
-                      Đăng nhập
-                    </button>
-                  </div>
-
-                  <a class="small text-muted" href="#!">Quên mật khẩu?</a>
-                  <p class="mb-5 pb-lg-2" style="color: #393f81">
-                    Bạn chưa có tài khoản?
-                    <a href="#!" style="color: #393f81">Đăng ký</a>
-                  </p>
-                  <a href="#!" class="small text-muted">Terms of use.</a>
-                  <a href="#!" class="small text-muted">Privacy policy</a>
                 </form>
               </div>
             </div>
@@ -69,4 +75,3 @@
     </div>
   </div>
 </section>
-<td-toast></td-toast>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TdBaseComponent } from './td-base.component';
 import { IPagingData } from '../../../interfaces/IPagingData';
-import { StatusCode, ToastStatus } from '../enums';
+import { StatusCode } from '../enums';
 import { TdBaseService } from '../services/td-base.service';
 
 @Component({
@@ -35,11 +35,11 @@ export class TdBaseGridComponent extends TdBaseComponent {
           this.totalPage = obj.totalPage;
           this.pageNumber = obj.pageNumber;
         } else {
-          this.toast(ToastStatus.Error, rs.message);
+          // this.toast(ToastStatus.Error, rs.message);
         }
       },
       (error) => {
-        this.toast(ToastStatus.Error, error.message);
+        // this.toast(ToastStatus.Error, error.message);
       }, // Xử lý lỗi nếu có
       () => {
         this.isLoading = false;

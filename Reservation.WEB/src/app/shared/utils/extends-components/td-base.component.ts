@@ -1,11 +1,6 @@
 import { FormGroup } from '@angular/forms';
-import { ToastStatus } from '../enums';
-import { inject } from '@angular/core';
-import { ToastService } from '../services/toast.service';
 
 export class TdBaseComponent {
-  private _toastService: ToastService = inject(ToastService);
-
   constructor() {}
 
   /**
@@ -19,25 +14,5 @@ export class TdBaseComponent {
       frmGroup.updateValueAndValidity();
       return false;
     } else return true;
-  }
-
-  toast(toastStatus: ToastStatus, mess: string): void {
-    let header: string = 'Thành công';
-    let bgClass: string = 'bg-success';
-    if (toastStatus == ToastStatus.Success) {
-      header = 'Thành công!';
-      bgClass = 'bg-success';
-    } else if (toastStatus == ToastStatus.Warning) {
-      header = 'Cảnh báo!';
-      bgClass = 'bg-warning';
-    } else if (toastStatus == ToastStatus.Error) {
-      header = 'Thất bại!';
-      bgClass = 'bg-danger';
-    }
-
-    this._toastService.show(mess, {
-      classname: `${bgClass} text-light`,
-      header: header,
-    });
   }
 }

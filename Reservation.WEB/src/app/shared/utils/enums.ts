@@ -8,12 +8,6 @@ export enum StatusCode {
   InternalServerError = 500,
 }
 
-export enum ToastStatus {
-  Success,
-  Warning,
-  Error,
-}
-
 export enum ControlTypeEnum {
   Text,
   Select,

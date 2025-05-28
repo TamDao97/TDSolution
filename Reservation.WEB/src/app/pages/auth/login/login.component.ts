@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedModule } from '../../../shared/modules/shared.module';
-import { UiControlModule } from '../../../shared/modules/ui-control.module';
 import { TdBaseComponent } from '../../../shared/utils/extends-components/td-base.component';
 import { LoginService } from '../../../services/auth/login.service';
-import { StatusCode, ToastStatus } from '../../../shared/utils/enums';
-import { Router } from '@angular/router';
+import { StatusCode } from '../../../shared/utils/enums';
 import { AuthService } from '../../../shared/utils/services/auth.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastService } from '../../../shared/services/toast.service';
+import { StatusResponseTitle } from '../../../shared/utils/constants';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   standalone: true,
-  imports: [SharedModule, UiControlModule],
+  imports: [SharedModule],
 })
 export class LoginComponent extends TdBaseComponent implements OnInit {
   frmGroup!: FormGroup;
@@ -21,6 +22,7 @@ export class LoginComponent extends TdBaseComponent implements OnInit {
   constructor(
     private _router: Router,
     private _fb: FormBuilder,
+    private _toastService: ToastService,
     private _loginService: LoginService
   ) {
     super();
@@ -28,7 +30,7 @@ export class LoginComponent extends TdBaseComponent implements OnInit {
 
   ngOnInit() {
     this.frmGroup = this._fb.group({
-      email: [null, [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       password: [null, [Validators.required, Validators.minLength(6)]],
     });
   }
@@ -42,9 +44,9 @@ export class LoginComponent extends TdBaseComponent implements OnInit {
       if (rs.status == StatusCode.Ok) {
         AuthService.setAuthStorage(rs.data);
         this._router.navigate(['/user']); // Điều hướng sau khi đăng nhập thành công
-        this.toast(ToastStatus.Success, rs.message);
+        this._toastService.success(StatusResponseTitle.SUCCESS, rs.message);
       } else {
-        this.toast(ToastStatus.Error, rs.message);
+        this._toastService.error(StatusResponseTitle.ERROR, rs.message);
       }
     });
   }

@@ -2,17 +2,15 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { ICurrentUser } from '../../interfaces/ICurrentUser';
 import { catchError, finalize, throwError } from 'rxjs';
 import { inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { StatusCode } from '../enums';
 import { AuthService } from '../services/auth.service';
-import { LoadingService } from '../services/loading.service';
-import { ToastService } from '../services/toast.service';
+import { Router } from '@angular/router';
 
 export const Interceptor: HttpInterceptorFn = (req, next) => {
   const auth = AuthService.getAuthStorage(); // Lấy token từ localStorage
   const router = inject(Router); // Khởi tạo router
-  const toastService = inject(ToastService); // Khởi tạo router
-  const loadingService = inject(LoadingService); // Khởi tạo loading
+  // const toastService = inject(ToastService); // Khởi tạo router
+  // const loadingService = inject(LoadingService); // Khởi tạo loading
 
   if (auth) {
     const currentUser = JSON.parse(auth) as ICurrentUser;
@@ -22,7 +20,7 @@ export const Interceptor: HttpInterceptorFn = (req, next) => {
         Authorization: `Bearer ${currentUser.accessToken}`,
       },
     });
-    loadingService.show();
+    // loadingService.show();
     return next(cloned).pipe(
       catchError((err) => {
         if (err.status === StatusCode.Unauthorized) {
@@ -33,8 +31,8 @@ export const Interceptor: HttpInterceptorFn = (req, next) => {
           router.navigate(['/error', StatusCode.Forbidden]);
         }
         return throwError(err);
-      }),
-      finalize(() => loadingService.hide())
+      })
+      // finalize(() => loadingService.hide())
     );
   }
   return next(req);
