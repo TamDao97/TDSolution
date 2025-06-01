@@ -1,0 +1,12 @@
+.action-buttons i {
+  margin: 0 6px;
+  cursor: pointer;
+  transition: color 0.3s, transform 0.2s;
+  font-size: 18px;
+  color: #595959;
+}
+
+.action-buttons i:hover {
+  color: #1890ff;
+  transform: scale(1.1);
+}

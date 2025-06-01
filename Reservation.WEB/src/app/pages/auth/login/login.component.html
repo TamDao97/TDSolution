@@ -21,10 +21,13 @@
                   (ngSubmit)="onSubmit()"
                 >
                   <nz-form-item>
-                    <nz-form-control [nzErrorTip]="emailErrorTpl">
+                    <nz-form-control
+                      nzHasFeedback
+                      [nzErrorTip]="emailErrorTpl"
+                    >
                       <nz-input-group nzPrefixIcon="user">
                         <input
-                          type="text"
+                          type="text"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
                           nz-input
                           formControlName="email"
                           placeholder="Tài khoản"

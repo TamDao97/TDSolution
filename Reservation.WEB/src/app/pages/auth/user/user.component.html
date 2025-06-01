@@ -1,4 +1,4 @@
-<!-- <div class="page-inner">
+<div class="page-inner">
   <div class="card">
     <div class="card-body">
       <div class="row">
@@ -9,64 +9,113 @@
         </div>
       </div>
       <div class="row mb-1">
-        <div class="col-md-8 mb-1"></div>
-        <div class="col-md-4 mb-1">
-          <div class="row">
-            <div class="col-md-8 mb-1">
-              <td-input
-                [type]="'text'"
-                [placeholder]="'Từ khóa tìm kiếm'"
-              ></td-input>
-            </div>
-            <div class="col-md-4 mb-1">
-              <div class="d-flex justify-content-end">
-                <button
-                  type="button"
-                  class="btn btn-sm btn-outline-primary rounded-0"
-                >
-                  Tìm kiếm
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-sm btn-primary rounded-0"
-                  (click)="onSearchAdvance()"
-                >
-                  <i class="fa fa-solid fa-filter"></i>
-                </button>
-              </div>
-            </div>
+        <div class="col-md-6 mb-1"></div>
+        <div class="col-md-6 mb-1">
+          <div class="d-flex justify-content-end">
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+              <input type="text" nz-input placeholder="Từ khóa tìm kiếm" />
+            </nz-input-group>
+            <ng-template #suffixButton>
+              <button nz-button nzType="primary" nzSearch>Tìm kiếm</button>
+            </ng-template>
+            <button nz-button nzType="primary" (click)="onSearchAdvance()">
+              <i class="fa fa-solid fa-filter"></i>
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-
   <div class="card">
     <div class="card-body">
       <div class="row mb-2">
         <div class="col-md-12">
-          <div class="btn-group" ngbDropdown>
-            <button type="button" class="btn btn-sm btn-outline-primary">
-              Thêm mới
-            </button>
+          <nz-button-group>
+            <button nz-button (click)="onAdd()">Thêm mới</button>
             <button
-              type="button"
-              class="btn btn-sm btn-outline-primary dropdown-toggle-split"
-              ngbDropdownToggle
-            ></button>
-            <div class="dropdown-menu" ngbDropdownMenu>
-              <button ngbDropdownItem>Xuất Excel</button>
-              <button ngbDropdownItem>Nhập Excel</button>
-            </div>
-          </div>
+              nz-button
+              nzType="primary"
+              nz-dropdown
+              [nzDropdownMenu]="menu"
+            >
+              <i nz-icon nzType="down"></i>
+            </button>
+          </nz-button-group>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              <li nz-menu-item>Xuất excel</li>
+              <li nz-menu-item>Import excel</li>
+            </ul>
+          </nz-dropdown-menu>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12">
-          <td-ag-grid-table [columnDefs]="colDefs" [rowData]="rowData">
-          </td-ag-grid-table>
+          <nz-table
+            #rowSelectionTable
+            nzShowSizeChanger
+            [nzData]="listOfData"
+            (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+          >
+            <thead>
+              <tr>
+                <th
+                  [nzSelections]="listOfSelection"
+                  [(nzChecked)]="checked"
+                  [nzIndeterminate]="indeterminate"
+                  (nzCheckedChange)="onAllChecked($event)"
+                ></th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Address</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of rowSelectionTable.data; let i = index">
+                <td
+                  [nzChecked]="setOfCheckedId.has(data.id)"
+                  (nzCheckedChange)="onItemChecked(data.id, $event)"
+                ></td>
+                <td>{{ data.name }}</td>
+                <td>{{ data.age }}</td>
+                <td>{{ data.address }}</td>
+                <td class="action-buttons">
+                  <i
+                    nz-icon
+                    nzType="edit"
+                    nzTheme="outline"
+                    class="action-icon edit-icon"
+                    (click)="onEdit(data)"
+                    nz-tooltip
+                    nzTooltipTitle="Sửa"
+                  ></i>
+
+                  <i
+                    nz-icon
+                    nzType="delete"
+                    nzTheme="outline"
+                    class="action-icon delete-icon"
+                    (click)="onDelete(data)"
+                    nz-tooltip
+                    nzTooltipTitle="Xóa"
+                  ></i>
+
+                  <i
+                    nz-icon
+                    nzType="info-circle"
+                    nzTheme="outline"
+                    class="action-icon detail-icon"
+                    (click)="onDetail(data)"
+                    nz-tooltip
+                    nzTooltipTitle="Chi tiết"
+                  ></i>
+                </td>
+              </tr>
+            </tbody>
+          </nz-table>
         </div>
       </div>
     </div>
   </div>
-</div> -->
+</div>

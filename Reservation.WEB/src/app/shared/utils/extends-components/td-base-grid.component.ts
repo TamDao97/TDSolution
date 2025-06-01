@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Type } from '@angular/core';
 import { TdBaseComponent } from './td-base.component';
 import { IPagingData } from '../../../interfaces/IPagingData';
 import { StatusCode } from '../enums';
 import { TdBaseService } from '../services/td-base.service';
+import { ToastService } from '../../services/toast.service';
+import { StatusResponseTitle } from '../constants';
 
 @Component({
   template: '',
@@ -16,7 +18,10 @@ export class TdBaseGridComponent extends TdBaseComponent {
   pageSize: number = 10;
   isLoading: Boolean = false;
 
-  constructor(private _tdBaseService: TdBaseService) {
+  constructor(
+    public _tdBaseService: TdBaseService,
+    public _toastService: ToastService
+  ) {
     super();
   }
 
@@ -35,15 +40,16 @@ export class TdBaseGridComponent extends TdBaseComponent {
           this.totalPage = obj.totalPage;
           this.pageNumber = obj.pageNumber;
         } else {
-          // this.toast(ToastStatus.Error, rs.message);
+          this._toastService.error(StatusResponseTitle.ERROR, rs.message);
         }
       },
       (error) => {
-        // this.toast(ToastStatus.Error, error.message);
-      }, // Xử lý lỗi nếu có
+        this._toastService.error(StatusResponseTitle.ERROR, error.message);
+      },
       () => {
+        // Khi hoàn thành
         this.isLoading = false;
-      } // Khi hoàn thành
+      }
     );
   }
 }

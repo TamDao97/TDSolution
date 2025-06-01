@@ -16,6 +16,9 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 export const libModule = [
   NzFormModule,
@@ -33,6 +36,9 @@ export const libModule = [
   NzTagModule,
   NzToolTipModule,
   NzTreeModule,
+  NzDropDownModule,
+  NzIconModule,
+  NzModalModule,
 ];
 export const libDirective = [];
 

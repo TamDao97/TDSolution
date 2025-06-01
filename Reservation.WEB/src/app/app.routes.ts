@@ -17,13 +17,13 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'ui-component',
+        redirectTo: 'user',
         pathMatch: 'full',
       },
       {
         path: 'user',
         component: UserComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
     ],
   },

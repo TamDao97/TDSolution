@@ -11,6 +11,7 @@ export class ToastService {
     this._notification.create('success', title, content, {
       nzPlacement: 'topRight',
       nzDuration: 3000,
+      nzStyle: { top: '50px' },
     });
   }
 
@@ -18,6 +19,7 @@ export class ToastService {
     this._notification.create('error', title, content, {
       nzPlacement: 'topRight',
       nzDuration: 3000,
+      nzStyle: { top: '50px' },
     });
   }
 
