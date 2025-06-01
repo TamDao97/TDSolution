@@ -1,4 +1,4 @@
 export interface IDropdown {
-  value: string;
+  value: any;
   text: string;
 }

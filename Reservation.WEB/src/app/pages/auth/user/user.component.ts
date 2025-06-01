@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TdBaseGridComponent } from '../../../shared/utils/extends-components/td-base-grid.component';
 import { SharedModule } from '../../../shared/modules/shared.module';
-import { IControl } from '../../../shared/interfaces/IControl';
-import { ControlTypeEnum } from '../../../shared/utils/enums';
 import { TdBaseService } from '../../../shared/utils/services/td-base.service';
 import { ToastService } from '../../../shared/services/toast.service';
 import { StatusResponseTitle } from '../../../shared/utils/constants';
-import { NzModalService } from 'ng-zorro-antd/modal';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { IControl } from '../../../shared/interfaces/IBase';
+import { ControlTypeEnum } from '../../../shared/utils/enums';
+import { FilterModalComponent } from '../../../shared/components/filter-modal/filter-modal.component';
 
 @Component({
   selector: 'app-user',
@@ -39,54 +39,111 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
     {
       label: 'Quyền',
       type: ControlTypeEnum.Select,
-      colClass: 'col-4',
-      ngModel: 'role',
-      placeHolder: '--Chọn--',
+      colClass: 'col-6',
+      name: 'role',
+      placeHolder: '--Quyền--',
       order: 1,
+      options: [
+        {
+          text: 'Admin',
+          value: 1,
+        },
+        {
+          text: 'User',
+          value: 2,
+        },
+      ],
     },
     {
       label: 'Trạng thái',
       type: ControlTypeEnum.Select,
-      colClass: 'col-4',
-      ngModel: 'status',
-      placeHolder: '--Chọn--',
+      colClass: 'col-6',
+      name: 'status',
+      placeHolder: '--Trạng thái--',
       order: 1,
+      options: [
+        {
+          text: 'Hoạt động',
+          value: 1,
+        },
+        {
+          text: 'Khóa',
+          value: 2,
+        },
+      ],
     },
     {
       label: 'Giới tính',
       type: ControlTypeEnum.Radio,
       colClass: 'col-4',
-      ngModel: 'gender',
+      name: 'gender',
       order: 1,
-    },
-    {
-      label: 'Loại tài khoản',
-      type: ControlTypeEnum.Select,
-      colClass: 'col-4',
-      ngModel: 'accountType',
-      placeHolder: '--Chọn--',
-      order: 1,
+      options: [
+        {
+          text: 'Tất cả',
+          value: null,
+        },
+        {
+          text: 'Nam',
+          value: 1,
+        },
+        {
+          text: 'Nữ',
+          value: 2,
+        },
+      ],
     },
   ];
 
   onSearchAdvance(): void {
-    // this._filterGridService.open(this.filterControl);
+    this.openModal(
+      {
+        title: 'Tìm kiếm nâng cao',
+        width: 800,
+      },
+      FilterModalComponent,
+      {
+        controls: this.filterControl,
+      }
+    ).afterClose.subscribe((result: any) => {
+      console.log('result', result);
+    });
   }
 
   onAdd() {
-    this.openModal('Thêm mới', UserEditComponent);
+    this.openModal(
+      {
+        title: 'Thêm mới người dùng',
+        width: 800,
+      },
+      UserEditComponent
+    );
   }
 
   onEdit(data: any) {
-    this.openModal('Cập nhật thông tin', UserEditComponent, {
-      params: data,
-    });
+    this.openModal(
+      {
+        title: 'Cập nhật người dùng',
+        width: 800,
+      },
+      UserEditComponent,
+      {
+        params: data,
+      }
+    );
   }
 
   onDetail(data: any) {
-    this.openModal('Xem chi tiết', UserEditComponent, {
-      params: data,
-    });
+    this.openModal(
+      {
+        title: 'Xem chi tiết',
+        width: 800,
+      },
+      UserEditComponent,
+      {
+        params: data,
+      }
+    );
   }
 
   onDelete(data: any) {

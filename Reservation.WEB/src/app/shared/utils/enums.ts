@@ -12,6 +12,7 @@ export enum ControlTypeEnum {
   Text,
   Select,
   Date,
+  DateRange,
   CheckBox,
   Radio,
   TextArea,

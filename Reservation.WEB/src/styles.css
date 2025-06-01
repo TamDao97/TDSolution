@@ -1,3 +1,11 @@
+.main-header {
+  z-index: 999 !important;
+}
+
+.sidebar {
+  z-index: 1000 !important;
+}
+
 .action-buttons i {
   margin: 0 6px;
   cursor: pointer;

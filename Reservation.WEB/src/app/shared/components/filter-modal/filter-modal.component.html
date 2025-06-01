@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="px-1 py-2" [ngClass]="control.colClass" *ngFor="let control of controls">
+    <ng-container [ngSwitch]="control.type">
+      <ng-container *ngSwitchCase="controlTypeEnum.Text">
+        <input style="width: 100%;" nz-input type="text" [placeholder]="control.placeHolder"
+          [(ngModel)]="objFilter[control.name]" />
+      </ng-container>
+      <ng-container *ngSwitchCase="controlTypeEnum.Select">
+        <nz-select style="width: 100%;" [(ngModel)]="objFilter[control.name]" [nzPlaceHolder]="control.placeHolder">
+          <nz-option *ngFor="let option of control.options" [nzValue]="option.value"
+            [nzLabel]="option.text"></nz-option>
+        </nz-select>
+      </ng-container>
+      <ng-container *ngSwitchCase="controlTypeEnum.Date">
+        <nz-date-picker style="width: 100%;" nzShowTime nzFormat="dd-MM-yyyy HH:mm"
+          (ngModelChange)="onDateChange($event)" (nzOnOk)="onDateOk($event)" [nzPlaceHolder]="control.placeHolder"
+          [(ngModel)]="objFilter[control.name]"></nz-date-picker>
+      </ng-container>
+      <ng-container *ngSwitchCase="controlTypeEnum.DateRange">
+        <nz-range-picker style="width: 100%;" [nzShowTime]="{ nzFormat: 'HH:mm' }" nzFormat="dd-MM-yyyy HH:mm"
+          (ngModelChange)="onDateRangeChange($event)" (nzOnCalendarChange)="onCalendarChange($event)"
+          (nzOnOk)="onDateRangeOk($event)" [nzPlaceHolder]="control.placeHolder"
+          [(ngModel)]="objFilter[control.name]"></nz-range-picker>
+      </ng-container>
+      <ng-container *ngSwitchCase="controlTypeEnum.TextArea">
+        <nz-textarea-count style="width: 100%;" [nzMaxCharacterCount]="100">
+          <textarea rows="4" nz-input [(ngModel)]="objFilter[control.name]"></textarea>
+        </nz-textarea-count>
+      </ng-container>
+      <ng-container *ngSwitchCase="controlTypeEnum.Radio">
+        <nz-radio-group style="width: 100%;" [(ngModel)]="objFilter[control.name]">
+          <label nz-radio [nzValue]="option.value" *ngFor="let option of control.options">{{option.text}}</label>
+        </nz-radio-group>
+      </ng-container>
+      <!-- <ng-container *ngSwitchCase="controlTypeEnum.CheckBox">
+        <nz-checkbox-group [nzOptions]="controls.options" [(ngModel)]="objFilter[control.name]" />
+      </ng-container> -->
+      <ng-container *ngSwitchDefault>
+      </ng-container>
+    </ng-container>
+
+  </div>
+</div>
+<div class="row mt-5">
+  <div class="col-12 text-end">
+    <button nz-button nzType="primary" (click)="onSearch()">Tìm kiếm</button>
+    <button nz-button nzType="primary" class="ms-1" (click)="onClear()">Đặt lại</button>
+  </div>
+</div>

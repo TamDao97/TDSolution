@@ -1,9 +1,10 @@
 import { inject, Type } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { IModalOptions } from '../../interfaces/IBase';
 
 export class TdBaseComponent {
-  protected _modal = inject(NzModalService); // inject không cần constructor
+  private _modal = inject(NzModalService); // inject không cần constructor
   constructor() {}
 
   /**
@@ -26,7 +27,11 @@ export class TdBaseComponent {
    * @param params
    * @returns
    */
-  openModal<T>(options: any, component: Type<T>, params: Partial<T> = {}) {
+  openModal<T>(
+    options: IModalOptions,
+    component: Type<T>,
+    params: Partial<T> = {}
+  ) {
     return this._modal.create({
       nzTitle: options.title,
       nzContent: component,
@@ -35,9 +40,6 @@ export class TdBaseComponent {
       nzMaskClosable: false,
       nzWidth: options.width,
       nzFooter: null, // hoặc bạn có thể custom footer
-      nzStyle: {
-        zIndex: 2000, // cao hơn sidebar
-      },
     });
   }
 }

@@ -32,12 +32,7 @@
         <div class="col-md-12">
           <nz-button-group>
             <button nz-button (click)="onAdd()">Thêm mới</button>
-            <button
-              nz-button
-              nzType="primary"
-              nz-dropdown
-              [nzDropdownMenu]="menu"
-            >
+            <button nz-button nzType="primary" nz-dropdown [nzDropdownMenu]="menu">
               <i nz-icon nzType="down"></i>
             </button>
           </nz-button-group>
@@ -51,20 +46,12 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <nz-table
-            #rowSelectionTable
-            nzShowSizeChanger
-            [nzData]="listOfData"
-            (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
-          >
+          <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="listOfData"
+            (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
             <thead>
               <tr>
-                <th
-                  [nzSelections]="listOfSelection"
-                  [(nzChecked)]="checked"
-                  [nzIndeterminate]="indeterminate"
-                  (nzCheckedChange)="onAllChecked($event)"
-                ></th>
+                <th [nzSelections]="listOfSelection" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
+                  (nzCheckedChange)="onAllChecked($event)"></th>
                 <th>Name</th>
                 <th>Age</th>
                 <th>Address</th>
@@ -73,43 +60,19 @@
             </thead>
             <tbody>
               <tr *ngFor="let data of rowSelectionTable.data; let i = index">
-                <td
-                  [nzChecked]="setOfCheckedId.has(data.id)"
-                  (nzCheckedChange)="onItemChecked(data.id, $event)"
-                ></td>
+                <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
                 <td>{{ data.name }}</td>
                 <td>{{ data.age }}</td>
                 <td>{{ data.address }}</td>
                 <td class="action-buttons">
-                  <i
-                    nz-icon
-                    nzType="edit"
-                    nzTheme="outline"
-                    class="action-icon edit-icon"
-                    (click)="onEdit(data)"
-                    nz-tooltip
-                    nzTooltipTitle="Sửa"
-                  ></i>
+                  <i nz-icon nzType="edit" nzTheme="outline" class="action-icon edit-icon" (click)="onEdit(data)"
+                    nz-tooltip nzTooltipTitle="Sửa"></i>
 
-                  <i
-                    nz-icon
-                    nzType="delete"
-                    nzTheme="outline"
-                    class="action-icon delete-icon"
-                    (click)="onDelete(data)"
-                    nz-tooltip
-                    nzTooltipTitle="Xóa"
-                  ></i>
+                  <i nz-icon nzType="delete" nzTheme="outline" class="action-icon delete-icon" (click)="onDelete(data)"
+                    nz-tooltip nzTooltipTitle="Xóa"></i>
 
-                  <i
-                    nz-icon
-                    nzType="info-circle"
-                    nzTheme="outline"
-                    class="action-icon detail-icon"
-                    (click)="onDetail(data)"
-                    nz-tooltip
-                    nzTooltipTitle="Chi tiết"
-                  ></i>
+                  <i nz-icon nzType="info-circle" nzTheme="outline" class="action-icon detail-icon"
+                    (click)="onDetail(data)" nz-tooltip nzTooltipTitle="Chi tiết"></i>
                 </td>
               </tr>
             </tbody>
