@@ -16,3 +16,26 @@ export interface IModalOptions {
   title: string;
   width: number;
 }
+
+export interface IColumn {
+  field: string;
+  header: string;
+  class?: string;
+  sort: true | false;
+  sortBy: 'asc' | 'desc';
+  type:
+    | 'text'
+    | 'date'
+    | 'daterange'
+    | 'select'
+    | 'checkbox'
+    | 'radio'
+    | 'textarea'
+    | 'file'
+    | 'image'
+    | 'video'
+    | 'audio'
+    | 'currency'
+    | 'template';
+  customTemplate?: () => any;
+}

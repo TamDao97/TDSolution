@@ -46,33 +46,44 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="listOfData"
+          <nz-table #table nzShowSizeChanger [nzData]="gridData"
             (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
             <thead>
               <tr>
                 <th [nzSelections]="listOfSelection" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
                   (nzCheckedChange)="onAllChecked($event)"></th>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Address</th>
+                <th *ngFor="let col of gridColumns">{{col.header}}</th>
+                <!-- Action -->
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let data of rowSelectionTable.data; let i = index">
-                <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
-                <td>{{ data.name }}</td>
-                <td>{{ data.age }}</td>
-                <td>{{ data.address }}</td>
+              <tr *ngFor="let row of table.data; let i = index">
+                <td [nzChecked]="setOfCheckedId.has(row.id)" (nzCheckedChange)="onItemChecked(row.id, $event)"></td>
+                <td *ngFor="let col of gridColumns" [ngSwitch]="col.type">
+                  <ng-container *ngSwitchCase="'date'">
+                    {{ row[col.field] | date:'shortDate' }}
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'currency'">
+                    {{ row[col.field] | currency }}
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'tepmlate'">
+                    {{ col.customTemplate?.() }}
+                  </ng-container>
+                  <ng-container *ngSwitchDefault>
+                    {{ row[col.field] }}
+                  </ng-container>
+                </td>
+                <!-- Action -->
                 <td class="action-buttons">
-                  <i nz-icon nzType="edit" nzTheme="outline" class="action-icon edit-icon" (click)="onEdit(data)"
+                  <i nz-icon nzType="edit" nzTheme="outline" class="action-icon edit-icon" (click)="onEdit(row)"
                     nz-tooltip nzTooltipTitle="Sửa"></i>
 
-                  <i nz-icon nzType="delete" nzTheme="outline" class="action-icon delete-icon" (click)="onDelete(data)"
+                  <i nz-icon nzType="delete" nzTheme="outline" class="action-icon delete-icon" (click)="onDelete(row)"
                     nz-tooltip nzTooltipTitle="Xóa"></i>
 
                   <i nz-icon nzType="info-circle" nzTheme="outline" class="action-icon detail-icon"
-                    (click)="onDetail(data)" nz-tooltip nzTooltipTitle="Chi tiết"></i>
+                    (click)="onDetail(row)" nz-tooltip nzTooltipTitle="Chi tiết"></i>
                 </td>
               </tr>
             </tbody>

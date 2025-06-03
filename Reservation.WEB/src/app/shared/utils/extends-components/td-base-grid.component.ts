@@ -5,12 +5,14 @@ import { StatusCode } from '../enums';
 import { TdBaseService } from '../services/td-base.service';
 import { ToastService } from '../../services/toast.service';
 import { StatusResponseTitle } from '../constants';
+import { IColumn } from '../../interfaces/IBase';
 
 @Component({
   template: '',
 })
 export class TdBaseGridComponent extends TdBaseComponent {
   title: string = '';
+  gridColumns: IColumn[] = [];
   gridData: any[] = [];
   totalPage: number = 0;
   totalRecord: number = 0;

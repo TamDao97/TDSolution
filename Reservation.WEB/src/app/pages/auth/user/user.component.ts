@@ -5,7 +5,7 @@ import { TdBaseService } from '../../../shared/utils/services/td-base.service';
 import { ToastService } from '../../../shared/services/toast.service';
 import { StatusResponseTitle } from '../../../shared/utils/constants';
 import { UserEditComponent } from './user-edit/user-edit.component';
-import { IControl } from '../../../shared/interfaces/IBase';
+import { IColumn, IControl } from '../../../shared/interfaces/IBase';
 import { ControlTypeEnum } from '../../../shared/utils/enums';
 import { FilterModalComponent } from '../../../shared/components/filter-modal/filter-modal.component';
 import { UserService } from '../../../services/user/user.service';
@@ -19,7 +19,6 @@ import { UserService } from '../../../services/user/user.service';
 })
 export class UserComponent extends TdBaseGridComponent implements OnInit {
   override title = 'Quản lý người dùng';
-  isCollapsed = false;
 
   filterControl: IControl[] = [];
   objFilter: any = {};
@@ -35,11 +34,11 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
 
   override ngOnInit(): void {
     this.objFilter = this.buildAdvanceFilter();
+    this.gridColumns = this.buildTableColumn();
     this.gridLoadData(this.endpoint, this.objFilter);
   }
 
-  /************Khai báo form filter**************/
-
+  // #region Advance Filter
   buildAdvanceFilter(): any {
     this.filterControl = [
       {
@@ -107,6 +106,61 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
 
     return this.objFilter;
   }
+  // #endregion
+
+  // #region Table
+  buildTableColumn(): IColumn[] {
+    return [
+      {
+        field: 'displayName',
+        header: 'Tên người dùng',
+        class: 'text-center',
+        type: 'template',
+        sort: true,
+        sortBy: 'asc',
+        customTemplate: () => {
+          return (rowData: any) => {
+            debugger;
+            console.log(rowData);
+            return rowData.displayName;
+          };
+        },
+      },
+      {
+        field: 'email',
+        header: 'Email',
+        class: 'text-center',
+        type: 'text',
+        sort: true,
+        sortBy: 'asc',
+      },
+      {
+        field: 'phoneNumber',
+        header: 'Sđt',
+        class: 'text-center',
+        type: 'text',
+        sort: true,
+        sortBy: 'asc',
+      },
+      {
+        field: 'isLockout',
+        header: 'Trạng thái',
+        class: 'text-center',
+        type: 'checkbox',
+        sort: true,
+        sortBy: 'asc',
+      },
+      {
+        field: 'dateModify',
+        header: 'Cập nhật cuối',
+        class: 'text-center',
+        type: 'template',
+        sort: true,
+        sortBy: 'asc',
+      },
+    ];
+  }
+  // #endregion
 
   onSearch(): void {
     this.gridLoadData(this.endpoint, this.objFilter);
