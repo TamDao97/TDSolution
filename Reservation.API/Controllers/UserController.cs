@@ -86,14 +86,11 @@ namespace Reservation.API.Controllers
             return Ok(await _userService.GetByIdAsync(id));
         }
 
-        [AllowAnonymous]
-        [Route("fake-data")]
+        [Route("get-by-filter")]
         [HttpPost]
-        public async Task<ActionResult<Response<List<Dropdown>>>> GetTestDatas(GridFilterBase filter)
+        public async Task<ActionResult<Response<PagingData<List<UserDto>>>>> GetByFilterAsync(UserGridFilter filter)
         {
-            var totalRecord = LstItem.Count;
-            var datas = LstItem.Skip((filter.PageNumber - 1) * filter.PageSize).Take(filter.PageSize).ToList();
-            return Ok(Response<List<Dropdown>>.Success(datas, "success!"));
+            return Ok(await _userService.GetByFilterAsync(filter));
         }
     }
 }

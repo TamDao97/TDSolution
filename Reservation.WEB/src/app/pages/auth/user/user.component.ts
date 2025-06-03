@@ -8,6 +8,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { IControl } from '../../../shared/interfaces/IBase';
 import { ControlTypeEnum } from '../../../shared/utils/enums';
 import { FilterModalComponent } from '../../../shared/components/filter-modal/filter-modal.component';
+import { UserService } from '../../../services/user/user.service';
 
 @Component({
   selector: 'app-user',
@@ -20,80 +21,96 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
   override title = 'Quản lý người dùng';
   isCollapsed = false;
 
-  constructor(_tdBaseService: TdBaseService, _toastService: ToastService) {
+  filterControl: IControl[] = [];
+  objFilter: any = {};
+  endpoint = `${this._userService.apiUrl}/get-by-filter`;
+
+  constructor(
+    _tdBaseService: TdBaseService,
+    _toastService: ToastService,
+    private _userService: UserService
+  ) {
     super(_tdBaseService, _toastService);
   }
 
   override ngOnInit(): void {
-    this.listOfData = new Array(200).fill(0).map((_, index) => ({
-      id: index,
-      name: `Edward King ${index}`,
-      age: 32,
-      address: `London, Park Lane no. ${index}`,
-    }));
+    this.objFilter = this.buildAdvanceFilter();
+    this.gridLoadData(this.endpoint, this.objFilter);
   }
 
   /************Khai báo form filter**************/
 
-  filterControl: IControl[] = [
-    {
-      label: 'Quyền',
-      type: ControlTypeEnum.Select,
-      colClass: 'col-6',
-      name: 'role',
-      placeHolder: '--Quyền--',
-      order: 1,
-      options: [
-        {
-          text: 'Admin',
-          value: 1,
-        },
-        {
-          text: 'User',
-          value: 2,
-        },
-      ],
-    },
-    {
-      label: 'Trạng thái',
-      type: ControlTypeEnum.Select,
-      colClass: 'col-6',
-      name: 'status',
-      placeHolder: '--Trạng thái--',
-      order: 1,
-      options: [
-        {
-          text: 'Hoạt động',
-          value: 1,
-        },
-        {
-          text: 'Khóa',
-          value: 2,
-        },
-      ],
-    },
-    {
-      label: 'Giới tính',
-      type: ControlTypeEnum.Radio,
-      colClass: 'col-4',
-      name: 'gender',
-      order: 1,
-      options: [
-        {
-          text: 'Tất cả',
-          value: null,
-        },
-        {
-          text: 'Nam',
-          value: 1,
-        },
-        {
-          text: 'Nữ',
-          value: 2,
-        },
-      ],
-    },
-  ];
+  buildAdvanceFilter(): any {
+    this.filterControl = [
+      {
+        label: 'Quyền',
+        type: ControlTypeEnum.Select,
+        colClass: 'col-6',
+        name: 'role',
+        placeHolder: '--Quyền--',
+        order: 1,
+        options: [
+          {
+            text: 'Admin',
+            value: 1,
+          },
+          {
+            text: 'User',
+            value: 2,
+          },
+        ],
+      },
+      {
+        label: 'Trạng thái',
+        type: ControlTypeEnum.Select,
+        colClass: 'col-6',
+        name: 'status',
+        placeHolder: '--Trạng thái--',
+        order: 1,
+        options: [
+          {
+            text: 'Hoạt động',
+            value: 1,
+          },
+          {
+            text: 'Khóa',
+            value: 2,
+          },
+        ],
+      },
+      {
+        label: 'Giới tính',
+        type: ControlTypeEnum.Radio,
+        colClass: 'col-4',
+        name: 'gender',
+        order: 1,
+        options: [
+          {
+            text: 'Tất cả',
+            value: null,
+          },
+          {
+            text: 'Nam',
+            value: 1,
+          },
+          {
+            text: 'Nữ',
+            value: 2,
+          },
+        ],
+      },
+    ];
+
+    this.filterControl.forEach((element: IControl) => {
+      this.objFilter[element.name] = null;
+    });
+
+    return this.objFilter;
+  }
+
+  onSearch(): void {
+    this.gridLoadData(this.endpoint, this.objFilter);
+  }
 
   onSearchAdvance(): void {
     this.openModal(
@@ -106,7 +123,7 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
         controls: this.filterControl,
       }
     ).afterClose.subscribe((result: any) => {
-      console.log('result', result);
+      this.gridLoadData(this.endpoint, result);
     });
   }
 

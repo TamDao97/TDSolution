@@ -170,7 +170,7 @@ namespace Reservation.API.Services
             }
 
             int totalItems = query.Select(r => r.Id).Count();
-            var lstItemsPagging = query.Skip(gridDto.PageNumber - 1 * gridDto.PageSize)
+            var lstItemsPagging = query.Skip((gridDto.PageNumber - 1) * gridDto.PageSize)
                                         .Take(gridDto.PageSize)
                                         .Select(r => AutoMapperGeneric.Map<User, UserDto>(r))
                                         .ToList();

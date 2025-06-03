@@ -8,7 +8,7 @@ import { IResponse } from '../../interfaces/IResponse';
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = `${environment.apiUrl}/user`;
+  public apiUrl = `${environment.apiUrl}/user`;
   constructor(private httpClient: HttpClient) {}
 
   getById(id: string): Observable<IResponse> {

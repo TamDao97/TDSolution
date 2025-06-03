@@ -10,7 +10,6 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     //Xử lý call api lấy current user
-    debugger;
     if (AuthService.isLoggedIn()) {
       return true;
     } else {

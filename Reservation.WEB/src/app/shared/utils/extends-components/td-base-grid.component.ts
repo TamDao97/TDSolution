@@ -29,9 +29,20 @@ export class TdBaseGridComponent extends TdBaseComponent {
     // this.gridLoadData();
   }
 
+  gridOptions(): any {
+    return {
+      pageNumber: this.pageNumber,
+      pageSize: this.pageSize,
+    };
+  }
+
   gridLoadData(apiUrl: string, filter: any): void {
+    let objFilter = {
+      ...filter,
+      ...this.gridOptions(),
+    };
     this.isLoading = true;
-    this._tdBaseService.gridLoadData(apiUrl, filter).subscribe(
+    this._tdBaseService.gridLoadData(apiUrl, objFilter).subscribe(
       (rs) => {
         if (rs.status == StatusCode.Ok) {
           const obj = rs.data as IPagingData;

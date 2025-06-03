@@ -38,6 +38,16 @@ export class FilterModalComponent implements OnInit {
     });
   }
 
+  onSearch(): void {
+    this.modalRef.close(this.objFilter);
+  }
+
+  onClear(): void {
+    this.controls.forEach((element: IControl) => {
+      this.objFilter[element.name] = null;
+    });
+  }
+
   onDateChange(e: any) {}
 
   onDateOk(e: any) {}
@@ -50,15 +60,5 @@ export class FilterModalComponent implements OnInit {
 
   onCalendarChange(result: Array<Date | null>): void {
     console.log('onCalendarChange', result);
-  }
-
-  onSearch(): void {
-    this.modalRef.close(this.objFilter);
-  }
-
-  onClear(): void {
-    this.controls.forEach((element: IControl) => {
-      this.objFilter[element.name] = null;
-    });
   }
 }
