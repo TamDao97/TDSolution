@@ -37,5 +37,5 @@ export interface IColumn {
     | 'audio'
     | 'currency'
     | 'template';
-  customTemplate?: () => any;
+  customTemplate?: (data?: any) => any;
 }

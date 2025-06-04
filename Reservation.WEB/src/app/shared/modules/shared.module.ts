@@ -20,6 +20,7 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 export const libModule = [
   NzFormModule,
@@ -41,6 +42,7 @@ export const libModule = [
   NzIconModule,
   NzModalModule,
   NzCheckboxModule,
+  NzTypographyModule,
 ];
 export const libDirective = [];
 

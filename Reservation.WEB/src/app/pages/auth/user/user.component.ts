@@ -118,12 +118,8 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
         type: 'template',
         sort: true,
         sortBy: 'asc',
-        customTemplate: () => {
-          return (rowData: any) => {
-            debugger;
-            console.log(rowData);
-            return rowData.displayName;
-          };
+        customTemplate: (data: any) => {
+          return `${data.displayName} <p nz-typography nzCopyable nzCopyText="${data.userName}">${data.userName}.</p>`;
         },
       },
       {

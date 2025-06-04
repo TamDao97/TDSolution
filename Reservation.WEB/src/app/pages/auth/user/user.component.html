@@ -67,8 +67,9 @@
                   <ng-container *ngSwitchCase="'currency'">
                     {{ row[col.field] | currency }}
                   </ng-container>
-                  <ng-container *ngSwitchCase="'tepmlate'">
-                    {{ col.customTemplate?.() }}
+                  <ng-container *ngSwitchCase="'template'">
+                    <!-- {{ col.customTemplate?.(row) }} -->
+                    <div [innerHTML]="col.customTemplate?.(row)"></div>
                   </ng-container>
                   <ng-container *ngSwitchDefault>
                     {{ row[col.field] }}
