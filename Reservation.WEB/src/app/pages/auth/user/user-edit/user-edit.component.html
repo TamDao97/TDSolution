@@ -1,3 +1,79 @@
-<p>
+<!-- <p>
   {{params.id}}
-</p>
+</p> -->
+
+
+<nz-tabset>
+  <nz-tab nzTitle="Thông tin tài khoản">
+    <form nz-form [formGroup]="frmAccountGroup">
+      <nz-form-item>
+        <nz-form-control nzHasFeedback [nzErrorTip]="userNameErrorTpl">
+          <nz-input-group nzPrefixIcon="user">
+            <input type="text" nz-input formControlName="userName" placeholder="Tài khoản" />
+          </nz-input-group>
+        </nz-form-control>
+        <ng-template #userNameErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Vui lòng nhập email!
+          </ng-container>
+          <ng-container *ngIf="control.hasError('email')">
+            Email không hợp lệ!
+          </ng-container>
+        </ng-template>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="passwordErrorTpl">
+          <nz-input-group nzPrefixIcon="lock">
+            <input type="password" nz-input formControlName="password" placeholder="Mật khẩu" />
+          </nz-input-group>
+        </nz-form-control>
+        <ng-template #passwordErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Vui lòng nhập mật khẩu!
+          </ng-container>
+          <ng-container *ngIf="control.hasError('minlength')">
+            Mật khẩu phải có ít nhất 6 ký tự!
+          </ng-container>
+        </ng-template>
+      </nz-form-item>
+    </form>
+  </nz-tab>
+  <nz-tab nzTitle="Thông tin chung">
+    <form nz-form [formGroup]="frmUserInfoGroup">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="displayName">Họ và tên</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Vui lòng nhập thông tin!">
+          <input nz-input formControlName="displayName" id="displayName" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email" nzRequired>Email</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Vui lòng nhập thông tin!">
+          <input nz-input type="email" id="email" formControlName="email" />
+        </nz-form-control>
+      </nz-form-item>
+      <!-- <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="frmUserInfoGroup!.controls['phoneNumber']"
+          nzErrorTip="Vui lòng nhập thông tin!">
+          <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+            <ng-template #addOnBeforeTemplate>
+              <nz-select formControlName="phoneNumberPrefix" class="phone-select">
+                <nz-option nzLabel="+86" nzValue="+84"></nz-option>
+                <nz-option nzLabel="+87" nzValue="+86"></nz-option>
+              </nz-select>
+            </ng-template>
+            <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item> -->
+    </form>
+  </nz-tab>
+</nz-tabset>
+<div class="row">
+  <div class="col-md-12 col-lg-12 d-flex justify-content-end">
+    <button nz-button [nzType]="'primary'">Lưu</button>
+    <button nz-button [nzType]="'primary'">Đóng</button>
+  </div>
+</div>

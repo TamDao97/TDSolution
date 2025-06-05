@@ -62,14 +62,30 @@
                 <td [nzChecked]="setOfCheckedId.has(row.id)" (nzCheckedChange)="onItemChecked(row.id, $event)"></td>
                 <td *ngFor="let col of gridColumns" [ngSwitch]="col.type">
                   <ng-container *ngSwitchCase="'date'">
-                    {{ row[col.field] | date:'shortDate' }}
+                    {{ row[col.field] | date: 'HH:mm dd/MM/yyyy' }}
                   </ng-container>
                   <ng-container *ngSwitchCase="'currency'">
                     {{ row[col.field] | currency }}
                   </ng-container>
                   <ng-container *ngSwitchCase="'template'">
                     <!-- {{ col.customTemplate?.(row) }} -->
-                    <div [innerHTML]="col.customTemplate?.(row)"></div>
+                    <ng-container [ngSwitch]="col.field">
+                      <ng-container *ngSwitchCase="'displayName'">
+                        <span>{{ row[col.field] }}</span>
+                        <br />
+                        <nz-tag [nzColor]="'blue'">
+                          <span nz-typography nzCopyable nzCopyText="{{row.userName}}">{{row.userName}}.</span>
+                        </nz-tag>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'isLockout'">
+                        <nz-tag [nzColor]="row[col.field] ? 'red' : 'green'">
+                          {{ col.customTemplate?.(row) }}
+                        </nz-tag>
+                      </ng-container>
+                      <ng-container *ngSwitchDefault>
+                        {{ row[col.field] }}
+                      </ng-container>
+                    </ng-container>
                   </ng-container>
                   <ng-container *ngSwitchDefault>
                     {{ row[col.field] }}

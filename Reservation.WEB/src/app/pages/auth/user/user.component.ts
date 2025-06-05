@@ -118,9 +118,9 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
         type: 'template',
         sort: true,
         sortBy: 'asc',
-        customTemplate: (data: any) => {
-          return `${data.displayName} <p nz-typography nzCopyable nzCopyText="${data.userName}">${data.userName}.</p>`;
-        },
+        // customTemplate: (data: any) => {
+        //   return `${data.displayName} <p nz-typography nzCopyable nzCopyText="${data.userName}">${data.userName}.</p>`;
+        // },
       },
       {
         field: 'email',
@@ -142,9 +142,14 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
         field: 'isLockout',
         header: 'Trạng thái',
         class: 'text-center',
-        type: 'checkbox',
+        type: 'template',
         sort: true,
         sortBy: 'asc',
+        customTemplate: (data: any) => {
+          if (data.isLockout) {
+            return 'Khóa';
+          } else return 'Hoạt động';
+        },
       },
       {
         field: 'dateModify',
@@ -184,7 +189,9 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
         width: 800,
       },
       UserEditComponent
-    );
+    ).afterClose.subscribe((result: any) => {
+      this.gridLoadData(this.endpoint, result);
+    });
   }
 
   onEdit(data: any) {
