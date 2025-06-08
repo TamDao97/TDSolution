@@ -3,15 +3,14 @@ import { environment } from '../../../env.development';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IResponse } from '../../interfaces/IResponse';
+import { TdBaseService } from '../../shared/utils/services/td-base.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
-  public apiUrl = `${environment.apiUrl}/user`;
-  constructor(private httpClient: HttpClient) {}
-
-  getById(id: string): Observable<IResponse> {
-    return this.httpClient.get<IResponse>(`${this.apiUrl}/user-getbyid/${id}`);
+export class UserService extends TdBaseService {
+  override apiUrl: string = `${environment.apiUrl}/user`;
+  constructor(_httpClient: HttpClient) {
+    super(_httpClient);
   }
 }

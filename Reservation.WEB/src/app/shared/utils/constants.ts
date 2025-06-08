@@ -11,8 +11,9 @@ export const StatusResponseMessage = {
   ADD_SUCCESS: 'Thêm mới thành công!',
   UPDATE_SUCCESS: 'Cập nhật thành công!',
   DELETE_SUCCESS: 'Xóa thành công!',
-  WARNING: 'Cảnh báo',
-  ERROR: 'Lỗi',
+  WARNING_SYSTEM: 'Cảnh báo hệ thống',
+  ERROR_SYSTEM: 'Lỗi hệ thống',
+  INPUT_REQUIRED: 'Vui lòng nhập thông tin',
 };
 
 export const DateFormat = 'dd/MM/yyyy';

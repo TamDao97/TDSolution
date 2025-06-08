@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TdBaseGridComponent } from '../../../shared/utils/extends-components/td-base-grid.component';
 import { SharedModule } from '../../../shared/modules/shared.module';
-import { TdBaseService } from '../../../shared/utils/services/td-base.service';
 import { ToastService } from '../../../shared/services/toast.service';
 import { StatusResponseTitle } from '../../../shared/utils/constants';
 import { UserEditComponent } from './user-edit/user-edit.component';
@@ -22,20 +21,18 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
 
   filterControl: IControl[] = [];
   objFilter: any = {};
-  endpoint = `${this._userService.apiUrl}/get-by-filter`;
 
   constructor(
-    _tdBaseService: TdBaseService,
     _toastService: ToastService,
-    private _userService: UserService
+     _userService: UserService
   ) {
-    super(_tdBaseService, _toastService);
+    super(_userService, _toastService);
   }
 
   override ngOnInit(): void {
     this.objFilter = this.buildAdvanceFilter();
     this.gridColumns = this.buildTableColumn();
-    this.gridLoadData(this.endpoint, this.objFilter);
+    this.gridLoadData(this.objFilter);
   }
 
   // #region Advance Filter
@@ -164,7 +161,7 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
   // #endregion
 
   onSearch(): void {
-    this.gridLoadData(this.endpoint, this.objFilter);
+    this.gridLoadData(this.objFilter);
   }
 
   onSearchAdvance(): void {
@@ -178,7 +175,7 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
         controls: this.filterControl,
       }
     ).afterClose.subscribe((result: any) => {
-      this.gridLoadData(this.endpoint, result);
+      this.gridLoadData(result);
     });
   }
 
@@ -190,7 +187,7 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
       },
       UserEditComponent
     ).afterClose.subscribe((result: any) => {
-      this.gridLoadData(this.endpoint, result);
+      this.gridLoadData(result);
     });
   }
 

@@ -1,4 +1,5 @@
-﻿using TD.Lib.Repository.Entity.Base;
+﻿using Reservation.API.DataContext.Enums;
+using TD.Lib.Repository.Entity.Base;
 
 namespace Reservation.API.DataContext.Entity.Core
 {
@@ -30,6 +31,10 @@ namespace Reservation.API.DataContext.Entity.Core
 
         /// <summary>
         /// </summary>
+        public GenderEnums Gender { get; set; }
+
+        /// <summary>
+        /// </summary>
         public DateTimeOffset? DateLockout { get; set; }
 
         /// <summary>
@@ -42,6 +47,10 @@ namespace Reservation.API.DataContext.Entity.Core
 
         /// <summary>
         /// </summary>
-        public bool IsAdmin { get; set; }
+        public bool IsAdmin { get; set; } = false;
+
+        /// <summary>
+        /// </summary>
+        public bool IsSuper { get; set; } = false;
     }
 }

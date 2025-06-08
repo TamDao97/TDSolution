@@ -34,4 +34,12 @@ namespace Reservation.API.DataContext.Enums
         [Description("Đã hủy")]
         DaHuy = 5,
     }
+
+    public enum GenderEnums
+    {
+        [Description("Nam")]
+        Male,
+        [Description("Nữ")]
+        FeMale1
+    }
 }

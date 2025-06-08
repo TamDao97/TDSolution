@@ -14,7 +14,9 @@ namespace Reservation.API.DataContext.Dto.Core
         public DateTimeOffset? DateLockout { get; set; }
         public bool IsLockout { get; set; }
         public int AccessFailedCount { get; set; }
-        public bool IsAdmin { get; set; }
+        public bool IsAdmin { get; set; } = false;
+        public bool IsSuper { get; set; } = false;
+        public int? Gender { get; set; }
     }
 
     public class UserCreateReqDto : UserDto

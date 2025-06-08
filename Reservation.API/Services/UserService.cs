@@ -64,17 +64,20 @@ namespace Reservation.API.Services
             user.IsDeleted = false;
 
             //tạo quyền
-
-            List<UserRole> lstUserRole = new List<UserRole>();
-            UserRole userRole = null;
-            foreach (var idRole in reqDto.LstRole)
+            var lstUserRole = new List<UserRole>();
+            if (!reqDto.IsAdmin)
             {
-                userRole = new UserRole
+                lstUserRole = new List<UserRole>();
+                UserRole userRole = null;
+                foreach (var idRole in reqDto.LstRole)
                 {
-                    IdUser = user.Id,
-                    IdRole = idRole
-                };
-                lstUserRole.Add(userRole);
+                    userRole = new UserRole
+                    {
+                        IdUser = user.Id,
+                        IdRole = idRole
+                    };
+                    lstUserRole.Add(userRole);
+                }
             }
 
             using (var trans = await _unitOfWork.BeginTransactionAsync())
@@ -119,22 +122,36 @@ namespace Reservation.API.Services
             var lstUserRoleRemove = _userRoleRepos.Table.Where(r => r.IdUser == user.Id).AsEnumerable();
 
             List<UserRole> lstUserRole = new List<UserRole>();
-
-            UserRole userRole = null;
-            foreach (var idRole in reqDto.LstRole)
+            if (reqDto.IsAdmin)
             {
-                userRole = new UserRole
+                lstUserRole = new List<UserRole>();
+                UserRole userRole = null;
+                foreach (var idRole in reqDto.LstRole)
                 {
-                    IdUser = user.Id,
-                    IdRole = idRole
-                };
-                lstUserRole.Add(userRole);
+                    userRole = new UserRole
+                    {
+                        IdUser = user.Id,
+                        IdRole = idRole
+                    };
+                    lstUserRole.Add(userRole);
+                }
             }
 
-            await _userRepos.UpdateAsync(user);
-            await _userRoleRepos.DeleteMultiAsync(lstUserRoleRemove);
-            await _userRoleRepos.CreateMultiAsync(lstUserRole);
-            await _unitOfWork.SaveChangesAsync();
+            using (var trans = await _unitOfWork.BeginTransactionAsync())
+            {
+                try
+                {
+                    await _userRepos.UpdateAsync(user);
+                    await _userRoleRepos.DeleteMultiAsync(lstUserRoleRemove);
+                    await _userRoleRepos.CreateMultiAsync(lstUserRole);
+                    await _unitOfWork.SaveChangesAsync();
+                    trans.Commit();
+                }
+                catch (Exception ex)
+                {
+                    trans.Rollback();
+                }
+            }
 
             //response data
             UserCreateResDto dto = AutoMapperGeneric.Map<User, UserCreateResDto>(user);

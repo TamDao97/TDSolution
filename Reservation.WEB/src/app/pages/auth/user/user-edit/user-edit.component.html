@@ -1,8 +1,3 @@
-<!-- <p>
-  {{params.id}}
-</p> -->
-
-
 <nz-tabset>
   <nz-tab nzTitle="Thông tin tài khoản">
     <form nz-form [formGroup]="frmAccountGroup">
@@ -48,16 +43,31 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email" nzRequired>Email</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Vui lòng nhập thông tin!">
-          <input nz-input type="email" id="email" formControlName="email" />
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="gender" nzRequired>Giới tính</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <nz-radio-group formControlName="gender">
+            <label nz-radio [nzValue]="0">Nam</label>
+            <label nz-radio [nzValue]="1">Nữ</label>
+          </nz-radio-group>
         </nz-form-control>
       </nz-form-item>
-      <!-- <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="frmUserInfoGroup!.controls['phoneNumber']"
-          nzErrorTip="Vui lòng nhập thông tin!">
-          <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email">Email</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="emailErrorTpl">
+          <nz-input-group nzPrefixIcon="email">
+            <input type="text" nz-input formControlName="email" />
+          </nz-input-group>
+        </nz-form-control>
+        <ng-template #emailErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('email')">
+            Email không hợp lệ!
+          </ng-container>
+        </ng-template>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber">SĐT</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="frmUserInfoGroup!.controls['phoneNumber']">
+          <!-- <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
             <ng-template #addOnBeforeTemplate>
               <nz-select formControlName="phoneNumberPrefix" class="phone-select">
                 <nz-option nzLabel="+86" nzValue="+84"></nz-option>
@@ -65,15 +75,23 @@
               </nz-select>
             </ng-template>
             <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
-          </nz-input-group>
+          </nz-input-group> -->
+          <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
         </nz-form-control>
-      </nz-form-item> -->
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="isAdmin">Tài khoản admin</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <label nz-checkbox formControlName="isAdmin"></label>
+        </nz-form-control>
+      </nz-form-item>
+
     </form>
   </nz-tab>
 </nz-tabset>
 <div class="row">
   <div class="col-md-12 col-lg-12 d-flex justify-content-end">
-    <button nz-button [nzType]="'primary'">Lưu</button>
-    <button nz-button [nzType]="'primary'">Đóng</button>
+    <button nz-button [nzType]="'primary'" (click)="onSave()">Lưu</button>
+    <button class="ms-2" nz-button [nzType]="'primary'">Đóng</button>
   </div>
 </div>

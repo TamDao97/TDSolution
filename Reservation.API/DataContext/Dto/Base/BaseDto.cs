@@ -8,7 +8,7 @@ namespace Reservation.API.DataContext.Dto.Base
 {
     public class BaseDto
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModify { get; set; }
         public Guid CreatedUserId { get; set; }

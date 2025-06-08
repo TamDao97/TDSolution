@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Reservation.API.Attributes;
 using Reservation.API.Commons;
 using Reservation.API.Controllers.Base;
 using Reservation.API.DataContext.Dto.Core;
-using Reservation.API.DataContext.Entity.Core;
 using Reservation.API.Services;
 using TD.Lib.Common;
 
@@ -42,7 +40,7 @@ namespace Reservation.API.Controllers
         /// </summary>
         /// <param name="reqDto"></param>
         /// <returns></returns>
-        [Route("user-create")]
+        [Route("create")]
         [HttpPost]
         public async Task<ActionResult<Response<UserCreateResDto>>> CreateAsync(UserCreateReqDto reqDto)
         {
@@ -54,7 +52,7 @@ namespace Reservation.API.Controllers
         /// </summary>
         /// <param name="reqDto"></param>
         /// <returns></returns>
-        [Route("user-update")]
+        [Route("update")]
         [HttpPost]
         public async Task<ActionResult<Response<UserCreateResDto>>> UpdateAsync(UserCreateReqDto reqDto)
         {
@@ -66,7 +64,7 @@ namespace Reservation.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [Route("user-delete/{id}")]
+        [Route("delete/{id}")]
         [HttpPost]
         public async Task<ActionResult<Response<bool>>> DeleteAsync(Guid id)
         {
@@ -79,7 +77,7 @@ namespace Reservation.API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [TDPermission("GetByIdAsync", "Xem chi tiết tài khoản", $"{RoleCodes.ThuNgan}, {RoleCodes.LeTan}")]
-        [Route("user-getbyid/{id}")]
+        [Route("get-by-id/{id}")]
         [HttpGet]
         public async Task<ActionResult<Response<UserDto>>> GetByIdAsync(Guid id)
         {

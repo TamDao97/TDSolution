@@ -1,23 +1,27 @@
 import { inject, Type } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { IModalOptions } from '../../interfaces/IBase';
 
 export class TdBaseComponent {
   private _modal = inject(NzModalService); // inject không cần constructor
-  constructor() {}
+  constructor() { }
 
   /**
    * Validate form
    * @param frmGroup validate formGroup
    * @returns
    */
-  validateForm(frmGroup: FormGroup): boolean {
-    if (frmGroup.invalid) {
-      frmGroup.markAllAsTouched();
-      frmGroup.updateValueAndValidity();
-      return false;
-    } else return true;
+  validateForm(form: AbstractControl): boolean {
+    if (form instanceof FormGroup || form instanceof FormArray) {
+      Object.values(form.controls).forEach((control) => {
+        this.validateForm(control); // Đệ quy cho control con
+      });
+    }
+    form.markAsTouched({ onlySelf: true });
+    form.markAsDirty({ onlySelf: true });
+    form.updateValueAndValidity({ onlySelf: true });
+    return form.valid;
   }
 
   /**
