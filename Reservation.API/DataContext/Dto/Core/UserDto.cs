@@ -1,4 +1,5 @@
 ﻿using Reservation.API.DataContext.Dto.Base;
+using Reservation.API.DataContext.Enums;
 using TD.Lib.Common;
 
 namespace Reservation.API.DataContext.Dto.Core
@@ -16,7 +17,7 @@ namespace Reservation.API.DataContext.Dto.Core
         public int AccessFailedCount { get; set; }
         public bool IsAdmin { get; set; } = false;
         public bool IsSuper { get; set; } = false;
-        public int? Gender { get; set; }
+        public GenderEnums? Gender { get; set; }
     }
 
     public class UserCreateReqDto : UserDto

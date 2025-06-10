@@ -20,6 +20,11 @@ export class TdBaseGridComponent extends TdBaseComponent {
   pageSize: number = 10;
   isLoading: Boolean = false;
 
+  // Checkbox
+  checked = false;
+  indeterminate = false;
+  setOfCheckedId = new Set<string>();
+
   constructor(
     public _tdBaseService: TdBaseService,
     public _toastService: ToastService
@@ -64,5 +69,40 @@ export class TdBaseGridComponent extends TdBaseComponent {
         this.isLoading = false;
       }
     );
+  }
+
+  updateCheckedSet(id: string, checked: boolean): void {
+    if (checked) {
+      this.setOfCheckedId.add(id);
+    } else {
+      this.setOfCheckedId.delete(id);
+    }
+  }
+
+  onItemChecked(id: string, checked: boolean): void {
+    this.updateCheckedSet(id, checked);
+    this.refreshCheckedStatus();
+  }
+
+  onAllChecked(value: boolean): void {
+    this.gridData.forEach((item) =>
+      this.updateCheckedSet(item.id, value)
+    );
+    this.refreshCheckedStatus();
+  }
+
+  refreshCheckedStatus(): void {
+    this.checked = this.gridData.every((item) =>
+      this.setOfCheckedId.has(item.id)
+    );
+    this.indeterminate =
+      this.gridData.some((item) =>
+        this.setOfCheckedId.has(item.id)
+      ) && !this.checked;
+  }
+
+  onCurrentPageDataChange($event: any): void {
+    this.gridData = $event;
+    this.refreshCheckedStatus();
   }
 }

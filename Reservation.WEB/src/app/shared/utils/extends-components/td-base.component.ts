@@ -5,6 +5,8 @@ import { IModalOptions } from '../../interfaces/IBase';
 
 export class TdBaseComponent {
   private _modal = inject(NzModalService); // inject không cần constructor
+  private _modalRef = inject(NzModalRef, { optional: true }); // Tránh lỗi nếu không có provider
+
   constructor() { }
 
   /**
@@ -44,6 +46,31 @@ export class TdBaseComponent {
       nzMaskClosable: false,
       nzWidth: options.width,
       nzFooter: null, // hoặc bạn có thể custom footer
+    });
+  }
+
+  /**
+   * Close modal
+   * @param data
+   */
+  closeModal(data?: any) {
+    this._modalRef?.close(data);
+  }
+
+  /**
+   * Confirm modal
+   * @param message 
+   * @param onOk 
+   * @param title 
+   */
+  confirmModal(message: string, onOk: () => void, title: string = 'Xác nhận') {
+    this._modal.confirm({
+      nzTitle: title,
+      nzContent: message,
+      nzOkText: 'Đồng ý',
+      nzCancelText: 'Huỷ',
+      nzOkType: 'default',
+      nzOnOk: onOk
     });
   }
 }

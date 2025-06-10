@@ -14,6 +14,7 @@ export const StatusResponseMessage = {
   WARNING_SYSTEM: 'Cảnh báo hệ thống',
   ERROR_SYSTEM: 'Lỗi hệ thống',
   INPUT_REQUIRED: 'Vui lòng nhập thông tin',
+  NOT_SELECTED: 'Vui lòng tick chọn dữ liệu',
 };
 
 export const DateFormat = 'dd/MM/yyyy';

@@ -13,7 +13,8 @@
         <div class="col-md-6 mb-1">
           <div class="d-flex justify-content-end">
             <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
-              <input type="text" nz-input placeholder="Từ khóa tìm kiếm" />
+              <input type="text" nz-input placeholder="Từ khóa tìm kiếm" [(ngModel)]="objFilter.keyword"
+                (keydown.enter)="onSearch()" />
             </nz-input-group>
             <ng-template #suffixButton>
               <button nz-button nzType="primary" nzSearch (click)="onSearch()">Tìm kiếm</button>
@@ -38,8 +39,18 @@
           </nz-button-group>
           <nz-dropdown-menu #menu="nzDropdownMenu">
             <ul nz-menu nzSelectable>
-              <li nz-menu-item>Xuất excel</li>
-              <li nz-menu-item>Import excel</li>
+              <li nz-menu-item (click)="onDeleteMany()">
+                <a class="text-danger" href="javascript:void(0);"><i nz-icon nzType="delete" nzTheme="outline"></i> Xóa
+                  dữ liệu</a>
+              </li>
+              <li nz-menu-item>
+                <a class="text-success" href="javascript:void(0);"><i nz-icon nzType="export" nzTheme="outline"></i>
+                  Export excel</a>
+              </li>
+              <li nz-menu-item>
+                <a class="text-success" href="javascript:void(0);"><i nz-icon nzType="import" nzTheme="outline"></i>
+                  Import excel</a>
+              </li>
             </ul>
           </nz-dropdown-menu>
         </div>
@@ -50,8 +61,9 @@
             (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
             <thead>
               <tr>
-                <th [nzSelections]="listOfSelection" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
-                  (nzCheckedChange)="onAllChecked($event)"></th>
+                <th [width]="80" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
+                  (nzCheckedChange)="onAllChecked($event)">
+                </th>
                 <th *ngFor="let col of gridColumns">{{col.header}}</th>
                 <!-- Action -->
                 <th></th>
@@ -59,7 +71,8 @@
             </thead>
             <tbody>
               <tr *ngFor="let row of table.data; let i = index">
-                <td [nzChecked]="setOfCheckedId.has(row.id)" (nzCheckedChange)="onItemChecked(row.id, $event)"></td>
+                <td [width]="80" [nzChecked]="setOfCheckedId.has(row.id)"
+                  (nzCheckedChange)="onItemChecked(row.id, $event)"></td>
                 <td *ngFor="let col of gridColumns" [ngSwitch]="col.type">
                   <ng-container *ngSwitchCase="'date'">
                     {{ row[col.field] | date: 'HH:mm dd/MM/yyyy' }}
@@ -68,7 +81,6 @@
                     {{ row[col.field] | currency }}
                   </ng-container>
                   <ng-container *ngSwitchCase="'template'">
-                    <!-- {{ col.customTemplate?.(row) }} -->
                     <ng-container [ngSwitch]="col.field">
                       <ng-container *ngSwitchCase="'displayName'">
                         <span>{{ row[col.field] }}</span>
@@ -81,6 +93,9 @@
                         <nz-tag [nzColor]="row[col.field] ? 'red' : 'green'">
                           {{ col.customTemplate?.(row) }}
                         </nz-tag>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'dateModify'">
+                        {{ row[col.field] | date: 'HH:mm dd/MM/yyyy' }}
                       </ng-container>
                       <ng-container *ngSwitchDefault>
                         {{ row[col.field] }}

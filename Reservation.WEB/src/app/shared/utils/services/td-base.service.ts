@@ -24,7 +24,11 @@ export class TdBaseService {
   }
 
   delete(id: string): Observable<IResponse> {
-    return this._httpClient.delete<IResponse>(`${this.apiUrl}/delete/${id}`);
+    return this._httpClient.post<IResponse>(`${this.apiUrl}/delete/${id}`, null);
+  }
+
+  deleteMany(ids: string[]): Observable<IResponse> {
+    return this._httpClient.post<IResponse>(`${this.apiUrl}/delete-many`, ids);
   }
 
   search(payload: any): Observable<IResponse> {

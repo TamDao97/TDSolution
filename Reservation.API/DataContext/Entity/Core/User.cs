@@ -31,7 +31,7 @@ namespace Reservation.API.DataContext.Entity.Core
 
         /// <summary>
         /// </summary>
-        public GenderEnums Gender { get; set; }
+        public GenderEnums? Gender { get; set; }
 
         /// <summary>
         /// </summary>

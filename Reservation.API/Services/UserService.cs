@@ -115,6 +115,9 @@ namespace Reservation.API.Services
             }
 
             user.DisplayName = reqDto.DisplayName;
+            user.Gender = reqDto.Gender;
+            user.Email = reqDto.Email;
+            user.PhoneNumber = reqDto.PhoneNumber;
             user.IsAdmin = reqDto.IsAdmin;
             user.DateModify = DateTime.Now;
 
@@ -122,7 +125,7 @@ namespace Reservation.API.Services
             var lstUserRoleRemove = _userRoleRepos.Table.Where(r => r.IdUser == user.Id).AsEnumerable();
 
             List<UserRole> lstUserRole = new List<UserRole>();
-            if (reqDto.IsAdmin)
+            if (!reqDto.IsAdmin)
             {
                 lstUserRole = new List<UserRole>();
                 UserRole userRole = null;

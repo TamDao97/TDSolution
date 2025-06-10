@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TdBaseGridComponent } from '../../../shared/utils/extends-components/td-base-grid.component';
 import { SharedModule } from '../../../shared/modules/shared.module';
 import { ToastService } from '../../../shared/services/toast.service';
-import { StatusResponseTitle } from '../../../shared/utils/constants';
+import { StatusResponseMessage, StatusResponseTitle } from '../../../shared/utils/constants';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { IColumn, IControl } from '../../../shared/interfaces/IBase';
-import { ControlTypeEnum } from '../../../shared/utils/enums';
+import { ControlTypeEnum, StatusCode } from '../../../shared/utils/enums';
 import { FilterModalComponent } from '../../../shared/components/filter-modal/filter-modal.component';
 import { UserService } from '../../../services/user/user.service';
 
@@ -20,17 +20,22 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
   override title = 'Quản lý người dùng';
 
   filterControl: IControl[] = [];
-  objFilter: any = {};
+  objFilter: any = {
+    keyword: null,
+  };
 
   constructor(
     _toastService: ToastService,
-     _userService: UserService
+    _userService: UserService
   ) {
     super(_userService, _toastService);
   }
 
   override ngOnInit(): void {
-    this.objFilter = this.buildAdvanceFilter();
+    this.objFilter = {
+      ...this.objFilter,
+      ...this.buildAdvanceFilter(),
+    };
     this.gridColumns = this.buildTableColumn();
     this.gridLoadData(this.objFilter);
   }
@@ -175,7 +180,11 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
         controls: this.filterControl,
       }
     ).afterClose.subscribe((result: any) => {
-      this.gridLoadData(result);
+      this.objFilter = {
+        ...this.objFilter,
+        ...result,
+      }
+      this.gridLoadData(this.objFilter);
     });
   }
 
@@ -187,7 +196,7 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
       },
       UserEditComponent
     ).afterClose.subscribe((result: any) => {
-      this.gridLoadData(result);
+      this.gridLoadData(this.objFilter);
     });
   }
 
@@ -199,9 +208,14 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
       },
       UserEditComponent,
       {
-        params: data,
+        params: {
+          data,
+          isDisabled: false
+        },
       }
-    );
+    ).afterClose.subscribe((result: any) => {
+      this.gridLoadData(this.objFilter);
+    });
   }
 
   onDetail(data: any) {
@@ -212,80 +226,43 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
       },
       UserEditComponent,
       {
-        params: data,
+        params: {
+          data,
+          isDisabled: true
+        },
       }
     );
   }
 
   onDelete(data: any) {
-    this._toastService.success(StatusResponseTitle.SUCCESS, 'Xóa');
+    this.confirmModal('Bạn có chắc chắn muốn xoá?', () => {
+      this._tdBaseService.delete(data.id).subscribe((rs) => {
+        if (rs.status == StatusCode.Ok) {
+          this._toastService.success(StatusResponseTitle.SUCCESS, StatusResponseMessage.DELETE_SUCCESS);
+          this.gridLoadData(this.objFilter);
+        } else {
+          this._toastService.error(StatusResponseTitle.ERROR, rs.message);
+        }
+      })
+    });
   }
 
-  // grid event
-  listOfSelection = [
-    {
-      text: 'Select All Row',
-      onSelect: () => {
-        this.onAllChecked(true);
-      },
-    },
-    {
-      text: 'Select Odd Row',
-      onSelect: () => {
-        this.listOfCurrentPageData.forEach((data, index) =>
-          this.updateCheckedSet(data.id, index % 2 !== 0)
-        );
-        this.refreshCheckedStatus();
-      },
-    },
-    {
-      text: 'Select Even Row',
-      onSelect: () => {
-        this.listOfCurrentPageData.forEach((data, index) =>
-          this.updateCheckedSet(data.id, index % 2 === 0)
-        );
-        this.refreshCheckedStatus();
-      },
-    },
-  ];
-  checked = false;
-  indeterminate = false;
-  listOfCurrentPageData: readonly any[] = [];
-  listOfData: readonly any[] = [];
-  setOfCheckedId = new Set<number>();
-
-  updateCheckedSet(id: number, checked: boolean): void {
-    if (checked) {
-      this.setOfCheckedId.add(id);
-    } else {
-      this.setOfCheckedId.delete(id);
+  onDeleteMany() {
+    if (this.setOfCheckedId.size == 0) {
+      this._toastService.warning(StatusResponseTitle.WARNING, StatusResponseMessage.NOT_SELECTED);
+      return;
     }
-  }
 
-  onItemChecked(id: number, checked: boolean): void {
-    this.updateCheckedSet(id, checked);
-    this.refreshCheckedStatus();
-  }
-
-  onAllChecked(value: boolean): void {
-    this.listOfCurrentPageData.forEach((item) =>
-      this.updateCheckedSet(item.id, value)
-    );
-    this.refreshCheckedStatus();
-  }
-
-  onCurrentPageDataChange($event: readonly any[]): void {
-    this.listOfCurrentPageData = $event;
-    this.refreshCheckedStatus();
-  }
-
-  refreshCheckedStatus(): void {
-    this.checked = this.listOfCurrentPageData.every((item) =>
-      this.setOfCheckedId.has(item.id)
-    );
-    this.indeterminate =
-      this.listOfCurrentPageData.some((item) =>
-        this.setOfCheckedId.has(item.id)
-      ) && !this.checked;
+    const ids = Array.from(this.setOfCheckedId);
+    this.confirmModal('Bạn có chắc chắn muốn xoá?', () => {
+      this._tdBaseService.deleteMany(ids).subscribe((rs) => {
+        if (rs.status == StatusCode.Ok) {
+          this._toastService.success(StatusResponseTitle.SUCCESS, StatusResponseMessage.DELETE_SUCCESS);
+          this.gridLoadData(this.objFilter);
+        } else {
+          this._toastService.error(StatusResponseTitle.ERROR, rs.message);
+        }
+      })
+    });
   }
 }
