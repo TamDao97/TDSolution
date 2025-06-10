@@ -57,8 +57,7 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <nz-table #table nzShowSizeChanger [nzData]="gridData"
-            (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+          <nz-table #table [nzData]="gridData" [nzLoading]="isLoading" nzShowPagination="false">
             <thead>
               <tr>
                 <th [width]="80" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
@@ -120,6 +119,13 @@
               </tr>
             </tbody>
           </nz-table>
+          <div class="mt-3 d-flex justify-content-end">
+            <nz-pagination [nzPageSize]="pageSize" [nzPageIndex]="pageNumber" [nzPageSizeOptions]="pageSizeOptions"
+              [nzTotal]="totalRecord" (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+              (nzPageIndexChange)="onPageChange($event)" (nzPageSizeChange)="onPageSizeChange($event)" nzShowSizeChanger
+              nzShowQuickJumper>
+            </nz-pagination>
+          </div>
         </div>
       </div>
     </div>

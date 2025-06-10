@@ -3,11 +3,9 @@ import { IControl } from '../../interfaces/IBase';
 import { CommonModule } from '@angular/common';
 import { ControlTypeEnum } from '../../utils/enums';
 import { SharedModule } from '../../modules/shared.module';
-import {
-  NzCheckboxModule,
-  NzCheckBoxOptionInterface,
-} from 'ng-zorro-antd/checkbox';
 import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
+import { StorageLocalService } from '../../utils/services/storage-local.service';
+import { LocalStorageKey } from '../../utils/constants';
 
 @Component({
   selector: 'app-filter-modal',
@@ -19,26 +17,31 @@ import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
 export class FilterModalComponent implements OnInit {
   params: any = inject(NZ_MODAL_DATA);
   modalRef: any = inject(NzModalRef);
-  @Input() controls: IControl[] = [];
+  controls: IControl[] = [];
   controlTypeEnum = ControlTypeEnum;
 
   objFilter: any = {};
-  constructor() {}
-
-  options1: NzCheckBoxOptionInterface[] = [
-    { label: 'Apple', value: 'Apple' },
-    { label: 'Pear', value: 'Pear' },
-    { label: 'Orange', value: 'Orange' },
-  ];
+  keyPage: string = '';
+  keyCache: string = '';
+  constructor() { }
 
   ngOnInit() {
+    this.keyPage = this.params.keyPage;
+    this.keyCache = `${this.keyPage}${LocalStorageKey.filter}`;
     this.controls = this.params.controls as IControl[];
+    this.initForm();
+  }
+
+  initForm() {
+    const cacheValue = StorageLocalService.getItem(this.keyCache);
+    const objValue = JSON.parse(cacheValue ?? '{}');
     this.controls.forEach((element: IControl) => {
-      this.objFilter[element.name] = null;
+      this.objFilter[element.name] = objValue[element.name] ?? null;
     });
   }
 
   onSearch(): void {
+    StorageLocalService.setItem(this.keyCache, this.objFilter);
     this.modalRef.close(this.objFilter);
   }
 
@@ -46,13 +49,14 @@ export class FilterModalComponent implements OnInit {
     this.controls.forEach((element: IControl) => {
       this.objFilter[element.name] = null;
     });
+    StorageLocalService.removeItem(`${this.keyPage}${LocalStorageKey.filter}`);
   }
 
-  onDateChange(e: any) {}
+  onDateChange(e: any) { }
 
-  onDateOk(e: any) {}
+  onDateOk(e: any) { }
 
-  onDateRangeChange(e: any) {}
+  onDateRangeChange(e: any) { }
 
   onDateRangeOk(result: Date | Date[] | null): void {
     console.log('onOk', result);

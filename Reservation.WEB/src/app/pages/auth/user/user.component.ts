@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TdBaseGridComponent } from '../../../shared/utils/extends-components/td-base-grid.component';
 import { SharedModule } from '../../../shared/modules/shared.module';
 import { ToastService } from '../../../shared/services/toast.service';
-import { StatusResponseMessage, StatusResponseTitle } from '../../../shared/utils/constants';
+import { keyPage, StatusResponseMessage, StatusResponseTitle } from '../../../shared/utils/constants';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { IColumn, IControl } from '../../../shared/interfaces/IBase';
 import { ControlTypeEnum, StatusCode } from '../../../shared/utils/enums';
@@ -18,6 +18,7 @@ import { UserService } from '../../../services/user/user.service';
 })
 export class UserComponent extends TdBaseGridComponent implements OnInit {
   override title = 'Quản lý người dùng';
+  override pageKey = keyPage.USER;
 
   filterControl: IControl[] = [];
   objFilter: any = {
@@ -178,6 +179,7 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
       FilterModalComponent,
       {
         controls: this.filterControl,
+        keyPage: this.pageKey,
       }
     ).afterClose.subscribe((result: any) => {
       this.objFilter = {
@@ -208,10 +210,8 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
       },
       UserEditComponent,
       {
-        params: {
-          data,
-          isDisabled: false
-        },
+        params: data,
+        isDisabled: false
       }
     ).afterClose.subscribe((result: any) => {
       this.gridLoadData(this.objFilter);
@@ -226,10 +226,8 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
       },
       UserEditComponent,
       {
-        params: {
-          data,
-          isDisabled: true
-        },
+        params: data,
+        isDisabled: true
       }
     );
   }

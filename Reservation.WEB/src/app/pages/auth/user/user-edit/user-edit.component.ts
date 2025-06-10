@@ -18,7 +18,8 @@ import { StatusCode } from '../../../../shared/utils/enums';
   imports: [SharedModule],
 })
 export class UserEditComponent extends TdBaseComponent implements OnInit {
-  params: any = inject(NZ_MODAL_DATA)?.params;
+  params: any = inject(NZ_MODAL_DATA);
+  isDisabled: boolean = false;
 
   frmAccountGroup!: FormGroup;
   frmUserInfoGroup!: FormGroup;
@@ -51,9 +52,9 @@ export class UserEditComponent extends TdBaseComponent implements OnInit {
       isAdmin: [false],
     });
 
-    if (this.params?.data?.id) {
+    if (this.params?.params?.id) {
       this._userService
-        .getById(this.params?.data?.id)
+        .getById(this.params?.params?.id)
         .subscribe((rs: IResponse) => {
           if (rs.status == StatusCode.Ok) {
             this.frmUserInfoGroup.patchValue(rs.data);

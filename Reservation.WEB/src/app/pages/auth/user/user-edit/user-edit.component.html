@@ -1,5 +1,5 @@
 <!-- Cú pháp ngIf with then/else -->
-<ng-container *ngIf="!this.params?.data.id; then tabset; else frmUserInfoGroupTemplate"></ng-container>
+<ng-container *ngIf="!this.params?.params?.id; then tabset; else frmUserInfoGroupTemplate"></ng-container>
 <ng-template #tabset>
   <nz-tabset>
     <nz-tab nzTitle="Thông tin tài khoản">
@@ -148,6 +148,6 @@
 <div class="row">
   <div class="col-md-12 col-lg-12 d-flex justify-content-end">
     <button nz-button [nzType]="'primary'" (click)="onSave()" [hidden]="this.params.isDisabled">Lưu</button>
-    <button class="ms-2" nz-button [nzType]="'primary'" (click)="onClose()">Đóng</button>
+    <button class="ms-2" nz-button [nzType]="'primary'" nzDanger (click)="onClose()">Đóng</button>
   </div>
 </div>

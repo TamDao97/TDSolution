@@ -1,5 +1,6 @@
 export const LocalStorageKey = {
   Auth: 'auth',
+  filter: 'filter',
 };
 export const StatusResponseTitle = {
   SUCCESS: 'Thành công',
@@ -18,3 +19,7 @@ export const StatusResponseMessage = {
 };
 
 export const DateFormat = 'dd/MM/yyyy';
+
+export const keyPage = {
+  USER: 'user',
+}
