@@ -84,6 +84,11 @@ namespace Reservation.API.Controllers
             return Ok(await _userService.GetByIdAsync(id));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         [Route("get-by-filter")]
         [HttpPost]
         public async Task<ActionResult<Response<PagingData<List<UserDto>>>>> GetByFilterAsync(UserGridFilter filter)
