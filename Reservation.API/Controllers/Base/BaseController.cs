@@ -39,7 +39,7 @@ namespace Reservation.API.Controllers.Base
             return Ok(await _baseService.DeleteAsync(id));
         }
 
-        [Route("getbyid/{id}")]
+        [Route("get-by-id/{id}")]
         [HttpPost]
         public virtual async Task<ActionResult<Response<bool>>> GetById(Guid id)
         {

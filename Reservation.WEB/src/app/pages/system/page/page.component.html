@@ -1,0 +1,82 @@
+<div class="page-inner">
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <h3 class="fw-bold">
+        <i class="icon-home"></i> <span class="ms-3">{{ title }}</span>
+      </h3>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <nz-tree [nzData]="pageTreeData" [nzDraggable]="true" [nzBlockNode]="true" [nzExpandedKeys]="expandedKeys"
+            (nzClick)="onNodeClick($event)" (nzOnDragDrop)="onDrop($event)">
+          </nz-tree>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <form nz-form [formGroup]="frmGroup">
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="idParent">Trang cha</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24">
+                <nz-tree-select [nzNodes]="pageTreeData" nzShowSearch nzPlaceHolder="Trang cha"
+                  formControlName="idParent"></nz-tree-select>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">Tên trang</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Vui lòng nhập thông tin!">
+                <input nz-input formControlName="name" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="url">Url</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24">
+                <input nz-input formControlName="url" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="icon">Icon</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24">
+                <input nz-input formControlName="icon" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="permissionCode">Key code</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24">
+                <input nz-input formControlName="permissionCode" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="order">Thứ tự</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24">
+                <nz-input-number formControlName="order" [nzMin]="1" [nzMax]="10" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control [nzOffset]="6" [nzSm]="14" [nzXs]="24">
+                <div class="row">
+                  <div class="col-12 col-md-6 mb-2"><label nz-checkbox formControlName="isActive"></label> Sử dụng</div>
+                  <div class="col-12 col-md-6 mb-2"> <label nz-checkbox formControlName="isTab"></label> Tab menu</div>
+                  <div class="col-12 col-md-6 mb-2"><label nz-checkbox formControlName="isHomePage"></label> Trang chủ
+                  </div>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+          <div class="row">
+            <div class="col-md-12 col-lg-12 d-flex justify-content-end">
+              <button nz-button [nzType]="'primary'" (click)="onSave()">Lưu</button>
+              <button class="ms-2" nz-button [nzType]="'primary'" nzDanger (click)="onReset()">Làm mới</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

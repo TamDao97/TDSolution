@@ -12,6 +12,6 @@ namespace Reservation.API.DataContext.Entity.Core
         public bool? IsHomePage { get; set; } = false;
         public Guid? IdParent { get; set; }
         public string? PermissionCode { get; set; }
-        public int Order { get; set; }
+        public int? Order { get; set; }
     }
 }

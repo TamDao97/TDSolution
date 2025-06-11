@@ -14,6 +14,8 @@ namespace Reservation.API.DataContext
             : base(options)
         {
         }
+
+        public DbSet<Page> Pages { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Role> Roles { get; set; }

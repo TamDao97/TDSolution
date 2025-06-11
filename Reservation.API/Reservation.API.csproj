@@ -27,4 +27,8 @@
     <ProjectReference Include="..\Base.Lib\TD.Lib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\Areas\" />
+  </ItemGroup>
+
 </Project>

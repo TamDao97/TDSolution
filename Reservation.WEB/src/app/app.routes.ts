@@ -5,6 +5,7 @@ import { AuthGuard } from './shared/utils/auth/auth-guard';
 import { PageErrorComponent } from './shared/components/page-error/page-error.component';
 import { UserComponent } from './pages/auth/user/user.component';
 import { Routes } from '@angular/router';
+import { PageComponent } from './pages/system/page/page.component';
 
 export const routes: Routes = [
   {
@@ -17,8 +18,13 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'user',
+        redirectTo: 'page',
         pathMatch: 'full',
+      },
+      {
+        path: 'page',
+        component: PageComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'user',

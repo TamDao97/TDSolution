@@ -22,6 +22,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 
 export const libModule = [
   NzFormModule,
@@ -44,7 +45,8 @@ export const libModule = [
   NzModalModule,
   NzCheckboxModule,
   NzTypographyModule,
-  NzPaginationModule
+  NzPaginationModule,
+  NzTreeSelectModule
 ];
 export const libDirective = [];
 

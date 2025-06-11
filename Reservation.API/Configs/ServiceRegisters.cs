@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Reservation.API.Commons;
 using Reservation.API.DataContext;
-using Reservation.API.DataContext.Entity.Core;
 using Reservation.API.Services;
+using Reservation.API.Services.Common;
 using Reservation.API.UnitOfWork;
 using System.Text;
 
@@ -63,6 +62,8 @@ namespace Reservation.API.Configs
             services.AddScoped(typeof(IAuthService), typeof(AuthService));
             services.AddScoped(typeof(IRoleService), typeof(RoleService));
             services.AddScoped(typeof(IUserService), typeof(UserService));
+            services.AddScoped(typeof(IPageService), typeof(PageService));
+            services.AddScoped(typeof(ICommonService), typeof(CommonService));
         }
 
         public static void Configs(this IServiceCollection services, IConfiguration config)
