@@ -40,7 +40,7 @@ namespace Reservation.API.Controllers.Base
         }
 
         [Route("get-by-id/{id}")]
-        [HttpPost]
+        [HttpGet]
         public virtual async Task<ActionResult<Response<bool>>> GetById(Guid id)
         {
             return Ok(await _baseService.GetByIdAsync(id));
