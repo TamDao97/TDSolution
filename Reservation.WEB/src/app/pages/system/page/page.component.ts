@@ -60,21 +60,8 @@ export class PageComponent extends TdBaseGridComponent implements OnInit {
     });
     this.expandedKeys = this.getAllKeys(this.pageTreeData);
     this.getPageTree();
-    this.dropdownPage();
   }
 
-  dropdownPage() {
-    this._pageService
-      .dropdownPage()
-      .subscribe((rs: IResponse) => {
-        if (rs.status == StatusCode.Ok) {
-          this.lstPage = rs.data;
-        } else {
-          this._toastService.error(StatusResponseTitle.ERROR, rs.message);
-        }
-      });
-
-  }
 
   getPageTree() {
     this._pageService
@@ -104,6 +91,15 @@ export class PageComponent extends TdBaseGridComponent implements OnInit {
 
   onNodeClick(event: any): void {
     console.log('Clicked node:', event.node);
+    this._pageService
+      .getById(event.node.key)
+      .subscribe((rs: IResponse) => {
+        if (rs.status == StatusCode.Ok) {
+          this.frmGroup.patchValue(rs.data);
+        } else {
+          this._toastService.error(StatusResponseTitle.ERROR, rs.message);
+        }
+      });
   }
 
   onSave() {
@@ -121,7 +117,6 @@ export class PageComponent extends TdBaseGridComponent implements OnInit {
           if (rs.status == StatusCode.Ok) {
             this.frmGroup.reset();
             this.getPageTree();
-            this.dropdownPage();
             this._toastService.success(StatusResponseTitle.SUCCESS, StatusResponseMessage.ADD_SUCCESS)
           } else {
             this._toastService.error(StatusResponseTitle.ERROR, rs.message);
@@ -133,7 +128,6 @@ export class PageComponent extends TdBaseGridComponent implements OnInit {
         .subscribe((rs: IResponse) => {
           if (rs.status == StatusCode.Ok) {
             this.getPageTree();
-            this.dropdownPage();
             this._toastService.success(StatusResponseTitle.SUCCESS, StatusResponseMessage.UPDATE_SUCCESS);
           } else {
             this._toastService.error(StatusResponseTitle.ERROR, rs.message);

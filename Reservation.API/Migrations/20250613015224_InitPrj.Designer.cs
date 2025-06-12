@@ -9,11 +9,11 @@ using Reservation.API.DataContext;
 
 #nullable disable
 
-namespace Reservation.API.DataContext.Migrations
+namespace Reservation.API.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
-    [Migration("20240907040719_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250613015224_InitPrj")]
+    partial class InitPrj
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,6 +80,60 @@ namespace Reservation.API.DataContext.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Branches");
+                });
+
+            modelBuilder.Entity("Reservation.API.DataContext.Entity.Core.Page", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModify")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("IdParent")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsHomePage")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsTab")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ModifyUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PermissionCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pages");
                 });
 
             modelBuilder.Entity("Reservation.API.DataContext.Entity.Core.Permission", b =>
@@ -231,6 +285,9 @@ namespace Reservation.API.DataContext.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Gender")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
 
@@ -238,6 +295,9 @@ namespace Reservation.API.DataContext.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsLockout")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSuper")
                         .HasColumnType("bit");
 
                     b.Property<Guid>("ModifyUserId")
