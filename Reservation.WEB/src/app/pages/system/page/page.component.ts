@@ -33,18 +33,6 @@ export class PageComponent extends TdBaseGridComponent implements OnInit {
     super(_pageService, _toastService);
   }
 
-  expandedKeys: any[] = [];
-  getAllKeys(nodes: any[]): string[] {
-    let keys: string[] = [];
-    for (const node of nodes) {
-      keys.push(node.key);
-      if (node.children) {
-        keys = keys.concat(this.getAllKeys(node.children));
-      }
-    }
-    return keys;
-  }
-
   override ngOnInit() {
     this.frmGroup = this._fb.group({
       id: [null],
@@ -58,7 +46,6 @@ export class PageComponent extends TdBaseGridComponent implements OnInit {
       isTab: [false],
       isHomePage: [false],
     });
-    this.expandedKeys = this.getAllKeys(this.pageTreeData);
     this.getPageTree();
   }
 

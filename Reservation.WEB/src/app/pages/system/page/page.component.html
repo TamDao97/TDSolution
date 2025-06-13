@@ -9,8 +9,8 @@
   <div class="row mb-2">
     <div class="col-md-6">
       <nz-card>
-        <nz-tree [nzData]="pageTreeData" [nzDraggable]="true" [nzBlockNode]="true" [nzExpandedKeys]="expandedKeys"
-          [nzShowExpand]="true" nzShowIcon="true" (nzClick)="onNodeClick($event)" (nzOnDragDrop)="onDrop($event)">
+        <nz-tree [nzData]="pageTreeData" [nzBlockNode]="true" nzExpandAll="true" [nzShowLine]="true"
+          (nzClick)=" onNodeClick($event)" [nzDraggable]="true" (nzOnDragDrop)="onDrop($event)">
         </nz-tree>
       </nz-card>
     </div>
