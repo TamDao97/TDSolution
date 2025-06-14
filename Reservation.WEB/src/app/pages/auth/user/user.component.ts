@@ -7,7 +7,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { IColumn, IControl } from '../../../shared/interfaces/IBase';
 import { ControlTypeEnum, StatusCode } from '../../../shared/utils/enums';
 import { FilterModalComponent } from '../../../shared/components/filter-modal/filter-modal.component';
-import { UserService } from '../../../services/user/user.service';
+import { UserService } from '../../../services/system/user.service';
 
 @Component({
   selector: 'app-user',
@@ -117,6 +117,7 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
       {
         field: 'displayName',
         header: 'Tên người dùng',
+        width: '300px',
         class: 'text-center',
         type: 'template',
         sort: true,
@@ -128,6 +129,7 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
       {
         field: 'email',
         header: 'Email',
+        width: '300px',
         class: 'text-center',
         type: 'text',
         sort: true,
@@ -136,6 +138,7 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
       {
         field: 'phoneNumber',
         header: 'Sđt',
+        width: '300px',
         class: 'text-center',
         type: 'text',
         sort: true,
@@ -144,6 +147,7 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
       {
         field: 'isLockout',
         header: 'Trạng thái',
+        width: '150px',
         class: 'text-center',
         type: 'template',
         sort: true,
@@ -157,6 +161,7 @@ export class UserComponent extends TdBaseGridComponent implements OnInit {
       {
         field: 'dateModify',
         header: 'Cập nhật cuối',
+        width: '150px',
         class: 'text-center',
         type: 'template',
         sort: true,

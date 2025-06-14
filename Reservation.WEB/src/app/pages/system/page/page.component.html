@@ -12,8 +12,8 @@
     <div class="row mb-2">
       <div class="col-md-6">
         <nz-card>
-          <nz-tree [nzData]="pageTreeData" [nzDraggable]="true" [nzBlockNode]="true" [nzShowExpand]="true"
-            nzShowIcon="true" (nzClick)="onNodeClick($event)" (nzOnDragDrop)="onDrop($event)">
+          <nz-tree [nzData]="pageTreeData" [nzDraggable]="true" [nzBlockNode]="true" [nzShowLine]="true"
+            (nzClick)="onNodeClick($event)" (nzOnDragDrop)="onDrop($event)">
           </nz-tree>
         </nz-card>
       </div>
@@ -77,12 +77,19 @@
           </form>
           <div class="row">
             <div class="col-md-12 col-lg-12 d-flex justify-content-end">
-              <button nz-button [nzType]="'primary'" (click)="onSave()">
-                Lưu
-              </button>
-              <button class="ms-2" nz-button [nzType]="'primary'" nzDanger (click)="onReset()">
+              <button nz-button [nzType]="'default'" (click)="onReset()">
                 Làm mới
               </button>
+              <button class="ms-2" nz-button [nzType]="'primary'" (click)="onSave()">
+                Lưu
+              </button>
+              <button *ngIf="this.frmGroup.get('id')?.valid" class="ms-2" nz-button [nzType]="'primary'" nzDanger
+                (click)="onDelete(this.frmGroup.get('id')?.value)">
+                Xóa
+              </button>
+              <!-- <button class="ms-2" nz-button [nzType]="'primary'" nzDanger (click)="onReset()">
+                Làm mới
+              </button> -->
             </div>
           </div>
         </nz-card>

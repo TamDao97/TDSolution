@@ -27,6 +27,13 @@ namespace Reservation.API.Controllers
             _roleService = roleService;
         }
 
+        [Route("get-by-filter")]
+        [HttpPost]
+        public async Task<ActionResult<Response<PagingData<List<RoleDto>>>>> GetByFilterAsync(RoleGridFilter filter)
+        {
+            return Ok(await _roleService.GetByFilterAsync(filter));
+        }
+
         /// <summary>
         /// Quét module chức năng
         /// </summary>

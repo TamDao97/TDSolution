@@ -23,6 +23,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
+import { RouterModule } from '@angular/router';
 
 export const libModule = [
   NzFormModule,
@@ -53,6 +54,7 @@ export const libDirective = [];
 @NgModule({
   declarations: [],
   imports: [
+    RouterModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -60,6 +62,7 @@ export const libDirective = [];
     ...libDirective,
   ],
   exports: [
+    RouterModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

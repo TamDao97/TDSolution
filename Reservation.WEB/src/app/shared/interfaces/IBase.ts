@@ -20,22 +20,23 @@ export interface IModalOptions {
 export interface IColumn {
   field: string;
   header: string;
+  width: string;
   class?: string;
   sort: true | false;
   sortBy: 'asc' | 'desc';
   type:
-    | 'text'
-    | 'date'
-    | 'daterange'
-    | 'select'
-    | 'checkbox'
-    | 'radio'
-    | 'textarea'
-    | 'file'
-    | 'image'
-    | 'video'
-    | 'audio'
-    | 'currency'
-    | 'template';
+  | 'text'
+  | 'date'
+  | 'daterange'
+  | 'select'
+  | 'checkbox'
+  | 'radio'
+  | 'textarea'
+  | 'file'
+  | 'image'
+  | 'video'
+  | 'audio'
+  | 'currency'
+  | 'template';
   customTemplate?: (data?: any) => any;
 }

@@ -20,9 +20,9 @@
               Tìm kiếm
             </button>
           </ng-template>
-          <button nz-button nzType="primary" (click)="onSearchAdvance()">
+          <!-- <button nz-button nzType="primary" (click)="onSearchAdvance()">
             <i class="fa fa-solid fa-filter"></i>
-          </button>
+          </button> -->
         </div>
       </div>
     </div>
@@ -61,7 +61,7 @@
         <nz-table #table [nzData]="gridData" [nzLoading]="isLoading" nzShowPagination="false">
           <thead>
             <tr>
-              <th [width]="80" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
+              <th [width]="50" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate"
                 (nzCheckedChange)="onAllChecked($event)"></th>
               <th [width]="col.width" *ngFor="let col of gridColumns">{{ col.header }}</th>
               <!-- Action -->
@@ -81,11 +81,11 @@
                 </ng-container>
                 <ng-container *ngSwitchCase="'template'">
                   <ng-container [ngSwitch]="col.field">
-                    <ng-container *ngSwitchCase="'displayName'">
+                    <ng-container *ngSwitchCase="'name'">
                       <span>{{ row[col.field] }}</span>
                       <br />
                       <nz-tag [nzColor]="'blue'">
-                        <span nz-typography nzCopyable nzCopyText="{{ row.userName }}">{{ row.userName }}.</span>
+                        <span nz-typography nzCopyable nzCopyText="{{ row.code }}">{{ row.code }}.</span>
                       </nz-tag>
                     </ng-container>
                     <ng-container *ngSwitchCase="'isLockout'">

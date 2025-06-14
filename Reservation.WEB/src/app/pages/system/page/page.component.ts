@@ -123,6 +123,19 @@ export class PageComponent extends TdBaseGridComponent implements OnInit {
     }
   }
 
+  onDelete(id: string) {
+    this._pageService
+      .delete(id)
+      .subscribe((rs: IResponse) => {
+        if (rs.status == StatusCode.Ok) {
+          this.getPageTree();
+          this._toastService.success(StatusResponseTitle.SUCCESS, StatusResponseMessage.DELETE_SUCCESS);
+        } else {
+          this._toastService.error(StatusResponseTitle.ERROR, rs.message);
+        }
+      });
+  }
+
   onReset() {
     this.frmGroup.reset();
   }

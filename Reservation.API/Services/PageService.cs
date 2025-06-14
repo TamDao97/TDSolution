@@ -65,6 +65,13 @@ namespace Reservation.API.Services
                     {
                         Key = r.Id,
                         Title = r.Name,
+                        Icon = r.Icon,
+                        Url = r.Url,
+                        IsActive = r.IsActive,
+                        IsHomePage = r.IsHomePage,
+                        IsTab = r.IsTab,
+                        Order = r.Order,
+                        PermissionCode = r.PermissionCode,
                         Children = BuildTree(r.Id)
                     })
                     .ToList();

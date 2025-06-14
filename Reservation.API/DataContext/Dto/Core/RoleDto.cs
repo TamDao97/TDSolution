@@ -14,7 +14,6 @@ namespace Reservation.API.DataContext.Dto.Core
 
     public class RoleGridFilter : GridFilterBase
     {
-
     }
 
     public class PermissionGroupByModuleDto

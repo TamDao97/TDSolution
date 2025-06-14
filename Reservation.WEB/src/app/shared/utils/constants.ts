@@ -22,5 +22,6 @@ export const DateFormat = 'dd/MM/yyyy';
 
 export const keyPage = {
   USER: 'user',
-  PAGE: 'page'
+  PAGE: 'page',
+  ROLE: 'role'
 }

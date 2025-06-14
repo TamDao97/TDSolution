@@ -6,6 +6,7 @@ import { PageErrorComponent } from './shared/components/page-error/page-error.co
 import { UserComponent } from './pages/auth/user/user.component';
 import { Routes } from '@angular/router';
 import { PageComponent } from './pages/system/page/page.component';
+import { RoleComponent } from './pages/system/role/role.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,11 @@ export const routes: Routes = [
       {
         path: 'user',
         component: UserComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'role',
+        component: RoleComponent,
         canActivate: [AuthGuard],
       },
     ],

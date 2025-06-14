@@ -1,0 +1,35 @@
+<form nz-form [formGroup]="frmGroup">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="code">Mã</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Vui lòng nhập thông tin!">
+      <input nz-input formControlName="code" id="code" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="code">Tên</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Vui lòng nhập thông tin!">
+      <input nz-input formControlName="name" id="name" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="isAdmin">Mô tả</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-textarea-count style="width: 100%;" [nzMaxCharacterCount]="100">
+        <textarea rows="4" nz-input formControlName="description"></textarea>
+      </nz-textarea-count>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="order">Thứ tự</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-input-number formControlName="order" [nzMin]="1" [nzMax]="10" />
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<div class="row">
+  <div class="col-md-12 col-lg-12 d-flex justify-content-end">
+    <button nz-button [nzType]="'primary'" (click)="onSave()" [hidden]="this.params.isDisabled">Lưu</button>
+    <button class="ms-2" nz-button [nzType]="'primary'" nzDanger (click)="onClose()">Đóng</button>
+  </div>
+</div>
