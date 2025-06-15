@@ -4,6 +4,7 @@ import { AuthService } from '../../../utils/services/auth.service';
 import { UserEditComponent } from '../../../../pages/system/auth/user/user-edit/user-edit.component';
 import { TdBaseComponent } from '../../../utils/extends-components/td-base.component';
 import { UserProfileComponent } from '../../../../pages/system/auth/user/user-profile/user-profile.component';
+import { UserChangePasswordComponent } from '../../../../pages/system/auth/user/user-change-password/user-change-password.component';
 
 @Component({
   selector: 'app-header',
@@ -36,7 +37,19 @@ export class HeaderComponent extends TdBaseComponent implements OnInit {
         params: { id: this.currentUser.id },
       }
     ).afterClose.subscribe((result: any) => {
-      console.log(result);
+      // console.log(result);
+    });
+  }
+
+  onChangePassword() {
+    this.openModal(
+      {
+        title: 'Đổi mật khẩu',
+        width: 800,
+      },
+      UserChangePasswordComponent
+    ).afterClose.subscribe((result: any) => {
+      // console.log(result);
     });
   }
 }

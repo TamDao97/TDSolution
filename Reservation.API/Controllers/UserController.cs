@@ -54,7 +54,7 @@ namespace Reservation.API.Controllers
         /// <returns></returns>
         [Route("update")]
         [HttpPost]
-        public async Task<ActionResult<Response<UserCreateResDto>>> UpdateAsync(UserCreateReqDto reqDto)
+        public async Task<ActionResult<Response<UserUpdateResDto>>> UpdateAsync(UserUpdateReqDto reqDto)
         {
             return Ok(await _userService.UpdateAsync(reqDto));
         }
@@ -101,13 +101,28 @@ namespace Reservation.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [TDPermission]
         [TDAuthorize]
         [Route("get-user-profile")]
         [HttpGet]
         public async Task<ActionResult<Response<UserDto>>> GetUserProfileAsync()
         {
             return Ok(await _userService.GetByIdAsync(CurrentUser.Id));
+        }
+
+        [TDAuthorize]
+        [Route("save-user-profile")]
+        [HttpPost]
+        public async Task<ActionResult<Response<UserDto>>> SaveUserProfileAsync(UserProfileSaveReq req)
+        {
+            return Ok(await _userService.SaveUserProfileAsync(req));
+        }
+
+        [TDAuthorize]
+        [Route("change-password")]
+        [HttpPost]
+        public async Task<ActionResult<Response<bool>>> ChangePasswordAsync(UserChangePasswordReq req)
+        {
+            return Ok(await _userService.ChangePasswordAsync(req, CurrentUser));
         }
     }
 }

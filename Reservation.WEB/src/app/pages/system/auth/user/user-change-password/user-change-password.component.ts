@@ -1,28 +1,25 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SharedModule } from '../../../../../shared/modules/shared.module';
-import { TdBaseComponent } from '../../../../../shared/utils/extends-components/td-base.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 import { IResponse } from '../../../../../interfaces/IResponse';
 import { UserService } from '../../../../../services/system/user.service';
 import { ToastService } from '../../../../../shared/services/toast.service';
 import { StatusResponseTitle, StatusResponseMessage } from '../../../../../shared/utils/constants';
 import { StatusCode } from '../../../../../shared/utils/enums';
+import { TdBaseComponent } from '../../../../../shared/utils/extends-components/td-base.component';
+import { confirmPassword } from '../../../../../shared/utils/helpers';
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css'],
+  selector: 'app-user-change-password',
+  templateUrl: './user-change-password.component.html',
+  styleUrls: ['./user-change-password.component.scss'],
   standalone: true,
   imports: [SharedModule],
 })
-export class UserProfileComponent extends TdBaseComponent implements OnInit {
-  params: any = inject(NZ_MODAL_DATA);
-
+export class UserChangePasswordComponent extends TdBaseComponent implements OnInit {
   frmGroup!: FormGroup;
   constructor(
-    private _router: Router,
     private _fb: FormBuilder,
     private _toastService: ToastService,
     private _userService: UserService
@@ -37,23 +34,9 @@ export class UserProfileComponent extends TdBaseComponent implements OnInit {
   initForm() {
     this.frmGroup = this._fb.group({
       id: [null],
-      userName: [{ value: null, disabled: true }, [Validators.required]],
-      displayName: [null, [Validators.required]],
-      gender: [0, [Validators.required]],
-      email: [null],
-      phoneNumber: [null],
+      password: [null, [Validators.required]],
+      passwordConfirm: [null, [Validators.required, confirmPassword('password')]],
     });
-    if (this.params?.params?.id) {
-      this._userService
-        .getUserProfile()
-        .subscribe((rs: IResponse) => {
-          if (rs.status == StatusCode.Ok) {
-            this.frmGroup.patchValue(rs.data);
-          } else {
-            this._toastService.error(StatusResponseTitle.ERROR, rs.message);
-          }
-        });
-    }
   }
 
   onSave() {
@@ -66,7 +49,7 @@ export class UserProfileComponent extends TdBaseComponent implements OnInit {
       ...this.frmGroup.value
     }
     this._userService
-      .saveUserProfile(payload)
+      .changePassword(payload)
       .subscribe((rs: IResponse) => {
         if (rs.status == StatusCode.Ok) {
           this.frmGroup.reset();

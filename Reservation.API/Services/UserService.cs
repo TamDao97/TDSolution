@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Reservation.API.Commons;
+using Reservation.API.DataContext.Dto;
 using Reservation.API.DataContext.Dto.Core;
 using Reservation.API.DataContext.Entity.Core;
 using Reservation.API.Services.Base;
@@ -19,6 +20,8 @@ namespace Reservation.API.Services
         Task<Response<UserCreateResDto>> CreateAsync(UserCreateReqDto reqDto);
         Task<Response<UserCreateResDto>> UpdateAsync(UserCreateReqDto reqDto);
         Task<Response<bool>> DeleteAsync(Guid id);
+        Task<Response<bool>> SaveUserProfileAsync(UserProfileSaveReq req);
+        Task<Response<bool>> ChangePasswordAsync(UserChangePasswordReq req, CurrentUser currentUser);
     }
 
     public class UserService : BaseService<User, UserDto>, IUserService
@@ -212,6 +215,37 @@ namespace Reservation.API.Services
             return Response<UserDto>.Success(dto, StatusCode.Ok.ToDescription());
         }
 
+        public async Task<Response<bool>> SaveUserProfileAsync(UserProfileSaveReq req)
+        {
+            //Cập nhật user
+            var user = await _userRepos.GetByIdAsync(req.Id);
+            if (user == null) return Response<bool>.Error(StatusCode.NotFound, StatusCode.NotFound.ToDescription());
 
+            user.DisplayName = req.DisplayName;
+            user.Gender = req.Gender;
+            user.Email = req.Email;
+            user.PhoneNumber = req.PhoneNumber;
+            user.IsAdmin = req.IsAdmin;
+            user.DateModify = DateTime.Now;
+
+            await _userRepos.UpdateAsync(user);
+            await _unitOfWork.SaveChangesAsync();
+            return Response<bool>.Success(true, StatusCode.Ok.ToDescription());
+        }
+
+        public async Task<Response<bool>> ChangePasswordAsync(UserChangePasswordReq req, CurrentUser currentUser)
+        {
+            var user = await _userRepos.GetByIdAsync(currentUser.Id);
+            if (user == null) return Response<bool>.Error(StatusCode.NotFound, StatusCode.NotFound.ToDescription());
+            if (req.Password != req.PasswordConfirm) return Response<bool>.Error(StatusCode.InternalServerError, ErrorMess.PasswordMismatch);
+
+            user.PasswordHash = Utils.HashPassword(req.Password);
+            user.ModifyUserId = currentUser.Id;
+            user.DateModify = DateTime.Now;
+
+            await _userRepos.UpdateAsync(user);
+            await _unitOfWork.SaveChangesAsync();
+            return Response<bool>.Success(true, StatusCode.Ok.ToDescription());
+        }
     }
 }

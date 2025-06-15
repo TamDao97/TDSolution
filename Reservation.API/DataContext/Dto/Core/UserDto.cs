@@ -31,6 +31,27 @@ namespace Reservation.API.DataContext.Dto.Core
         public List<string> LstRole { get; set; } = new List<string>();
     }
 
+    public class UserUpdateReqDto : UserCreateReqDto
+    {
+
+    }
+
+    public class UserUpdateResDto : UserCreateResDto
+    {
+
+    }
+
+    public class UserProfileSaveReq : UserDto
+    {
+
+    }
+
+    public class UserChangePasswordReq
+    {
+        public string Password { get; set; }
+        public string PasswordConfirm { get; set; }
+    }
+
     public class UserGridFilter : GridFilterBase
     {
     }

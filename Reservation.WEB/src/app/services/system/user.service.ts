@@ -17,4 +17,12 @@ export class UserService extends TdBaseService {
   getUserProfile(): Observable<IResponse> {
     return this._httpClient.get<IResponse>(`${this.apiUrl}/get-user-profile`);
   }
+
+  saveUserProfile(payload: any): Observable<IResponse> {
+    return this._httpClient.post<IResponse>(`${this.apiUrl}/save-user-profile`, payload);
+  }
+
+  changePassword(payload: any): Observable<IResponse> {
+    return this._httpClient.post<IResponse>(`${this.apiUrl}/change-password`, payload);
+  }
 }
