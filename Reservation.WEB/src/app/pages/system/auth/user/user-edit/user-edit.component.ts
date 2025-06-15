@@ -1,14 +1,15 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
-import { SharedModule } from '../../../../shared/modules/shared.module';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastService } from '../../../../shared/services/toast.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TdBaseComponent } from '../../../../shared/utils/extends-components/td-base.component';
-import { UserService } from '../../../../services/system/user.service';
-import { StatusResponseMessage, StatusResponseTitle } from '../../../../shared/utils/constants';
-import { IResponse } from '../../../../interfaces/IResponse';
-import { StatusCode } from '../../../../shared/utils/enums';
+import { NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
+import { IResponse } from '../../../../../interfaces/IResponse';
+import { UserService } from '../../../../../services/system/user.service';
+import { SharedModule } from '../../../../../shared/modules/shared.module';
+import { ToastService } from '../../../../../shared/services/toast.service';
+import { StatusResponseTitle, StatusResponseMessage } from '../../../../../shared/utils/constants';
+import { StatusCode } from '../../../../../shared/utils/enums';
+import { TdBaseComponent } from '../../../../../shared/utils/extends-components/td-base.component';
+
 
 @Component({
   selector: 'app-user-edit',

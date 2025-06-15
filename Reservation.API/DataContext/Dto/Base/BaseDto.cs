@@ -14,5 +14,6 @@ namespace Reservation.API.DataContext.Dto.Base
         public Guid CreatedUserId { get; set; }
         public Guid ModifyUserId { get; set; }
         public bool IsDeleted { get; set; }
+        public int Order { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Reservation.API.Commons;
 using Reservation.API.DataContext.Dto.Core;
@@ -59,6 +60,7 @@ namespace Reservation.API.Services
             //tạo user
             User user = AutoMapperGeneric.Map<UserCreateReqDto, User>(reqDto);
 
+            user.PasswordHash = Utils.HashPassword(reqDto.Password);
             user.DateCreated = DateTime.Now;
             user.DateModify = DateTime.Now;
             user.IsDeleted = false;
@@ -181,7 +183,7 @@ namespace Reservation.API.Services
 
         public async Task<Response<PagingData<List<UserDto>>>> GetByFilterAsync(UserGridFilter gridDto)
         {
-            var query = _userRepos.TableNoTracking;
+            var query = _userRepos.TableNoTracking.OrderByDescending(r => r.DateModify).AsQueryable();
 
             if (!string.IsNullOrEmpty(gridDto.Keyword))
             {
@@ -204,10 +206,12 @@ namespace Reservation.API.Services
             var item = await _userRepos.GetByIdAsync(id);
 
             if (item == null)
-                return Response<UserDto>.Error(StatusCode.InternalServerError, StatusCode.InternalServerError.ToDescription());
+                return Response<UserDto>.Error(StatusCode.NotFound, StatusCode.NotFound.ToDescription());
 
             UserDto dto = AutoMapperGeneric.Map<User, UserDto>(item);
             return Response<UserDto>.Success(dto, StatusCode.Ok.ToDescription());
         }
+
+
     }
 }

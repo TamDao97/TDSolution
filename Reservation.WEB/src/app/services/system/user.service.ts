@@ -13,4 +13,8 @@ export class UserService extends TdBaseService {
   constructor(_httpClient: HttpClient) {
     super(_httpClient);
   }
+
+  getUserProfile(): Observable<IResponse> {
+    return this._httpClient.get<IResponse>(`${this.apiUrl}/get-user-profile`);
+  }
 }

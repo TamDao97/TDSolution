@@ -1,0 +1,73 @@
+<form nz-form [formGroup]="frmGroup">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="displayName">Tài khoản</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="userNameErrorTpl">
+      <nz-input-group nzPrefixIcon="user">
+        <input type="text" nz-input formControlName="userName" placeholder="Tài khoản" />
+      </nz-input-group>
+    </nz-form-control>
+    <ng-template #userNameErrorTpl let-control>
+      <ng-container *ngIf="control.hasError('required')">
+        Vui lòng nhập email!
+      </ng-container>
+      <ng-container *ngIf="control.hasError('email')">
+        Email không hợp lệ!
+      </ng-container>
+    </ng-template>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="displayName">Họ và tên</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Vui lòng nhập thông tin!">
+      <input nz-input formControlName="displayName" id="displayName" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="gender" nzRequired>Giới tính</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-radio-group formControlName="gender">
+        <label nz-radio [nzValue]="0">Nam</label>
+        <label nz-radio [nzValue]="1">Nữ</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email">Email</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback [nzErrorTip]="emailErrorTpl">
+      <nz-input-group nzPrefixIcon="email">
+        <input type="text" nz-input formControlName="email" />
+      </nz-input-group>
+    </nz-form-control>
+    <ng-template #emailErrorTpl let-control>
+      <ng-container *ngIf="control.hasError('email')">
+        Email không hợp lệ!
+      </ng-container>
+    </ng-template>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber">SĐT</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="frmGroup!.controls['phoneNumber']">
+      <!-- <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+            <ng-template #addOnBeforeTemplate>
+              <nz-select formControlName="phoneNumberPrefix" class="phone-select">
+                <nz-option nzLabel="+86" nzValue="+84"></nz-option>
+                <nz-option nzLabel="+87" nzValue="+86"></nz-option>
+              </nz-select>
+            </ng-template>
+            <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
+          </nz-input-group> -->
+      <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="isAdmin">Tài khoản admin</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <label nz-checkbox formControlName="isAdmin"></label>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<div class="row">
+  <div class="col-md-12 col-lg-12 d-flex justify-content-end">
+    <button nz-button [nzType]="'primary'" (click)="onSave()" [hidden]="this.params.isDisabled">Lưu</button>
+    <button class="ms-2" nz-button [nzType]="'primary'" nzDanger (click)="onClose()">Đóng</button>
+  </div>
+</div>

@@ -19,7 +19,7 @@ export class TdBaseGridComponent extends TdBaseComponent {
   totalPage: number = 0;
   totalRecord: number = 0;
   pageNumber: number = 1;
-  pageSize: number = 1;
+  pageSize: number = 10;
   pageSizeOptions = [this.pageSize, this.pageSize * 2, this.pageSize * 3, this.pageSize * 4, this.pageSize * 5]
   isLoading: boolean = false;
 

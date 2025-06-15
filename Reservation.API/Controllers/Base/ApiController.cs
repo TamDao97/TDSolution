@@ -11,7 +11,7 @@ namespace Reservation.API.Controllers.Base
         CurrentUser? GetCurrentUser()
         {
             var service = (IAuthService)HttpContext.RequestServices.GetServices(typeof(IAuthService)).SingleOrDefault();
-            return service?.GetCurrentUser(HttpContext?.User?.Identity?.Name ?? string.Empty).Result.Data;
+            return service?.GetCurrentUserAsync(HttpContext?.User?.Identity?.Name ?? string.Empty).Result.Data;
         }
     }
 }

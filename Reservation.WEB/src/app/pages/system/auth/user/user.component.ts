@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { TdBaseGridComponent } from '../../../shared/utils/extends-components/td-base-grid.component';
-import { SharedModule } from '../../../shared/modules/shared.module';
-import { ToastService } from '../../../shared/services/toast.service';
-import { keyPage, StatusResponseMessage, StatusResponseTitle } from '../../../shared/utils/constants';
+import { UserService } from '../../../../services/system/user.service';
+import { FilterModalComponent } from '../../../../shared/components/filter-modal/filter-modal.component';
+import { IControl, IColumn } from '../../../../shared/interfaces/IBase';
+import { SharedModule } from '../../../../shared/modules/shared.module';
+import { ToastService } from '../../../../shared/services/toast.service';
+import { keyPage, StatusResponseTitle, StatusResponseMessage } from '../../../../shared/utils/constants';
+import { ControlTypeEnum, StatusCode } from '../../../../shared/utils/enums';
+import { TdBaseGridComponent } from '../../../../shared/utils/extends-components/td-base-grid.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
-import { IColumn, IControl } from '../../../shared/interfaces/IBase';
-import { ControlTypeEnum, StatusCode } from '../../../shared/utils/enums';
-import { FilterModalComponent } from '../../../shared/components/filter-modal/filter-modal.component';
-import { UserService } from '../../../services/system/user.service';
 
 @Component({
   selector: 'app-user',

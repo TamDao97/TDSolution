@@ -14,7 +14,7 @@ namespace Reservation.API.Services
     {
         Task<Response<CurrentUser>> LoginAsync(LoginReq req);
         Task<Response<bool>> RegisterAsync(RegisterReq req);
-        Task<Response<CurrentUser>> GetCurrentUser(string userName);
+        Task<Response<CurrentUser>> GetCurrentUserAsync(string userName);
     }
 
     public class AuthService : IAuthService
@@ -47,7 +47,7 @@ namespace Reservation.API.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Response<CurrentUser>> GetCurrentUser(string userName)
+        public async Task<Response<CurrentUser>> GetCurrentUserAsync(string userName)
         {
             var user = await _userRepos.TableNoTracking.FirstOrDefaultAsync(r => r.UserName == userName);
 
@@ -63,9 +63,10 @@ namespace Reservation.API.Services
 
             var currentUser = new CurrentUser
             {
-                Id = user.Id,
+                Id = user.Id,   
                 UserName = user.UserName,
                 DisplayName = user.DisplayName,
+                Email = user.Email,
                 IsAdmin = user.IsAdmin,
                 Permissions = permissions
             };

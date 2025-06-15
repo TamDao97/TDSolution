@@ -35,6 +35,9 @@ namespace Reservation.API.Attributes
 
             var permissionCode = ExtractPermissionFromFunc(context);
 
+            // Nếu không có permissionCode, không cần kiểm tra quyền
+            if (string.IsNullOrEmpty(permissionCode)) return;
+
             // Kiểm tra quyền theo yêu cầu
             var userHasPermission = CheckUserPermission(context, permissionCode);
             if (!userHasPermission)
@@ -53,7 +56,7 @@ namespace Reservation.API.Attributes
             var authenService = serviceProvider.GetService(typeof(IAuthService)) as IAuthService;
 
             //Logic check quyền
-            var currentUser = authenService.GetCurrentUser(context.HttpContext.User.Identity.Name).Result.Data;
+            var currentUser = authenService.GetCurrentUserAsync(context.HttpContext.User.Identity.Name).Result.Data;
 
             if (currentUser is null || !currentUser.Permissions.Any(r => r == permissionCode))
                 return false;
@@ -77,11 +80,10 @@ namespace Reservation.API.Attributes
             // Lấy các attribute của phương thức
             var permissionAttribute = actionDescriptor.MethodInfo.GetCustomAttributes<TDPermissionAttribute>().FirstOrDefault();
 
-            if (permissionAttribute is null) //Hàm này không yêu cầu phân quyền
+            if (permissionAttribute is null || string.IsNullOrEmpty(permissionAttribute.PermissionCode)) //Hàm này không yêu cầu phân quyền
             {
                 return string.Empty;
             }
-
             return $"{controllerType.Name}_{permissionAttribute.PermissionCode}";
         }
     }

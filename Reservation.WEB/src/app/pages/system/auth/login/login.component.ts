@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedModule } from '../../../shared/modules/shared.module';
-import { TdBaseComponent } from '../../../shared/utils/extends-components/td-base.component';
-import { LoginService } from '../../../services/auth/login.service';
-import { StatusCode } from '../../../shared/utils/enums';
-import { AuthService } from '../../../shared/utils/services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastService } from '../../../shared/services/toast.service';
-import { StatusResponseTitle } from '../../../shared/utils/constants';
+import { LoginService } from '../../../../services/system/login.service';
+import { SharedModule } from '../../../../shared/modules/shared.module';
+import { ToastService } from '../../../../shared/services/toast.service';
+import { StatusResponseTitle } from '../../../../shared/utils/constants';
+import { StatusCode } from '../../../../shared/utils/enums';
+import { TdBaseComponent } from '../../../../shared/utils/extends-components/td-base.component';
+import { AuthService } from '../../../../shared/utils/services/auth.service';
+
 
 @Component({
   selector: 'app-login',

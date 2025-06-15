@@ -85,7 +85,7 @@ namespace Reservation.API.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Tìm theo điều kiện
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
@@ -94,6 +94,20 @@ namespace Reservation.API.Controllers
         public async Task<ActionResult<Response<PagingData<List<UserDto>>>>> GetByFilterAsync(UserGridFilter filter)
         {
             return Ok(await _userService.GetByFilterAsync(filter));
+        }
+
+        /// <summary>
+        /// Xem chi tiết tài khoản
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [TDPermission]
+        [TDAuthorize]
+        [Route("get-user-profile")]
+        [HttpGet]
+        public async Task<ActionResult<Response<UserDto>>> GetUserProfileAsync()
+        {
+            return Ok(await _userService.GetByIdAsync(CurrentUser.Id));
         }
     }
 }

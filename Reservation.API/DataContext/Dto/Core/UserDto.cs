@@ -22,6 +22,7 @@ namespace Reservation.API.DataContext.Dto.Core
 
     public class UserCreateReqDto : UserDto
     {
+        public string Password { get; set; }
         public List<Guid> LstRole { get; set; } = new List<Guid>();
     }
 

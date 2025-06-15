@@ -88,7 +88,7 @@ namespace Reservation.API.Services
 
         public async Task<Response<PagingData<List<RoleDto>>>> GetByFilterAsync(RoleGridFilter gridDto)
         {
-            var query = _roleRepos.TableNoTracking;
+            var query = _roleRepos.TableNoTracking.OrderByDescending(r => r.DateModify).AsQueryable();
 
             if (!string.IsNullOrEmpty(gridDto.Keyword))
             {

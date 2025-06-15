@@ -26,7 +26,7 @@ namespace Reservation.API.Controllers
         /// <returns></returns>
         [Route("register")]
         [HttpPost]
-        public async Task<ActionResult<Response<bool>>> Register(RegisterReq req)
+        public async Task<ActionResult<Response<bool>>> RegisterAsync(RegisterReq req)
         {
             return Ok(await _authService.RegisterAsync(req));
         }
@@ -38,9 +38,20 @@ namespace Reservation.API.Controllers
         /// <returns></returns>
         [Route("login")]
         [HttpPost]
-        public async Task<ActionResult<Response<CurrentUser>>> Login(LoginReq req)
+        public async Task<ActionResult<Response<CurrentUser>>> LoginAsync(LoginReq req)
         {
             return Ok(await _authService.LoginAsync(req));
+        }
+
+        /// <summary>
+        /// Lấy thông tin người dùng hiện tại
+        /// </summary>
+        /// <returns></returns>
+        [Route("get-current-user")]
+        [HttpPost]
+        public async Task<ActionResult<Response<CurrentUser>>> GetCurrentUserAsync()
+        {
+            return Ok(CurrentUser);
         }
     }
 }
