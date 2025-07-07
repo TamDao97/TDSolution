@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: quiz-api
+    env: dotnet
+    plan: free
+    buildCommand: "dotnet publish Reservation.API/Reservation.API.csproj -c Release -o out"
+    startCommand: "dotnet out/Reservation.API.dll"
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
