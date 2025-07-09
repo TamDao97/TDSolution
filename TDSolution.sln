@@ -7,6 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TD.Lib", "Base.Lib\TD.Lib.c
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reservation.API", "Reservation.API\Reservation.API.csproj", "{59072DB7-5FE8-47E5-94AA-66D327166337}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{25C16DC7-5B92-4ADF-8014-3B347ED91078}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+		render.yaml = render.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
