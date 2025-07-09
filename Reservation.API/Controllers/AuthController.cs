@@ -53,5 +53,12 @@ namespace Reservation.API.Controllers
         {
             return Ok(CurrentUser);
         }
+
+        [Route("test")]
+        [HttpGet]
+        public async Task<ActionResult<Response<CurrentUser>>> Test()
+        {
+            return Ok("Test api");
+        }
     }
 }
