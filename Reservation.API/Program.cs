@@ -24,11 +24,14 @@ builder.WebHost.UseUrls($"http://*:{port}");
 var app = builder.Build();
 
 //Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Enable Swagger for all environments (not just development)
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Quiz API V1");
+    c.RoutePrefix = "swagger"; // Access at /swagger/index.html
+});
+
 
 app.UseCors(x => x
            .AllowAnyOrigin()
