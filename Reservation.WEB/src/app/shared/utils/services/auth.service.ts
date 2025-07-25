@@ -6,7 +6,7 @@ import { LocalStorageKey } from '../constants';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor() {}
+  constructor() { }
 
   // Kiểm tra nếu người dùng đã đăng nhập
   static isLoggedIn(): boolean {
